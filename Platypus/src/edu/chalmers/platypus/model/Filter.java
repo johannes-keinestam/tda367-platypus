@@ -1,4 +1,4 @@
-package model;
+package edu.chalmers.platypus.model;
 
 import javax.swing.ImageIcon;
 import java.awt.Component;
