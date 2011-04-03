@@ -15,5 +15,4 @@ public interface Filter {
 	public ImageIcon getDescriptiveImage();
 	
 	public HashMap<String,Component> getFilterComponents();
-	
 }
