@@ -1,7 +1,6 @@
 package edu.chalmers.platypus.model;
 
 import java.util.ArrayList;
-import java.util.logging.Filter;
 
 public class ActiveFilters {
 	private static ActiveFilters activeFiltersObject;
