@@ -15,7 +15,7 @@ public class FilterContainer {
 		scanForFilters();
 	}
 	
-	public static  FilterContainer getFilerConatinerObject(){
+	public static  FilterContainer getFilerContainerObject(){
 		if (filterContainer == null) {
 			filterContainer = new FilterContainer();
 		}
@@ -57,6 +57,7 @@ public class FilterContainer {
 	}
 	public void scanForFilters(){
 		File folder = new File(System.getenv("USERPROFILE")+"/Platypus/Filters");
+		
 	    File[] listOfFiles = folder.listFiles();
 
 	    for (int i = 0; i < listOfFiles.length; i++) {
@@ -68,7 +69,7 @@ public class FilterContainer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	  		importFilter(url);
+	  		//importFilter(url);
 	      }
 		
 	    }
