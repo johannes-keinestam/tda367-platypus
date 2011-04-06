@@ -21,16 +21,6 @@ public class PlatypusView extends FrameView {
     public PlatypusView(SingleFrameApplication app) {
         super(app);
 
-        /**addFilterPanel = new AddFilterPanel();
-        applyViewPanel = new ApplyViewPanel();
-        browseViewPanel = new BrowseViewPanel(this);
-        filterPanel = new FilterPanel();
-        filterViewPanel = new FilterViewPanel();
-        finishedViewPanel = new FinishedViewPanel();
-        previewPanel = new PreviewPanel();
-        saveViewPanel = new SaveViewPanel();
-        startViewPanel = new StartViewPanel();*/
-
         initComponents();
         ResourceMap resourceMap = getResourceMap();
     }
@@ -151,18 +141,4 @@ public class PlatypusView extends FrameView {
 
     private JDialog aboutBox;
 
-    /*//Dialog panels
-    public final JPanel addFilterPanel;
-
-    //Other panels
-    public final JPanel filterPanel;
-    public final JPanel previewPanel;
-
-    //View panels, i.e. full frame panels
-    public final JPanel applyViewPanel;
-    public final JPanel browseViewPanel;
-    public final JPanel filterViewPanel;
-    public final JPanel finishedViewPanel;
-    public final JPanel saveViewPanel;
-    public final JPanel startViewPanel;*/
 }
