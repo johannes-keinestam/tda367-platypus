@@ -6,13 +6,15 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
+import edu.chalmers.platypus.Locator;
+
 public class FilterContainer {
 	
 	private static FilterContainer filterContainer;
 	private ArrayList<Filter> loadedFilters = new ArrayList<Filter>();
 	
 	private FilterContainer(){
-		scanForFilters();
+		//scanForFilters();
 	}
 	
 	public static  FilterContainer getFilerContainerObject(){
@@ -69,10 +71,9 @@ public class FilterContainer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	  		//importFilter(url);
+	  		importFilter(url);
 	      }
 		
 	    }
-
     }
 }

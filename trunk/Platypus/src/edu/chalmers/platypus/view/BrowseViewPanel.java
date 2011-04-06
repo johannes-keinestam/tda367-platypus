@@ -47,6 +47,8 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
         initComponents();
 
         addPanel(addImageButton);
+        addPanel(new ThumbnailImage());
+        Locator.getCtrl().subscribeAsModelListener(this);
     }
 
     public BrowseViewPanel(PlatypusView parent) {
@@ -55,11 +57,12 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
     }
 
     private void addPanel(JPanel addToList) {
-        /**JPanel panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
         panel.add(addToList);
-        panel.setOpaque(true);*/
+        panel.setOpaque(true);
         jPanel1.add(addToList);
+        jPanel1.revalidate();
     }
     
 	@Override
@@ -67,9 +70,8 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
 		String change = evt.getPropertyName();
 		if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
 			BatchImage addedImage = (BatchImage)evt.getNewValue();
-            addPanel(new ThumbnailImage(addedImage));
+			addPanel(new ThumbnailImage(addedImage));
 		}
-		System.out.println("RECIEVED PCE");
 	}
 	
     public void openFileChooser() {

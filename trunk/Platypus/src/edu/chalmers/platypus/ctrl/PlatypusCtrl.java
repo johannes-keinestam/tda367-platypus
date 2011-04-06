@@ -1,5 +1,6 @@
 package edu.chalmers.platypus.ctrl;
 
+import java.beans.PropertyChangeListener;
 import java.net.URL;
 
 import edu.chalmers.platypus.Locator;
@@ -19,5 +20,9 @@ public class PlatypusCtrl {
 	
 	public void addImageToBatch(URL pathToImage) {
 		Locator.getModel().addImageToBatch(pathToImage);
+	}
+	
+	public void subscribeAsModelListener(PropertyChangeListener pcl) {
+		Locator.getModel().addListener(pcl);
 	}
 }
