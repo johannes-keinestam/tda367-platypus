@@ -5,6 +5,9 @@
 package edu.chalmers.platypus.view;
 
 import java.awt.CardLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -16,7 +19,7 @@ import javax.swing.JPanel;
 /**
  * The application's main frame.
  */
-public class PlatypusView extends FrameView {
+public class PlatypusView extends FrameView implements PropertyChangeListener {
 
     public PlatypusView(SingleFrameApplication app) {
         super(app);
@@ -140,5 +143,9 @@ public class PlatypusView extends FrameView {
 
 
     private JDialog aboutBox;
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		
+	}
 
 }

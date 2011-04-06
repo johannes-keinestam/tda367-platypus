@@ -25,7 +25,9 @@ import edu.chalmers.platypus.model.BatchImage;
  */
 public class ThumbnailImage extends javax.swing.JPanel {
 
-    private ThumbnailImage() {
+    public ThumbnailImage() {
+        initComponents();
+     	jLabel2.setText("filename.png");
     }
     
     public ThumbnailImage(BatchImage img) {
