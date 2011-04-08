@@ -47,7 +47,6 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
         initComponents();
 
         addPanel(addImageButton);
-        addPanel(new ThumbnailImage());
         Locator.getCtrl().subscribeAsModelListener(this);
     }
 
@@ -81,12 +80,7 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
         int result = browser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             for (File f : browser.getSelectedFiles()) {
-                //System.out.println(f.toString());
-                try {
-					Locator.getCtrl().addImageToBatch(f.toURL());
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
+            	Locator.getCtrl().addImageToBatch(f);
             }
         }
     }
