@@ -2,6 +2,7 @@ package edu.chalmers.platypus.model;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,8 +31,8 @@ public class PlatypusModel {
 		return instance;
 	}
 	
-	public void addImageToBatch(URL pathToImage) {
-		BatchImage newImage = new BatchImage();
+	public void addImageToBatch(File file) {
+		BatchImage newImage = new BatchImage(file);
 		imageBatch.add(newImage);
 		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_IMAGE_IN_BATCH.toString(), null, newImage);
 		notifyListeners(pce);

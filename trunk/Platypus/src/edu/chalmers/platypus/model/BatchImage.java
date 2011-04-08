@@ -10,15 +10,17 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class BatchImage {
-	private final URI imageURI;
+	private final File imageFile;
 
 	public BatchImage(final File file) {
-		this.imageURI = file.toURI();
+		this.imageFile = file;
 	}
 
 	public ImageIcon getThumbnail() {
 		try {
-			return new ImageIcon(imageURI.toURL());
+			// TODO scale
+			ImageIcon img = new ImageIcon(imageFile.toURI().toURL());
+			return img;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			return null;
@@ -27,7 +29,7 @@ public class BatchImage {
 	
 	public BufferedImage getImage() {
 		try {
-			return ImageIO.read(imageURI.toURL());
+			return ImageIO.read(imageFile);
 		} catch (final MalformedURLException e) {		
 			e.printStackTrace();
 			return null;
@@ -35,6 +37,12 @@ public class BatchImage {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public String getFileName() {
+		String fileName = imageFile.getPath();
+		System.out.println(fileName);
+		return fileName.substring(fileName.lastIndexOf(File.separator)+1, fileName.length());
 	}
 }
 
