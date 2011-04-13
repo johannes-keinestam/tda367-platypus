@@ -1,7 +1,6 @@
 package edu.chalmers.platypus.model;
 
 
-import java.awt.Graphics2D;
 import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorConvertOp;
@@ -42,7 +41,7 @@ public class FilterClass implements IFilter{
 		//remove later
 		System.out.println("AplliedFilter");
 		ColorConvertOp cco = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null);
-		return cco.filter(image, image);
+		return cco.filter(image, null);
    }
  
 		
