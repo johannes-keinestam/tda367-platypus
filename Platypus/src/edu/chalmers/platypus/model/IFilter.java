@@ -13,7 +13,7 @@ public interface IFilter {
 	
 	public String getDescription();
 	
-	public void applyFilter(BufferedImage image);
+	public BufferedImage applyFilter(BufferedImage image);
 	
 	public ImageIcon getDescriptiveImage();
 	
