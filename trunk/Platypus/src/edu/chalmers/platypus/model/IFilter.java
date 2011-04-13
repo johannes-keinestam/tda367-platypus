@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import java.awt.Component;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public interface IFilter {
@@ -12,7 +13,7 @@ public interface IFilter {
 	
 	public String getDescription();
 	
-	public void applyFilter();
+	public void applyFilter(BufferedImage image);
 	
 	public ImageIcon getDescriptiveImage();
 	
