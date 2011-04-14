@@ -10,6 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.view.resources.StateChanges;
 
 public class PlatypusModel {
@@ -17,11 +19,10 @@ public class PlatypusModel {
 	private final FilterContainer filterContainer;
 	private final ArrayList<BatchImage> imageBatch = new ArrayList<BatchImage>();
 	private static PlatypusModel instance;
-	private final List<PropertyChangeListener> listeners = new LinkedList<PropertyChangeListener>();
 	
 	private PlatypusModel() {
 		activeFilters = ActiveFilters.getActiveFilters();
-		filterContainer = FilterContainer.getFilerContainerObject();
+		filterContainer = FilterContainer.getFilterContainerObject();
 	}
 	
 	public static PlatypusModel getInstance() {
@@ -31,21 +32,26 @@ public class PlatypusModel {
 		return instance;
 	}
 	
-	public void addImageToBatch(File file) {
-		BatchImage newImage = new BatchImage(file);
-		imageBatch.add(newImage);
-		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_IMAGE_IN_BATCH.toString(), null, newImage);
-		notifyListeners(pce);
+	public ArrayList<BatchImage> getImageBatch() {
+		return imageBatch;
 	}
 	
-	public void addListener(PropertyChangeListener pcl) {
-		listeners.add(pcl);
+	public int getBatchSize() {
+		return imageBatch.size();
+	}
+		
+	public FilterContainer getFilterContainer() {
+		return filterContainer;
 	}
 	
-	private void notifyListeners(PropertyChangeEvent pce) {
-		for (PropertyChangeListener pcl : listeners) {
-			pcl.propertyChange(pce);
-		}
+	public ActiveFilters getActiveFilters() {
+		return activeFilters;
 	}
+	
+	public void addActiveFilter(IFilter filter) {
+		activeFilters.addFilter(filter);
+	}
+	
+
 	
 }

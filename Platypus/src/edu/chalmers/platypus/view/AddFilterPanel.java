@@ -11,17 +11,51 @@
 
 package edu.chalmers.platypus.view;
 
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.model.IFilter;
+
 /**
  *
  * @author skoldator
  */
 public class AddFilterPanel extends javax.swing.JPanel {
 
-    /** Creates new form AddFilterPanel */
-    public AddFilterPanel() {
+	/** Creates new form AddFilterPanel */
+    public AddFilterPanel(JDialog container, PlatypusView parent) {
         initComponents();
+        containerDialog = container;
+        parentView = parent;
+        updateList();
     }
 
+    public void closeContainerDialog() {
+        containerDialog.setVisible(false);
+    }
+
+    public void updateList() {
+        //Fetch list from ctrl, update with it
+    	DefaultListModel model = new DefaultListModel();
+    	for (IFilter filter : Locator.getCtrl().getLoadedFilterList()) {
+    		model.addElement(filter);
+    	}
+    	jList1.setModel(model);
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -37,6 +71,8 @@ public class AddFilterPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.PlatypusApp.class).getContext().getResourceMap(AddFilterPanel.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
@@ -45,13 +81,35 @@ public class AddFilterPanel extends javax.swing.JPanel {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "Loading..." };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jList1.setCellRenderer(new DefaultListCellRenderer(){
+        	@Override
+        	public Component getListCellRendererComponent(JList list, Object value, 
+        			int index, boolean isSelected, boolean cellHasFocus) {
+        		
+        		DefaultListCellRenderer component = (DefaultListCellRenderer)super.
+        			getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        		
+        		if (value instanceof IFilter) {
+            		String text = ((IFilter)value).getName();
+            		component.setText(text);
+        		}
+        		return component;
+        	}
+        });
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setFixedCellHeight(20);
         jList1.setName("jList1"); // NOI18N
         jList1.setSelectionBackground(resourceMap.getColor("jList1.selectionBackground")); // NOI18N
+        jList1.setSelectionForeground(resourceMap.getColor("jList1.selectionForeground")); // NOI18N
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel1.border.title"))); // NOI18N
@@ -69,11 +127,13 @@ public class AddFilterPanel extends javax.swing.JPanel {
         jTextArea1.setBorder(null);
         jTextArea1.setName("jTextArea1"); // NOI18N
         jTextArea1.setOpaque(false);
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea1);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
+        jLabel1.setVisible(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,30 +155,84 @@ public class AddFilterPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
+        jButton2.setName("jButton2"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+    	Object selection = jList1.getSelectedValue();
+    	if (selection instanceof IFilter) { //Should always be true
+        	IFilter filter = (IFilter)selection;
+        	jTextArea1.setText(filter.getDescription());
+        	((TitledBorder)jPanel1.getBorder()).setTitle(filter.getName());
+        	jPanel1.repaint();
+    	}
+    	
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    	closeContainerDialog();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    	Object selection = jList1.getSelectedValue();
+    	if (selection instanceof IFilter) { //Should always be true
+        	IFilter filter = (IFilter)selection;
+        	Locator.getCtrl().addFilterToBatch(filter);
+    	}
+        closeContainerDialog();
+        
+        /**if (selection instanceof IFilter && ) {
+            parentView.showNextView();
+        }*/
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
@@ -127,4 +241,7 @@ public class AddFilterPanel extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 
+    private ArrayList<String> loadedFilters;
+    private final JDialog containerDialog;
+    private final PlatypusView parentView;
 }

@@ -11,11 +11,15 @@
 
 package edu.chalmers.platypus.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 /**
  *
  * @author skoldator
  */
-public class ApplyViewPanel extends javax.swing.JPanel {
+public class ApplyViewPanel extends javax.swing.JPanel implements ActionListener {
 
     /** Creates new form ApplyViewPanel */
     public ApplyViewPanel() {
@@ -40,6 +44,11 @@ public class ApplyViewPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.PlatypusApp.class).getContext().getResourceMap(ApplyViewPanel.class);
@@ -75,11 +84,23 @@ public class ApplyViewPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        timer.setRepeats(false);
+        if (!timer.isRunning()) {
+            timer.start();
+        }
+    }//GEN-LAST:event_formComponentShown
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
+    private Timer timer = new Timer(5000, this);
     private PlatypusView parent;
+
+    public void actionPerformed(ActionEvent e) {
+        parent.showNextView();
+    }
 }

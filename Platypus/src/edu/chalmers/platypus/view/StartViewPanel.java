@@ -77,7 +77,7 @@ public class StartViewPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        parent.switchToView();
+        parent.showNextView();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

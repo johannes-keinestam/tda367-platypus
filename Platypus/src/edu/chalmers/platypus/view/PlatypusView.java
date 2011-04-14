@@ -7,14 +7,18 @@ package edu.chalmers.platypus.view;
 import java.awt.CardLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
-import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.FrameView;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+
+import org.jdesktop.application.Action;
+import org.jdesktop.application.FrameView;
+import org.jdesktop.application.ResourceMap;
+import org.jdesktop.application.SingleFrameApplication;
+
+import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.view.resources.StateChanges;
 
 /**
  * The application's main frame.
@@ -25,6 +29,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         super(app);
 
         initComponents();
+
         ResourceMap resourceMap = getResourceMap();
     }
 
@@ -38,12 +43,24 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         PlatypusApp.getApplication().show(aboutBox);
     }
 
-    public void switchToView(/**JPanel view*/) {
-        /**mainPanel.removeAll();
-        mainPanel.add(view);*/
-        ((CardLayout)jPanel1.getLayout()).next(jPanel1);
+    public void showAddFilterDialog() {
+        addFilterDialog = new JDialog(this.getFrame(), "Lägg till filter", true);
+        addFilterDialog.add(new AddFilterPanel(addFilterDialog, this));
+        addFilterDialog.pack();
+        addFilterDialog.setLocationRelativeTo(this.getComponent());
+    	addFilterDialog.setVisible(true);
     }
 
+    public void showNextView() {
+        ((CardLayout)jPanel1.getLayout()).next(jPanel1);
+    }
+    public void showPreviousView() {
+        ((CardLayout)jPanel1.getLayout()).previous(jPanel1);
+    }
+
+    public int numberOfActiveFilters() {
+    	return filterViewPanel1.getNumberOfFilterPanels();
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -54,6 +71,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
     private void initComponents() {
 
         mainPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         startViewPanel1 = new edu.chalmers.platypus.view.StartViewPanel(this);
         imageBrowserPanel1 = new edu.chalmers.platypus.view.BrowseViewPanel(this);
@@ -68,6 +86,8 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
 
         mainPanel.setName("mainPanel"); // NOI18N
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -90,15 +110,17 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         finishedViewPanel1.setName("finishedViewPanel1"); // NOI18N
         jPanel1.add(finishedViewPanel1, "card5");
 
+        jScrollPane1.setViewportView(jPanel1);
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
         );
 
         menuBar.setName("menuBar"); // NOI18N
@@ -135,6 +157,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
     private edu.chalmers.platypus.view.FinishedViewPanel finishedViewPanel1;
     private edu.chalmers.platypus.view.BrowseViewPanel imageBrowserPanel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private edu.chalmers.platypus.view.SaveViewPanel saveViewPanel1;
@@ -143,9 +166,10 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
 
 
     private JDialog aboutBox;
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		
-	}
+    private JDialog addFilterDialog;
+
+    public void propertyChange(PropertyChangeEvent evt) {
+
+    }
 
 }

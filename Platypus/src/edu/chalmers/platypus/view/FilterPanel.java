@@ -11,6 +11,10 @@
 
 package edu.chalmers.platypus.view;
 
+import javax.swing.border.TitledBorder;
+
+import edu.chalmers.platypus.model.IFilter;
+
 /**
  *
  * @author skoldator
@@ -21,11 +25,20 @@ public class FilterPanel extends javax.swing.JPanel {
     public FilterPanel() {
         initComponents();
     }
-    public FilterPanel(FilterViewPanel parent) {
+    public FilterPanel(IFilter filter, FilterViewPanel parent) {
         this();
         this.parent = parent;
+        
+        if (filter != null) {
+            ((TitledBorder)getBorder()).setTitle(filter.getName());
+            jScrollPane1.setViewportView(filter.getPanel());
+        }
     }
 
+    public void setAddButtonToNext() {
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.PlatypusApp.class).getContext().getResourceMap(FilterPanel.class);
+        jButton1.setText(resourceMap.getString("jButton1.alttext"));
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -71,7 +84,12 @@ public class FilterPanel extends javax.swing.JPanel {
 
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
-
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +100,12 @@ public class FilterPanel extends javax.swing.JPanel {
 
         jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
         jButton3.setName("jButton3"); // NOI18N
-
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,12 +142,23 @@ public class FilterPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (parent != null) {
+            parent.showPreviousFilterPanel();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (parent != null) {
-            parent.getMainView().switchToView();
+            parent.getMainView().showNextView();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (parent != null) {
+            parent.showNextFilterPanel();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,4 +171,5 @@ public class FilterPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private FilterViewPanel parent;
+    //private IFilter filter;
 }
