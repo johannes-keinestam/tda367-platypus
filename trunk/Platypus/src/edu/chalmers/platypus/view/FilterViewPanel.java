@@ -11,15 +11,24 @@
 
 package edu.chalmers.platypus.view;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
+import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.view.resources.StateChanges;
+
 /**
  *
  * @author skoldator
  */
-public class FilterViewPanel extends javax.swing.JPanel {
+public class FilterViewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
     /** Creates new form FilterViewPanel */
     public FilterViewPanel() {
         initComponents();
+        ComBus.subscribe(this);
     }
 
     public FilterViewPanel(PlatypusView parent) {
@@ -29,6 +38,51 @@ public class FilterViewPanel extends javax.swing.JPanel {
 
     public PlatypusView getMainView() {
         return parent;
+    }
+    
+    public void addFilterPanel(IFilter filter) {
+    	addedFilterPanels.add(new FilterPanel(filter, this));
+    	currentPanelIndex++;
+    	updateFilterPanelButtons();
+    	showFilterPanel(addedFilterPanels.get(addedFilterPanels.size()-1));
+    }
+    
+    private void showFilterPanel(FilterPanel panel) {
+    	jSplitPane1.setRightComponent(panel);
+        setDivider();
+    	System.out.println("Showing filter: "+(currentPanelIndex+1)+"/"+(addedFilterPanels.size()));
+    }
+    
+    public void showNextFilterPanel() {
+    	if (currentPanelIndex+1 < addedFilterPanels.size()) {
+        	showFilterPanel(addedFilterPanels.get(++currentPanelIndex));
+    	} else {
+    		parent.showAddFilterDialog();
+    	}
+    }
+    
+    public void showPreviousFilterPanel() {
+    	if (currentPanelIndex > 0) {
+    		showFilterPanel(addedFilterPanels.get(--currentPanelIndex));
+    	} else {
+    		parent.showPreviousView();
+    	}
+    }
+    
+    private void updateFilterPanelButtons() {
+    	for (int i = 0; i <= addedFilterPanels.size()-2; i++) {
+    		addedFilterPanels.get(i).setAddButtonToNext();
+    	}
+    }
+    
+    public void setDivider() {
+        if (jSplitPane1 != null) {
+        	jSplitPane1.setDividerLocation(0.6);
+        }
+    }
+    
+    public int getNumberOfFilterPanels() {
+    	return addedFilterPanels.size();
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -41,19 +95,24 @@ public class FilterViewPanel extends javax.swing.JPanel {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         previewPanel1 = new edu.chalmers.platypus.view.PreviewPanel();
-        filterPanel1 = new edu.chalmers.platypus.view.FilterPanel(this);
+        //filterPanel1 = new edu.chalmers.platypus.view.FilterPanel(null, this);
 
         setName("Form"); // NOI18N
 
         jSplitPane1.setDividerLocation(180);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane1.setName("jSplitPane1"); // NOI18N
+        jSplitPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jSplitPane1ComponentResized(evt);
+            }
+        });
 
         previewPanel1.setName("previewPanel1"); // NOI18N
         jSplitPane1.setTopComponent(previewPanel1);
 
-        filterPanel1.setName("filterPanel1"); // NOI18N
-        jSplitPane1.setRightComponent(filterPanel1);
+        //filterPanel1.setName("filterPanel1"); // NOI18N
+        //jSplitPane1.setRightComponent(filterPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -67,6 +126,9 @@ public class FilterViewPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSplitPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSplitPane1ComponentResized
+    	setDivider();
+    }//GEN-LAST:event_jSplitPane1ComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private edu.chalmers.platypus.view.FilterPanel filterPanel1;
@@ -75,5 +137,15 @@ public class FilterViewPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private PlatypusView parent;
+    private ArrayList<FilterPanel> addedFilterPanels = new ArrayList<FilterPanel>();
+    private int currentPanelIndex = -1;
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		String change = evt.getPropertyName();
+		if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())) {
+			addFilterPanel((IFilter)evt.getNewValue());
+		}
+	}
 
 }
