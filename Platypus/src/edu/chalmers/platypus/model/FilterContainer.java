@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.Locator;
-import edu.chalmers.platypus.view.resources.StateChanges;
+import edu.chalmers.platypus.util.StateChanges;
 
 public class FilterContainer {
 	
