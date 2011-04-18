@@ -12,7 +12,7 @@ import java.util.Set;
 
 import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.Locator;
-import edu.chalmers.platypus.view.resources.StateChanges;
+import edu.chalmers.platypus.util.StateChanges;
 
 public class PlatypusModel {
 	private final ActiveFilters activeFilters;
@@ -46,10 +46,6 @@ public class PlatypusModel {
 	
 	public ActiveFilters getActiveFilters() {
 		return activeFilters;
-	}
-	
-	public void addActiveFilter(IFilter filter) {
-		activeFilters.addFilter(filter);
 	}
 	
 
