@@ -71,4 +71,9 @@ public class PlatypusCtrl {
 		return Locator.getModel().getFilterContainer().getList();
 	}
 	
+	public void setNewPreview(BatchImage preview){
+		
+		
+	}
+	
 }
