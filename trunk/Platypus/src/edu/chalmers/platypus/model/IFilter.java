@@ -1,11 +1,12 @@
 package edu.chalmers.platypus.model;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public interface IFilter {
+public interface IFilter extends Serializable{
 
 	public String getName();
 	
