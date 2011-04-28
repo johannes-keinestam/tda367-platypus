@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.awt.image.BufferedImage;
 
 import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.Locator;
@@ -72,8 +73,16 @@ public class PlatypusCtrl {
 	}
 	
 	public void setNewPreview(BatchImage preview){
+//		BufferedImage asdf = preview.getImage();
+//		applyFilter();
 		
-		
+//		ImageIcon qwer = asdf. convert to ImageIcon
+//		Locator.getModel().setPreview(qwer);
+//		Locator.getModel().set -- original bilden för previewen -- Index eller en BatchImage.. hmm
+//		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), , );
 	}
+	
+	
+	
 	
 }
