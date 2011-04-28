@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.util.StateChanges;
@@ -62,7 +64,7 @@ public class ActiveFilters {
 			}
             
         }
-        public void savePreset(String name){
+        public void savePreset(final String name){
         	//Saves the preset file
         	FileOutputStream fos;
 			try {
@@ -82,6 +84,26 @@ public class ActiveFilters {
 				e.printStackTrace();
 			}
 			//Saves the info file
-			
+			try {
+				fos = new FileOutputStream(System.getenv("USERPROFILE")+"/Platypus/Presets/"+name+".info");
+				ObjectOutputStream oos;
+				try {
+					 oos = new ObjectOutputStream(fos);
+					 String filters = "";
+					 for (IFilter filter : activeFilters) {
+						filters = filters+filter.getName()+", ";
+					}
+					 oos.writeObject(new Preset(name, filters));
+			         oos.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	           
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
+        
 }
