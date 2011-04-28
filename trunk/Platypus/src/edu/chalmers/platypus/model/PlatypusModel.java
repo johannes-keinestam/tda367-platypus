@@ -20,6 +20,7 @@ public class PlatypusModel {
 	private final ArrayList<BatchImage> imageBatch = new ArrayList<BatchImage>();
 	private static PlatypusModel instance;
 //	private ImageIcon Preview;
+//	private BatchImage PreviewOriginal__or__ Int Index;
 	
 	private PlatypusModel() {
 		activeFilters = ActiveFilters.getActiveFilters();
@@ -55,6 +56,13 @@ public class PlatypusModel {
 //	
 //	public ImageIcon getPreviw(){
 //		return preview;
+//	}
+//	
+//	public void setPreviewOriginal(){
+//	}
+//	
+//	public ImageIcon getPreviewOriginal(){
+//		return Original.getThumbnail();
 //	}
 	
 }
