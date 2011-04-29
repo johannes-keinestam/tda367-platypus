@@ -19,8 +19,7 @@ public class PlatypusModel {
 	private final FilterContainer filterContainer;
 	private final ArrayList<BatchImage> imageBatch = new ArrayList<BatchImage>();
 	private static PlatypusModel instance;
-//	private ImageIcon Preview;
-//	private BatchImage PreviewOriginal__or__ Int Index;
+	private BatchImage preview;
 	
 	private PlatypusModel() {
 		activeFilters = ActiveFilters.getActiveFilters();
@@ -50,19 +49,11 @@ public class PlatypusModel {
 		return activeFilters;
 	}
 	
-//	public void setPreview(ImageIcon preview){
-//	ImageIcon or some sort of function to define the preview based on a batchImage	
-//	}
-//	
-//	public ImageIcon getPreviw(){
-//		return preview;
-//	}
-//	
-//	public void setPreviewOriginal(){
-//	}
-//	
-//	public ImageIcon getPreviewOriginal(){
-//		return Original.getThumbnail();
-//	}
+	public void setPreview(BatchImage preview){
+		this.preview = preview;
+	}
 	
+	public BatchImage getPreview(){
+		return preview;
+	}
 }
