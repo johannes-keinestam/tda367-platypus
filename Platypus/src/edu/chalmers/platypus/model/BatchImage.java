@@ -42,7 +42,8 @@ public class BatchImage {
 	public String getFileName() {
 		String fileName = imageFile.getPath();
 		System.out.println(fileName);
-		return fileName.substring(fileName.lastIndexOf(File.separator)+1, fileName.length());
+		System.out.println(fileName.substring(fileName.lastIndexOf(File.separator)+1, fileName.lastIndexOf('.')));
+		return fileName.substring(fileName.lastIndexOf(File.separator)+1, fileName.lastIndexOf('.'));
 	}
 }
 

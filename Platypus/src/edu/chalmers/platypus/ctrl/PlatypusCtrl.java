@@ -1,9 +1,13 @@
 package edu.chalmers.platypus.ctrl;
 
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import edu.chalmers.platypus.ComBus;
@@ -87,6 +91,22 @@ public class PlatypusCtrl {
 //		return asdf;
 //	}
 	
-	
+	public void saveImages(String path) {
+		
+		ArrayList<BatchImage> imgBatch = Locator.getModel().getImageBatch();
+		ArrayList<IFilter> activeFilters = Locator.getModel().getActiveFilters().getList();
+		for (BatchImage batchImg : imgBatch) {
+			for (IFilter filter : activeFilters) {
+				//BufferedImage filteredImg = filter.applyFilter(batchImg.getImage()); removed until valid filters are present
+				BufferedImage filteredImg = batchImg.getImage();
+				try {
+					ImageIO.write(filteredImg, "jpg", new File(path + File.separatorChar + batchImg.getFileName() + "_new." + "jpg"));
+				} catch (IOException e) {
+					System.out.println("Failed to write image: " + "test.jpg");
+					e.printStackTrace();
+				}
+			}	
+		}
+	}
 	
 }
