@@ -78,6 +78,7 @@ public class PlatypusCtrl {
 	
 	public void setNewPreview(BatchImage preview){
 		Locator.getModel().setPreview(preview);
+		previewChanged();
 	}
 	
 	public ImageIcon getPreviewOriginal(){
@@ -90,6 +91,11 @@ public class PlatypusCtrl {
 //		ImageIcon asdf = buffered image to image icon conversion 
 //		return asdf;
 //	}
+	
+	private void previewChanged(){
+		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), getPreviewOriginal(), null);
+//		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), getPreviewFiltered(), null);
+	}
 	
 	public void saveImages(String path) {
 		
