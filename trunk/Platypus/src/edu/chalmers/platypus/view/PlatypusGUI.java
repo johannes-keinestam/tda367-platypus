@@ -56,4 +56,7 @@ public class PlatypusGUI {
     	return model;
     }
 
+    public void saveImages(String path) {
+    	Locator.getCtrl().saveImages(path);
+    }
 }
