@@ -203,7 +203,7 @@ public class SaveViewPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	parent.getGUICtrl().saveImages(jTextField1.getText());
+    	parent.getGUICtrl().saveImages(jTextField1.getText(), jComboBox1.getSelectedItem().toString().toLowerCase().substring(1));
         parent.showNextView();
     }//GEN-LAST:event_jButton1ActionPerformed
 

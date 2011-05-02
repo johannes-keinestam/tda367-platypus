@@ -97,22 +97,10 @@ public class PlatypusCtrl {
 //		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), getPreviewFiltered(), null);
 	}
 	
-	public void saveImages(String path) {
+	public void saveImages(String path, String ext) {
 		
-		ArrayList<BatchImage> imgBatch = Locator.getModel().getImageBatch();
-		ArrayList<IFilter> activeFilters = Locator.getModel().getActiveFilters().getList();
-		for (BatchImage batchImg : imgBatch) {
-			for (IFilter filter : activeFilters) {
-				//BufferedImage filteredImg = filter.applyFilter(batchImg.getImage()); removed until valid filters are present
-				BufferedImage filteredImg = batchImg.getImage();
-				try {
-					ImageIO.write(filteredImg, "jpg", new File(path + File.separatorChar + batchImg.getFileName() + "_new." + "jpg"));
-				} catch (IOException e) {
-					System.out.println("Failed to write image: " + "test.jpg");
-					e.printStackTrace();
-				}
-			}	
-		}
+		new Thread(new RunBatch(path, ext)).start();
+		
 	}
 	
 }
