@@ -81,8 +81,8 @@ public class PlatypusCtrl {
 		previewChanged();
 	}
 	
-	public ImageIcon getPreviewOriginal(){
-		return Locator.getModel().getPreview().getThumbnail();
+	public ImageIcon getPreviewOriginal(int width, int height){
+		return Locator.getModel().getPreview().getThumbnail(width, height);
 	}
 	
 	public ImageIcon getPreviewFiltered(){
@@ -95,7 +95,7 @@ public class PlatypusCtrl {
 	}
 	
 	public void previewChanged(){
-		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), getPreviewOriginal(), null);
+		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), getPreviewOriginal(-1,-1), null);
 		ComBus.notifyListeners(pce);
 		PropertyChangeEvent pce2 = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), getPreviewFiltered(), null);
 		ComBus.notifyListeners(pce2);

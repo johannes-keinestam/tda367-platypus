@@ -33,7 +33,7 @@ public class ThumbnailImage extends javax.swing.JPanel {
         this.img = img;
         this.parent = parent;
         jLabel2.setText(img.getFileName());
-        jLabel1.setIcon(img.getThumbnail());
+        jLabel1.setIcon(img.getThumbnail(120,90));
     }
     
     public void showControls(){
