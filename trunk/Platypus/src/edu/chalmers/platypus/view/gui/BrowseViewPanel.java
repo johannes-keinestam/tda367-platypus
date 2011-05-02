@@ -92,7 +92,10 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
 			removePanel(removedImage);
 		} else if (change.equals(StateChanges.NEW_PREVIEW_IMAGE.toString())) {
 			ImageIcon newPreview = (ImageIcon)evt.getNewValue();
-			parent.setPreview(newPreview);
+			parent.setPreviewOriginal(newPreview);
+		} else if (change.equals(StateChanges.PREVIEW_IMAGE_UPDATED.toString())) {
+			ImageIcon newPreview = (ImageIcon)evt.getNewValue();
+			parent.setPreviewFiltered(newPreview);
 		}
 	}
 	

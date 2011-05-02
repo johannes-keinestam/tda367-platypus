@@ -24,8 +24,12 @@ public class PreviewPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public void setImage(ImageIcon img) {
+    public void setPreviewOriginal(ImageIcon img) {
     	jLabel1.setIcon(img);
+    }
+    
+    public void setPreviewFiltered(ImageIcon img) {
+    	jLabel2.setIcon(img);
     }
     /** This method is called from within the constructor to
      * initialize the form.

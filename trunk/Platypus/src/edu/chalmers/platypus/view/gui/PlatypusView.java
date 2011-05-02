@@ -87,8 +87,12 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         ((CardLayout)jPanel1.getLayout()).previous(jPanel1);
     }
     
-    public void setPreview(ImageIcon img) {
-    	filterViewPanel1.setPreview(img);
+    public void setPreviewOriginal(ImageIcon img) {
+    	filterViewPanel1.setPreviewOriginal(img);
+    }
+    
+    public void setPreviewFiltered(ImageIcon img) {
+    	filterViewPanel1.setPreviewFiltered(img);
     }
 
     /** This method is called from within the constructor to
