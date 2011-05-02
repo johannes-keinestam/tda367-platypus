@@ -100,9 +100,19 @@ public class PlatypusCtrl {
 	}
 	
 	public void saveImages(String path, String ext) {
-		
-		new Thread(new RunBatch(path, ext)).start();
-		
+		ArrayList<BatchImage> imageBatch = Locator.getModel().getImageBatch();
+		for (BatchImage batchImage : imageBatch) {
+			BufferedImage filteredImage = batchImage.getImage();
+			new Thread(new ApplyFilter(filteredImage)).start();
+			
+			try {
+				ImageIO.write(filteredImage, ext, new File(path + File.separatorChar + batchImage.getFileName() + "_new." + ext));
+			} catch (IOException e) {
+				System.out.println("Failed to write image: " + batchImage.getFileName()+ "_new." + ext);
+				e.printStackTrace();
+			}
+		}
+	
 	}
 	
 }
