@@ -87,7 +87,9 @@ public class PlatypusCtrl {
 	
 	public ImageIcon getPreviewFiltered(){
 		BufferedImage original = Locator.getModel().getPreview().getImage();
-//		applyFilter(original);
+		
+		new Thread(new ApplyFilter(original));
+		
 		ImageIcon preview = new ImageIcon(original);
 		return preview;
 	}
@@ -104,6 +106,7 @@ public class PlatypusCtrl {
 		for (BatchImage batchImage : imageBatch) {
 			ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.PROCESSING_IMAGE.toString(), batchImage, batchImage));
 			BufferedImage filteredImage = batchImage.getImage();
+			
 			new Thread(new ApplyFilter(filteredImage)).start();
 			
 			File outputFile = new File(path + File.separatorChar + batchImage.getFileName() + "_new." + ext);
