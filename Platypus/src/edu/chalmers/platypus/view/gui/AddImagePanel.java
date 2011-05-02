@@ -24,7 +24,7 @@ public class AddImagePanel extends JPanel {
     private AddImagePanel() {
         initComponents();
     }
-    public AddImagePanel(BrowseViewPanel listToAddTo) {
+    public AddImagePanel(BatchThumbPanel listToAddTo) {
         this();
         this.listToAddTo = listToAddTo;
     }
@@ -78,5 +78,5 @@ public class AddImagePanel extends JPanel {
     private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 	
-    private BrowseViewPanel listToAddTo;
+    private BatchThumbPanel listToAddTo;
 }
