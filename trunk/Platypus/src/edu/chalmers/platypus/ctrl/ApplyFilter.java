@@ -20,13 +20,6 @@ public class ApplyFilter implements Runnable {
 			//this.filteredImage = filter.applyFilter(this.filteredImage);
 		}
 
-		/*
-		try {
-			ImageIO.write(filteredImg, writeExt, new File(writePath + File.separatorChar + batchImg.getFileName() + "_new." + writeExt));
-		} catch (IOException e) {
-			System.out.println("Failed to write image: " + "test.jpg");
-			e.printStackTrace();
-		}*/
 	}
 
 }

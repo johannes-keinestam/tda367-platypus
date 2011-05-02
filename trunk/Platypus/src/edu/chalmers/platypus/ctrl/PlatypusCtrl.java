@@ -102,13 +102,16 @@ public class PlatypusCtrl {
 	public void saveImages(String path, String ext) {
 		ArrayList<BatchImage> imageBatch = Locator.getModel().getImageBatch();
 		for (BatchImage batchImage : imageBatch) {
+			ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.PROCESSING_IMAGE.toString(), batchImage, batchImage));
 			BufferedImage filteredImage = batchImage.getImage();
 			new Thread(new ApplyFilter(filteredImage)).start();
 			
-			try {
-				ImageIO.write(filteredImage, ext, new File(path + File.separatorChar + batchImage.getFileName() + "_new." + ext));
+			File outputFile = new File(path + File.separatorChar + batchImage.getFileName() + "_new." + ext);
+			try {				
+				ImageIO.write(filteredImage, ext, outputFile);
+				ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVED_IMAGE.toString(), outputFile, outputFile));
 			} catch (IOException e) {
-				System.out.println("Failed to write image: " + batchImage.getFileName()+ "_new." + ext);
+				System.out.println("Failed to write image: " + outputFile.getName());
 				e.printStackTrace();
 			}
 		}
