@@ -85,16 +85,18 @@ public class PlatypusCtrl {
 		return Locator.getModel().getPreview().getThumbnail();
 	}
 	
-//	public ImageIcon getPreviewFiltered(){
-//		BufferedImage qwer = Locator.getModel().getPreview().getImage();
-//		applyFilter(qwer);
-//		ImageIcon asdf = buffered image to image icon conversion 
-//		return asdf;
-//	}
+	public ImageIcon getPreviewFiltered(){
+		BufferedImage original = Locator.getModel().getPreview().getImage();
+//		applyFilter(original);
+		ImageIcon preview = new ImageIcon(original);
+		return preview;
+	}
 	
-	private void previewChanged(){
+	public void previewChanged(){
 		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), getPreviewOriginal(), null);
-//		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), getPreviewFiltered(), null);
+		ComBus.notifyListeners(pce);
+		PropertyChangeEvent pce2 = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), getPreviewFiltered(), null);
+		ComBus.notifyListeners(pce2);
 	}
 	
 	public void saveImages(String path, String ext) {

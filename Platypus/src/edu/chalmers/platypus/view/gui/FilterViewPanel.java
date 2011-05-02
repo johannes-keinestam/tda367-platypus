@@ -47,9 +47,14 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     	return addedFilterPanels.size();
     }
     
-    public void setPreview(ImageIcon img) {
-    	previewPanel1.setImage(img);
+    public void setPreviewOriginal(ImageIcon img) {
+    	previewPanel1.setPreviewOriginal(img);
     }
+    
+    public void setPreviewFiltered(ImageIcon img) {
+    	previewPanel1.setPreviewFiltered(img);
+    }
+    
     public void addFilterPanel(IFilter filter) {
     	addedFilterPanels.add(new FilterPanel(filter, this));
     	currentPanelIndex++;
