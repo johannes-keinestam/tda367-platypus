@@ -17,11 +17,22 @@ import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.TransferHandler;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -37,6 +48,21 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
         WrapLayout l = new WrapLayout();
         l.setAlignment(WrapLayout.LEFT);
         setLayout(l);
+
+        this.setDropTarget(new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent dtde) {
+                dtde.acceptDrop(DnDConstants.ACTION_COPY);
+                Transferable t = dtde.getTransferable();
+                List fileList;
+                try {
+                    fileList = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
+                } catch (Exception e) {
+                    return;
+                }
+                addImagesToBatch(fileList.toArray());
+            }
+        });
 
         addPanel(addImageButton);
         ComBus.subscribe(this);
@@ -66,16 +92,22 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
     public void openFileChooser() {
         JFileChooser browser = new JFileChooser();
         browser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        FileFilter filter = new FileNameExtensionFilter("Supported pictures " +
-                "(*.jpg, *.png, *.gif)",
-                "jpeg","JPEG","JPG","jpg","png","PNG","gif","GIF");
         browser.setFileFilter(filter);
         browser.setAcceptAllFileFilterUsed(false);
         browser.setMultiSelectionEnabled(true);
         int result = browser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
-            for (File f : browser.getSelectedFiles()) {
-            	PlatypusGUI.getInstance().addImageToBatch(f);
+            addImagesToBatch(browser.getSelectedFiles());
+        }
+    }
+
+    private void addImagesToBatch(Object[] array) {
+        for (Object o : array) {
+            if (o instanceof File) {
+                File current = (File)o;
+                if (filter.accept(current)) {
+                    PlatypusGUI.getInstance().addImageToBatch(current);
+                }
             }
         }
     }
@@ -133,4 +165,7 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
     // End of variables declaration//GEN-END:variables
 
     private final AddImagePanel addImageButton = new AddImagePanel(this);
+    private final FileFilter filter = new FileNameExtensionFilter("Supported pictures " +
+                "(*.jpg, *.png, *.gif)",
+                "jpeg","JPEG","JPG","jpg","png","PNG","gif","GIF");
 }
