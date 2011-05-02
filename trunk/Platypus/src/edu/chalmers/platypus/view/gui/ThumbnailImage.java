@@ -28,7 +28,7 @@ public class ThumbnailImage extends javax.swing.JPanel {
      	jLabel2.setText("filename.png");
     }
     
-    public ThumbnailImage(BatchImage img, BrowseViewPanel parent) {
+    public ThumbnailImage(BatchImage img, BatchThumbPanel parent) {
         initComponents();
         this.img = img;
         this.parent = parent;
@@ -207,5 +207,5 @@ public class ThumbnailImage extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 	
     private BatchImage img;
-    private BrowseViewPanel parent;
+    private BatchThumbPanel parent;
 }
