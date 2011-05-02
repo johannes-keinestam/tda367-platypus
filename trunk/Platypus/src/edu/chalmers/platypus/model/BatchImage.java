@@ -1,5 +1,6 @@
 package edu.chalmers.platypus.model;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +17,47 @@ public class BatchImage {
 		this.imageFile = file;
 	}
 
-	public ImageIcon getThumbnail() {
+	public ImageIcon getThumbnail(int width, int height) {
 		try {
-			// TODO scale
-			ImageIcon img = new ImageIcon(imageFile.toURI().toURL());
-			return img;
+			if(width == -1 && height == -1){
+				try{
+                    return new ImageIcon(imageFile.toURI().toURL());
+				} catch (MalformedURLException e) {
+                    e.printStackTrace();
+                    return null;
+				}
+			}
+			
+			BufferedImage unscaledImage = ImageIO.read(imageFile);
+			
+			int unscaledHeight = unscaledImage.getHeight();
+			int unscaledWidth = unscaledImage.getWidth();
+			
+			int imageRatio = unscaledHeight/unscaledWidth;
+			
+//			int scaledHeight = 0;
+//			int scaledWidth = 0;
+//			
+//			if(imageRatio>=1){
+//				double scale = (double)unscaledHeight/height;
+//				scaledHeight = height;
+//				scaledWidth = (int)width*scale;
+//			}else{
+//				double scale = (double)unscaledWidth/width;
+//				scaledHeight = height*scale;
+//				scaledWidth = width;
+//			}
+			
+			if(imageRatio>=1){
+				return new ImageIcon(unscaledImage.getScaledInstance(-1,height,Image.SCALE_FAST));
+			}else{
+				return new ImageIcon(unscaledImage.getScaledInstance(width,-1,Image.SCALE_FAST));
+			}
 		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
