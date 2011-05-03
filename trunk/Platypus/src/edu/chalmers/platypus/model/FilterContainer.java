@@ -17,7 +17,7 @@ public class FilterContainer {
 	private ArrayList<IFilter> loadedFilters = new ArrayList<IFilter>();
 	
 	private FilterContainer(){
-		//scanForFilters();
+		scanForFilters();
 	}
 	
 	public static  FilterContainer getFilterContainerObject(){

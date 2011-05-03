@@ -17,7 +17,7 @@ public class ApplyFilter implements Runnable {
 	public void run() {
 		ArrayList<IFilter> activeFilters = Locator.getModel().getActiveFilters().getList();
 		for (IFilter filter : activeFilters) {
-			//this.filteredImage = filter.applyFilter(this.filteredImage);
+			this.filteredImage = filter.applyFilter(this.filteredImage);
 		}
 
 	}
