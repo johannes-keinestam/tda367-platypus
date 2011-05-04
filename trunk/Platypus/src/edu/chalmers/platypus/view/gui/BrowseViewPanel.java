@@ -11,6 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.ComBus;
 import java.awt.Color;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
@@ -31,6 +32,7 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
     /** Creates new form ImageBrowserPanel */
     public BrowseViewPanel() {
         initComponents();
+        ComBus.subscribe(this);
     }
 
     public BrowseViewPanel(PlatypusView parent) {
@@ -51,12 +53,8 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String change = evt.getPropertyName();
-		if (change.equals(StateChanges.NEW_PREVIEW_IMAGE.toString())) {
-			ImageIcon newPreview = (ImageIcon)evt.getNewValue();
-			parent.setPreviewOriginal(newPreview);
-		} else if (change.equals(StateChanges.PREVIEW_IMAGE_UPDATED.toString())) {
-			ImageIcon newPreview = (ImageIcon)evt.getNewValue();
-			parent.setPreviewFiltered(newPreview);
+		if (change.equals(StateChanges.MODEL_RESET.toString())) {
+			setButtonAdd();
 		}
 	}
     

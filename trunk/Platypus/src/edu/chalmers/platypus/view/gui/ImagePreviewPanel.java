@@ -11,6 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.Locator;
 import javax.swing.ImageIcon;
 
 /**
@@ -48,11 +49,14 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
 
         setName("Form"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(ImagePreviewPanel.class);
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ImagePreviewPanel.class);
+        jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jLabel1.setDisabledIcon(resourceMap.getIcon("jLabel1.disabledIcon")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

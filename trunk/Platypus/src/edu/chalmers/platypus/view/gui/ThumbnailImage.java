@@ -16,6 +16,7 @@ import java.awt.event.ItemEvent;
 
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.view.PlatypusGUI;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -25,7 +26,6 @@ public class ThumbnailImage extends javax.swing.JPanel {
 
     public ThumbnailImage() {
         initComponents();
-     	jLabel2.setText("filename.png");
     }
     
     public ThumbnailImage(BatchImage img, BatchThumbPanel parent) {
@@ -33,7 +33,7 @@ public class ThumbnailImage extends javax.swing.JPanel {
         this.img = img;
         this.parent = parent;
         jLabel2.setText(img.getFileName());
-        jLabel1.setIcon(img.getThumbnail(120,90));
+        jLabel1.setIcon(new ImageIcon(img.getThumbnail(120,90)));
     }
     
     public void showControls(){

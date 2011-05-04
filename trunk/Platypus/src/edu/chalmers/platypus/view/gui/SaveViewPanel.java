@@ -12,6 +12,7 @@
 package edu.chalmers.platypus.view.gui;
 
 import java.awt.event.ItemEvent;
+import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
@@ -23,6 +24,7 @@ public class SaveViewPanel extends javax.swing.JPanel {
     /** Creates new form SavePanel */
     public SaveViewPanel() {
         initComponents();
+        jTextField1.setText(System.getenv("USERPROFILE")+File.separator+"Platypus"+File.separator+"Pictures");
     }
 
     public SaveViewPanel(PlatypusView parent) {
@@ -202,10 +204,10 @@ public class SaveViewPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
     	parent.getGUICtrl().saveImages(jTextField1.getText(), jComboBox1.getSelectedItem().toString().toLowerCase().substring(1));
         parent.showNextView();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         parent.showPreviousView();
