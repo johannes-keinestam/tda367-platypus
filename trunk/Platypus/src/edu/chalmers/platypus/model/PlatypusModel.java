@@ -3,6 +3,10 @@ package edu.chalmers.platypus.model;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -55,5 +59,48 @@ public class PlatypusModel {
 	
 	public BatchImage getPreview(){
 		return preview;
+	}
+	public ArrayList<Preset> getPresets(){
+		 File folder = new File(System.getenv("USERPROFILE")+"/Platypus/Presets");
+		 File[] listOfFiles = folder.listFiles();
+		 FileInputStream fis;
+		 ArrayList<Preset> presets = new  ArrayList<Preset>();
+		 for (int i = 0; i < listOfFiles.length; i++) {
+	    	 if (listOfFiles[i].isFile()) {
+	    		 Preset pe;	
+	    		 try {
+	    			 fis = new FileInputStream(listOfFiles[i]);
+	    			 ObjectInputStream ois;
+	    			 try {
+	    				 ois = new ObjectInputStream(fis);
+	    				 try {
+	    					 pe = (Preset) ois.readObject();
+	    					 presets.add(pe);
+     					
+	    				 } catch (ClassCastException e) {
+	    					 // TODO Auto-generated catch block
+	    					 //e.printStackTrace();
+	    				 } catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+	    				 }
+     	             ois.close();
+	    			 } 
+	    			 catch (IOException e) {
+	    				 // TODO Auto-generated catch block
+	    				 e.printStackTrace();
+     			}
+     	           
+     		} 
+	    	catch (FileNotFoundException e) {
+     			e.printStackTrace();
+     		}
+                   
+                   
+         }
+           
+       }
+		
+		return presets;	
 	}
 }
