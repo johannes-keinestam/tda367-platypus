@@ -47,14 +47,6 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     	return addedFilterPanels.size();
     }
     
-    public void setPreviewOriginal(ImageIcon img) {
-    	previewPanel1.setPreviewOriginal(img);
-    }
-    
-    public void setPreviewFiltered(ImageIcon img) {
-    	previewPanel1.setPreviewFiltered(img);
-    }
-    
     public void addFilterPanel(IFilter filter) {
     	addedFilterPanels.add(new FilterPanel(filter, this));
     	currentPanelIndex++;
@@ -175,9 +167,11 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
 		String change = evt.getPropertyName();
 		if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())) {
 			addFilterPanel((IFilter)evt.getNewValue());
-		}
-		else if (change.equals(StateChanges.FILTER_REMOVED_FROM_BATCH.toString())) {
+		} else if (change.equals(StateChanges.FILTER_REMOVED_FROM_BATCH.toString())) {
 			removeFilterPanel((IFilter)evt.getOldValue());
+		} else if (change.equals(StateChanges.MODEL_RESET.toString())) {
+                        currentPanelIndex = -1;
+			addedFilterPanels.clear();
 		}
 	}
 

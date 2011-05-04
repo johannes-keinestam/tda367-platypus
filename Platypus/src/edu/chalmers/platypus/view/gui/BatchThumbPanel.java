@@ -12,6 +12,7 @@
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
@@ -74,7 +75,7 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
         panel.add(addToList);
         panel.setOpaque(true);
         add(addToList);
-        revalidate();
+        revalidate();   
     }
 
     private void removePanel(BatchImage img) {
@@ -101,15 +102,21 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
         }
     }
 
-    private void addImagesToBatch(Object[] array) {
-        for (Object o : array) {
-            if (o instanceof File) {
-                File current = (File)o;
-                if (filter.accept(current)) {
-                    PlatypusGUI.getInstance().addImageToBatch(current);
+    private void addImagesToBatch(final Object[] array) {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (Object o : array) {
+                    if (o instanceof File) {
+                        File current = (File)o;
+                        if (filter.accept(current)) {
+                            PlatypusGUI.getInstance().addImageToBatch(current);
+                        }
+                    }
                 }
             }
-        }
+        });
+        t.start();
     }
 
     public void setPreview(ThumbnailImage img) {
@@ -121,21 +128,23 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
     			}
     		}
     	}
-    	// TODO call ctrl to set preview
+    	Locator.getCtrl().setNewPreview(img.getBatchImage());
     }
 
     @Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		String change = evt.getPropertyName();
-		if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
-			BatchImage addedImage = (BatchImage)evt.getNewValue();
-			addPanel(new ThumbnailImage(addedImage, this));
-		}
-		else if (change.equals(StateChanges.IMAGE_REMOVED_FROM_BATCH.toString())) {
-			BatchImage removedImage = (BatchImage)evt.getOldValue();
-			removePanel(removedImage);
+    public void propertyChange(PropertyChangeEvent evt) {
+	String change = evt.getPropertyName();
+	if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
+            BatchImage addedImage = (BatchImage)evt.getNewValue();
+            addPanel(new ThumbnailImage(addedImage, this));
+	} else if (change.equals(StateChanges.IMAGE_REMOVED_FROM_BATCH.toString())) {
+            BatchImage removedImage = (BatchImage)evt.getOldValue();
+            removePanel(removedImage);
+        } else if (change.equals(StateChanges.MODEL_RESET.toString())) {
+            removeAll();
+            addPanel(addImageButton);
         }
-	}
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

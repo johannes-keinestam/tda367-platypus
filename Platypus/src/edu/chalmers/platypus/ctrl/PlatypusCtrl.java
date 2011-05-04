@@ -15,6 +15,8 @@ import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.StateChanges;
+import java.awt.Image;
+import java.util.List;
 
 public class PlatypusCtrl {
 	private static PlatypusCtrl instance;
@@ -27,6 +29,15 @@ public class PlatypusCtrl {
 		}
 		return instance;
 	}
+
+        public void resetModel() {
+            Locator.getModel().getActiveFilters().getList().clear();
+
+            Locator.getModel().getImageBatch().clear();
+
+            ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.MODEL_RESET.toString(), null, null));
+
+        }
 	
 	public void addImageToBatch(File file) {
 		BatchImage newImage = new BatchImage(file);
@@ -42,7 +53,7 @@ public class PlatypusCtrl {
 			if (list.get(i) == img) {
 				list.remove(i);
 				PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.IMAGE_REMOVED_FROM_BATCH.toString(), img, null);
-				ComBus.notifyListeners(pce);
+                                ComBus.notifyListeners(pce);
 				break;
 			}			
 		}
@@ -82,11 +93,17 @@ public class PlatypusCtrl {
 	}
 	
 	public ImageIcon getPreviewOriginal(int width, int height){
-		return Locator.getModel().getPreview().getThumbnail(width, height);
+                if (Locator.getModel().getPreview() == null) {
+                    return null;
+                }
+		return new ImageIcon(Locator.getModel().getPreview().getThumbnail(width, height));
 	}
 	
-	public ImageIcon getPreviewFiltered(){
-		BufferedImage original = Locator.getModel().getPreview().getImage();
+	public ImageIcon getPreviewFiltered(int width, int height){
+                if (Locator.getModel().getPreview() == null) {
+                    return null;
+                }
+		BufferedImage original = Locator.getModel().getPreview().getThumbnail(width, height);
 		
 		new Thread(new ApplyFilter(original));
 		
@@ -95,9 +112,9 @@ public class PlatypusCtrl {
 	}
 	
 	public void previewChanged(){
-		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), getPreviewOriginal(-1,-1), null);
+		PropertyChangeEvent pce = new PropertyChangeEvent(this, StateChanges.NEW_PREVIEW_IMAGE.toString(), null, null);
 		ComBus.notifyListeners(pce);
-		PropertyChangeEvent pce2 = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), getPreviewFiltered(), null);
+		PropertyChangeEvent pce2 = new PropertyChangeEvent(this, StateChanges.PREVIEW_IMAGE_UPDATED.toString(), null, null);
 		ComBus.notifyListeners(pce2);
 	}
 	
@@ -118,6 +135,7 @@ public class PlatypusCtrl {
 				e.printStackTrace();
 			}
 		}
+                ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVE_OPERATION_FINISHED.toString(), null, null));
 	
 	}
 	

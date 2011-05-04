@@ -11,6 +11,8 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.Locator;
+
 /**
  *
  * @author skoldator
@@ -101,6 +103,7 @@ public class FinishedViewPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Locator.getCtrl().resetModel();
         parent.showNextView();
     }//GEN-LAST:event_jButton2ActionPerformed
 

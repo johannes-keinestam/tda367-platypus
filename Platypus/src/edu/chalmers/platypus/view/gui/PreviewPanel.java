@@ -11,26 +11,47 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.util.StateChanges;
+import java.awt.Image;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author skoldator
  */
-public class PreviewPanel extends javax.swing.JPanel {
+public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
     /** Creates new form PreviewPanel */
     public PreviewPanel() {
         initComponents();
+        ComBus.subscribe(this);
     }
 
-    public void setPreviewOriginal(ImageIcon img) {
-    	jLabel1.setIcon(img);
+    public void setPreviewOriginal() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ImageIcon i = Locator.getCtrl().getPreviewOriginal(imagePreviewPanel1.getWidth()-2,imagePreviewPanel1.getHeight()-2);
+                imagePreviewPanel1.setImage(i);
+            }
+        });
+        t.start();
     }
-    
-    public void setPreviewFiltered(ImageIcon img) {
-    	jLabel2.setIcon(img);
+    public void setPreviewFiltered() {
+       Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ImageIcon i = Locator.getCtrl().getPreviewOriginal(imagePreviewPanel2.getWidth()-2,imagePreviewPanel2.getHeight()-2);
+                imagePreviewPanel2.setImage(i);
+            }
+        });
+        t.start();
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -47,11 +68,11 @@ public class PreviewPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         imagePreviewPanel2 = new edu.chalmers.platypus.view.gui.ImagePreviewPanel();
-        jButton1 = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
         jSplitPane1.setBorder(null);
+        jSplitPane1.setDividerLocation(200);
         jSplitPane1.setDividerSize(0);
         jSplitPane1.setName("jSplitPane1"); // NOI18N
         jSplitPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -63,23 +84,16 @@ public class PreviewPanel extends javax.swing.JPanel {
         jPanel1.setName("jPanel1"); // NOI18N
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(PreviewPanel.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(PreviewPanel.class);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        imagePreviewPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         imagePreviewPanel1.setName("imagePreviewPanel1"); // NOI18N
-
-        javax.swing.GroupLayout imagePreviewPanel1Layout = new javax.swing.GroupLayout(imagePreviewPanel1);
-        imagePreviewPanel1.setLayout(imagePreviewPanel1Layout);
-        imagePreviewPanel1Layout.setHorizontalGroup(
-            imagePreviewPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 178, Short.MAX_VALUE)
-        );
-        imagePreviewPanel1Layout.setVerticalGroup(
-            imagePreviewPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
-        );
+        imagePreviewPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                imagePreviewPanel1ComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,15 +102,15 @@ public class PreviewPanel extends javax.swing.JPanel {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(imagePreviewPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(imagePreviewPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imagePreviewPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imagePreviewPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -108,28 +122,21 @@ public class PreviewPanel extends javax.swing.JPanel {
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
-        imagePreviewPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         imagePreviewPanel2.setName("imagePreviewPanel2"); // NOI18N
-
-        javax.swing.GroupLayout imagePreviewPanel2Layout = new javax.swing.GroupLayout(imagePreviewPanel2);
-        imagePreviewPanel2.setLayout(imagePreviewPanel2Layout);
-        imagePreviewPanel2Layout.setHorizontalGroup(
-            imagePreviewPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 229, Short.MAX_VALUE)
-        );
-        imagePreviewPanel2Layout.setVerticalGroup(
-            imagePreviewPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 97, Short.MAX_VALUE)
-        );
+        imagePreviewPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                imagePreviewPanel2ComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(imagePreviewPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(imagePreviewPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,32 +144,22 @@ public class PreviewPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imagePreviewPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imagePreviewPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jSplitPane1.setRightComponent(jPanel2);
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap(206, Short.MAX_VALUE))
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jButton1)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -171,16 +168,33 @@ public class PreviewPanel extends javax.swing.JPanel {
         jSplitPane1.setDividerLocation(0.5);
     }//GEN-LAST:event_jSplitPane1ComponentResized
 
+    private void imagePreviewPanel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_imagePreviewPanel1ComponentResized
+        setPreviewOriginal();
+    }//GEN-LAST:event_imagePreviewPanel1ComponentResized
+
+    private void imagePreviewPanel2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_imagePreviewPanel2ComponentResized
+        setPreviewFiltered();
+    }//GEN-LAST:event_imagePreviewPanel2ComponentResized
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private edu.chalmers.platypus.view.gui.ImagePreviewPanel imagePreviewPanel1;
     private edu.chalmers.platypus.view.gui.ImagePreviewPanel imagePreviewPanel2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        String change = evt.getPropertyName();
+	if (change.equals(StateChanges.NEW_PREVIEW_IMAGE.toString())) {
+            setPreviewOriginal();
+	} else if (change.equals(StateChanges.PREVIEW_IMAGE_UPDATED.toString())) {
+            setPreviewFiltered();
+        }
+    }
 
 }

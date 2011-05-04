@@ -41,7 +41,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
-        <Component class="edu.chalmers.platypus.view.PreviewPanel" name="previewPanel1">
+        <Component class="edu.chalmers.platypus.view.gui.PreviewPanel" name="previewPanel1">
           <Properties>
             <Property name="name" type="java.lang.String" value="previewPanel1" noResource="true"/>
           </Properties>
@@ -51,12 +51,12 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="edu.chalmers.platypus.view.FilterPanel" name="filterPanel1">
+        <Component class="edu.chalmers.platypus.view.gui.FilterPanel" name="filterPanel1">
           <Properties>
             <Property name="name" type="java.lang.String" value="filterPanel1" noResource="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.FilterPanel(this)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.FilterPanel(this)"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">

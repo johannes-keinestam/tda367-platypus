@@ -11,19 +11,25 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.model.BatchImage;
+import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.util.StateChanges;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Timer;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  *
  * @author skoldator
  */
-public class ApplyViewPanel extends javax.swing.JPanel implements ActionListener {
+public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
     /** Creates new form ApplyViewPanel */
     public ApplyViewPanel() {
         initComponents();
+        ComBus.subscribe(this);
     }
 
     public ApplyViewPanel(PlatypusView parent) {
@@ -52,14 +58,9 @@ public class ApplyViewPanel extends javax.swing.JPanel implements ActionListener
         jLabel3 = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(ApplyViewPanel.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApplyViewPanel.class);
         jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -103,13 +104,6 @@ public class ApplyViewPanel extends javax.swing.JPanel implements ActionListener
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        timer.setRepeats(false);
-        if (!timer.isRunning()) {
-            timer.start();
-        }
-    }//GEN-LAST:event_formComponentShown
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -117,12 +111,22 @@ public class ApplyViewPanel extends javax.swing.JPanel implements ActionListener
     private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 
-    private Timer timer = new Timer(5000, this);
     private PlatypusView parent;
     private String applyFilterText;
     private String savingFileText;
 
-    public void actionPerformed(ActionEvent e) {
-        parent.showNextView();
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+       	String change = evt.getPropertyName();
+	if (change.equals(StateChanges.PROCESSING_IMAGE.toString())) {
+            BatchImage b = (BatchImage) evt.getNewValue();
+            setFileName(b.getFileName());
+	} else if (change.equals(StateChanges.APPLYING_FILTER.toString())) {
+            IFilter f = (IFilter) evt.getNewValue();
+            setFilterName(f.getName());
+        } else if (change.equals(StateChanges.SAVE_OPERATION_FINISHED.toString())) {
+            parent.showNextView();
+        }
     }
 }
