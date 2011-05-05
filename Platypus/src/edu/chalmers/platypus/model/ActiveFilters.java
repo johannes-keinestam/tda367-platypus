@@ -39,10 +39,10 @@ public class ActiveFilters {
         public void loadPreset(ArrayList<IFilter> preset){
                 //TODO
         }
-        public void loadPreset(String name){
+        public void loadPreset(Preset preset){
         	FileInputStream fis;
 			try {
-				fis = new FileInputStream(System.getenv("USERPROFILE")+"/Platypus/Presets/"+name+".preset");
+				fis = new FileInputStream(System.getenv("USERPROFILE")+"/Platypus/Presets/"+preset.getName()+".preset");
 				ObjectInputStream ois;
 				try {
 					ois = new ObjectInputStream(fis);
