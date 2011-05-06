@@ -38,6 +38,7 @@ public class AddImagePanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        containerPanel = new javax.swing.JPanel();
         loadOverlayLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
 
@@ -46,13 +47,17 @@ public class AddImagePanel extends JPanel {
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setName("Form"); // NOI18N
         setOpaque(false);
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        containerPanel.setName("containerPanel"); // NOI18N
+        containerPanel.setOpaque(false);
+        containerPanel.setLayout(null);
 
         loadOverlayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loadOverlayLabel.setIcon(resourceMap.getIcon("loadOverlayLabel.icon")); // NOI18N
         loadOverlayLabel.setText(resourceMap.getString("loadOverlayLabel.text")); // NOI18N
         loadOverlayLabel.setName("loadOverlayLabel"); // NOI18N
-        add(loadOverlayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 90));
+        containerPanel.add(loadOverlayLabel);
+        loadOverlayLabel.setBounds(0, 0, 120, 90);
         loadOverlayLabel.setVisible(false);
 
         addButton.setBackground(resourceMap.getColor("addButton.background")); // NOI18N
@@ -67,7 +72,25 @@ public class AddImagePanel extends JPanel {
                 addButtonActionPerformed(evt);
             }
         });
-        add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 90));
+        containerPanel.add(addButton);
+        addButton.setBounds(0, 0, 120, 90);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(containerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(ActionEvent evt) {
@@ -87,6 +110,7 @@ public class AddImagePanel extends JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
+    private javax.swing.JPanel containerPanel;
     private javax.swing.JLabel loadOverlayLabel;
     // End of variables declaration//GEN-END:variables
 	

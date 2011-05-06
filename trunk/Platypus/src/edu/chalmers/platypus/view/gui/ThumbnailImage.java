@@ -142,6 +142,7 @@ public class ThumbnailImage extends javax.swing.JPanel {
         previewCheckBox.setText(resourceMap.getString("previewCheckBox.text")); // NOI18N
         previewCheckBox.setToolTipText(resourceMap.getString("previewCheckBox.toolTipText")); // NOI18N
         previewCheckBox.setName("previewCheckBox"); // NOI18N
+        previewCheckBox.setOpaque(false);
         previewCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 previewCheckBoxMouseClicked(evt);

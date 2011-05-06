@@ -12,7 +12,10 @@
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.util.StateChanges;
 import java.awt.event.ItemEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -25,6 +28,7 @@ public class SaveViewPanel extends javax.swing.JPanel {
     /** Creates new form SavePanel */
     public SaveViewPanel() {
         initComponents();
+
         pathTextField.setText(System.getenv("USERPROFILE")+File.separator+"Platypus"+File.separator+"Pictures");
     }
 

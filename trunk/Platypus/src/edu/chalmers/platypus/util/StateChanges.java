@@ -12,5 +12,6 @@ public enum StateChanges {
         APPLYING_FILTER,
 	SAVED_IMAGE,
         SAVE_OPERATION_FINISHED,
+        SAVE_OPERATION_ABORTED,
         MODEL_RESET
 }

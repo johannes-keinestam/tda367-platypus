@@ -151,5 +151,8 @@ public class PlatypusCtrl {
                 ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVE_OPERATION_FINISHED.toString(), null, null));
 	
 	}
-	
+
+        public void abortSaveOperation() {
+            // TODO add code
+        }
 }
