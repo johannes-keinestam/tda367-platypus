@@ -19,37 +19,37 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSplitPane1" alignment="1" pref="451" max="32767" attributes="0"/>
+          <Component id="previewSplitPane" alignment="1" pref="451" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jSplitPane1" pref="145" max="32767" attributes="0"/>
+              <Component id="previewSplitPane" pref="145" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JSplitPane" name="jSplitPane1">
+    <Container class="javax.swing.JSplitPane" name="previewSplitPane">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
         <Property name="dividerLocation" type="int" value="200"/>
         <Property name="dividerSize" type="int" value="0"/>
-        <Property name="name" type="java.lang.String" value="jSplitPane1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="previewSplitPane" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jSplitPane1ComponentResized"/>
+        <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="previewSplitPaneComponentResized"/>
       </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="originalPreviewContainerPanel">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="originalPreviewContainerPanel" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -60,10 +60,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" pref="200" max="32767" attributes="0"/>
+                  <Component id="originalLabel" alignment="0" pref="200" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="imagePreviewPanel1" pref="180" max="32767" attributes="0"/>
+                      <Component id="originalPreviewPanel" pref="180" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
               </Group>
@@ -71,35 +71,35 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="originalLabel" min="-2" pref="20" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="imagePreviewPanel1" pref="108" max="32767" attributes="0"/>
+                      <Component id="originalPreviewPanel" pref="108" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="1"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel1">
+            <Component class="javax.swing.JLabel" name="originalLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
-                <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+                <Property name="text" type="java.lang.String" resourceKey="originalLabel.text"/>
+                <Property name="name" type="java.lang.String" value="originalLabel" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="edu.chalmers.platypus.view.gui.ImagePreviewPanel" name="imagePreviewPanel1">
+            <Component class="edu.chalmers.platypus.view.gui.ImagePreviewPanel" name="originalPreviewPanel">
               <Properties>
-                <Property name="name" type="java.lang.String" value="imagePreviewPanel1" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="originalPreviewPanel" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="imagePreviewPanel1ComponentResized"/>
+                <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="originalPreviewPanelComponentResized"/>
               </Events>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel2">
+        <Container class="javax.swing.JPanel" name="filteredPreviewContainerPanel">
           <Properties>
-            <Property name="name" type="java.lang.String" value="jPanel2" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="filteredPreviewContainerPanel" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
@@ -110,10 +110,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel2" alignment="0" pref="251" max="32767" attributes="0"/>
+                  <Component id="filteredLabel" alignment="0" pref="251" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Component id="imagePreviewPanel2" pref="231" max="32767" attributes="0"/>
+                      <Component id="filteredPreviewPanel" pref="231" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="1"/>
                   </Group>
               </Group>
@@ -121,28 +121,28 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="filteredLabel" min="-2" pref="20" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="imagePreviewPanel2" pref="108" max="32767" attributes="0"/>
+                      <Component id="filteredPreviewPanel" pref="108" max="32767" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="1"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Component class="javax.swing.JLabel" name="filteredLabel">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
-                <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
+                <Property name="text" type="java.lang.String" resourceKey="filteredLabel.text"/>
+                <Property name="name" type="java.lang.String" value="filteredLabel" noResource="true"/>
               </Properties>
             </Component>
-            <Component class="edu.chalmers.platypus.view.gui.ImagePreviewPanel" name="imagePreviewPanel2">
+            <Component class="edu.chalmers.platypus.view.gui.ImagePreviewPanel" name="filteredPreviewPanel">
               <Properties>
-                <Property name="name" type="java.lang.String" value="imagePreviewPanel2" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="filteredPreviewPanel" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="imagePreviewPanel2ComponentResized"/>
+                <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="filteredPreviewPanelComponentResized"/>
               </Events>
             </Component>
           </SubComponents>

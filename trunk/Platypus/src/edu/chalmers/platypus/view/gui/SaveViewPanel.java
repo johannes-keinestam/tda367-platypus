@@ -11,6 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.Locator;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -24,7 +25,7 @@ public class SaveViewPanel extends javax.swing.JPanel {
     /** Creates new form SavePanel */
     public SaveViewPanel() {
         initComponents();
-        jTextField1.setText(System.getenv("USERPROFILE")+File.separator+"Platypus"+File.separator+"Pictures");
+        pathTextField.setText(System.getenv("USERPROFILE")+File.separator+"Platypus"+File.separator+"Pictures");
     }
 
     public SaveViewPanel(PlatypusView parent) {
@@ -41,138 +42,136 @@ public class SaveViewPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        pictureSavePanel = new javax.swing.JPanel();
+        pathDescLabel = new javax.swing.JLabel();
+        formatDescLabel = new javax.swing.JLabel();
+        pathTextField = new javax.swing.JTextField();
+        browseButton = new javax.swing.JButton();
+        formatComboBox = new javax.swing.JComboBox();
+        presetSavePanel = new javax.swing.JPanel();
+        savePresetCheckBox = new javax.swing.JCheckBox();
+        presetNameDescLabel = new javax.swing.JLabel();
+        presetNameTextField = new javax.swing.JTextField();
+        saveButton = new javax.swing.JButton();
+        previousButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(SaveViewPanel.class);
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel1.border.title"))); // NOI18N
-        jPanel1.setName("jPanel1"); // NOI18N
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(SaveViewPanel.class);
+        pictureSavePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("pictureSavePanel.border.title"))); // NOI18N
+        pictureSavePanel.setName("pictureSavePanel"); // NOI18N
 
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        pathDescLabel.setText(resourceMap.getString("pathDescLabel.text")); // NOI18N
+        pathDescLabel.setName("pathDescLabel"); // NOI18N
 
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+        formatDescLabel.setText(resourceMap.getString("formatDescLabel.text")); // NOI18N
+        formatDescLabel.setName("formatDescLabel"); // NOI18N
 
-        jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-        jTextField1.setName("jTextField1"); // NOI18N
+        pathTextField.setText(resourceMap.getString("pathTextField.text")); // NOI18N
+        pathTextField.setName("pathTextField"); // NOI18N
 
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        browseButton.setText(resourceMap.getString("browseButton.text")); // NOI18N
+        browseButton.setName("browseButton"); // NOI18N
+        browseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                browseButtonActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".JPG", ".PNG", ".TIFF", ".BMP", ".GIF", ".RAW" }));
-        jComboBox1.setName("jComboBox1"); // NOI18N
+        formatComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".JPG", ".PNG", ".TIFF", ".BMP", ".GIF", ".RAW" }));
+        formatComboBox.setName("formatComboBox"); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pictureSavePanelLayout = new javax.swing.GroupLayout(pictureSavePanel);
+        pictureSavePanel.setLayout(pictureSavePanelLayout);
+        pictureSavePanelLayout.setHorizontalGroup(
+            pictureSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pictureSavePanelLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                .addGroup(pictureSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(formatDescLabel)
+                    .addComponent(pathDescLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
+                .addGroup(pictureSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pictureSavePanelLayout.createSequentialGroup()
+                        .addComponent(pathTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(browseButton))
+                    .addComponent(formatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pictureSavePanelLayout.setVerticalGroup(
+            pictureSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pictureSavePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
+                .addGroup(pictureSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pathDescLabel)
+                    .addComponent(pathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(browseButton))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pictureSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(formatDescLabel)
+                    .addComponent(formatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel2.border.title"))); // NOI18N
-        jPanel2.setName("jPanel2"); // NOI18N
+        pathTextField.setEditable(false);
 
-        jCheckBox1.setText(resourceMap.getString("jCheckBox1.text")); // NOI18N
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
-        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+        presetSavePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("presetSavePanel.border.title"))); // NOI18N
+        presetSavePanel.setName("presetSavePanel"); // NOI18N
+
+        savePresetCheckBox.setText(resourceMap.getString("savePresetCheckBox.text")); // NOI18N
+        savePresetCheckBox.setName("savePresetCheckBox"); // NOI18N
+        savePresetCheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBox1ItemStateChanged(evt);
+                savePresetCheckBoxItemStateChanged(evt);
             }
         });
 
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
+        presetNameDescLabel.setText(resourceMap.getString("presetNameDescLabel.text")); // NOI18N
+        presetNameDescLabel.setName("presetNameDescLabel"); // NOI18N
 
-        jTextField2.setText(resourceMap.getString("jTextField2.text")); // NOI18N
-        jTextField2.setEnabled(false);
-        jTextField2.setName("jTextField2"); // NOI18N
+        presetNameTextField.setText(resourceMap.getString("presetNameTextField.text")); // NOI18N
+        presetNameTextField.setName("presetNameTextField"); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout presetSavePanelLayout = new javax.swing.GroupLayout(presetSavePanel);
+        presetSavePanel.setLayout(presetSavePanelLayout);
+        presetSavePanelLayout.setHorizontalGroup(
+            presetSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(presetSavePanelLayout.createSequentialGroup()
+                .addGroup(presetSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(presetSavePanelLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jCheckBox1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(savePresetCheckBox))
+                    .addGroup(presetSavePanelLayout.createSequentialGroup()
                         .addGap(64, 64, 64)
-                        .addComponent(jLabel3)
+                        .addComponent(presetNameDescLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(presetNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jCheckBox1)
+        presetSavePanelLayout.setVerticalGroup(
+            presetSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(presetSavePanelLayout.createSequentialGroup()
+                .addComponent(savePresetCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(presetSavePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(presetNameDescLabel)
+                    .addComponent(presetNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        presetNameTextField.setEnabled(false);
+
+        saveButton.setText(resourceMap.getString("saveButton.text")); // NOI18N
+        saveButton.setName("saveButton"); // NOI18N
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        previousButton.setText(resourceMap.getString("previousButton.text")); // NOI18N
+        previousButton.setName("previousButton"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,31 +180,40 @@ public class SaveViewPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pictureSavePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(presetSavePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(previousButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(saveButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pictureSavePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(presetSavePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(saveButton)
+                    .addComponent(previousButton))
                 .addContainerGap())
         );
+
+        previousButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-    	parent.getGUICtrl().saveImages(jTextField1.getText(), jComboBox1.getSelectedItem().toString().toLowerCase().substring(1));
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    	parent.getGUICtrl().saveImages(pathTextField.getText(), formatComboBox.getSelectedItem().toString().toLowerCase().substring(1));
+        if (savePresetCheckBox.isSelected()) {
+            Locator.getCtrl().savePreset(presetNameTextField.getText());
+        }
         parent.showNextView();
     }                                        
 
@@ -213,37 +221,37 @@ public class SaveViewPanel extends javax.swing.JPanel {
         parent.showPreviousView();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
         JFileChooser browser = new JFileChooser();
         browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         browser.setMultiSelectionEnabled(false);
         browser.showSaveDialog(this);
-        jTextField1.setText(browser.getSelectedFile().getPath());
-    }//GEN-LAST:event_jButton3ActionPerformed
+        pathTextField.setText(browser.getSelectedFile().getPath());
+    }//GEN-LAST:event_browseButtonActionPerformed
 
-    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+    private void savePresetCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_savePresetCheckBoxItemStateChanged
         if (evt.getStateChange() == ItemEvent.SELECTED) {
-            jTextField2.setEnabled(true);
+            presetNameTextField.setEnabled(true);
         } else {
-            jTextField2.setText("");
-            jTextField2.setEnabled(false);
+            presetNameTextField.setText("");
+            presetNameTextField.setEnabled(false);
         }
-    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+    }//GEN-LAST:event_savePresetCheckBoxItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton browseButton;
+    private javax.swing.JComboBox formatComboBox;
+    private javax.swing.JLabel formatDescLabel;
+    private javax.swing.JLabel pathDescLabel;
+    private javax.swing.JTextField pathTextField;
+    private javax.swing.JPanel pictureSavePanel;
+    private javax.swing.JLabel presetNameDescLabel;
+    private javax.swing.JTextField presetNameTextField;
+    private javax.swing.JPanel presetSavePanel;
+    private javax.swing.JButton previousButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JCheckBox savePresetCheckBox;
     // End of variables declaration//GEN-END:variables
 
     private PlatypusView parent;

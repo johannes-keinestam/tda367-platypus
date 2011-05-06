@@ -35,8 +35,8 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                ImageIcon i = Locator.getCtrl().getPreviewOriginal(imagePreviewPanel1.getWidth()-2,imagePreviewPanel1.getHeight()-2);
-                imagePreviewPanel1.setImage(i);
+                ImageIcon i = Locator.getCtrl().getPreviewOriginal(originalPreviewPanel.getWidth()-2,originalPreviewPanel.getHeight()-2);
+                originalPreviewPanel.setImage(i);
             }
         });
         t.start();
@@ -45,8 +45,8 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                ImageIcon i = Locator.getCtrl().getPreviewOriginal(imagePreviewPanel2.getWidth()-2,imagePreviewPanel2.getHeight()-2);
-                imagePreviewPanel2.setImage(i);
+                ImageIcon i = Locator.getCtrl().getPreviewOriginal(filteredPreviewPanel.getWidth()-2,filteredPreviewPanel.getHeight()-2);
+                filteredPreviewPanel.setImage(i);
             }
         });
         t.start();
@@ -61,130 +61,130 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        imagePreviewPanel1 = new edu.chalmers.platypus.view.gui.ImagePreviewPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        imagePreviewPanel2 = new edu.chalmers.platypus.view.gui.ImagePreviewPanel();
+        previewSplitPane = new javax.swing.JSplitPane();
+        originalPreviewContainerPanel = new javax.swing.JPanel();
+        originalLabel = new javax.swing.JLabel();
+        originalPreviewPanel = new edu.chalmers.platypus.view.gui.ImagePreviewPanel();
+        filteredPreviewContainerPanel = new javax.swing.JPanel();
+        filteredLabel = new javax.swing.JLabel();
+        filteredPreviewPanel = new edu.chalmers.platypus.view.gui.ImagePreviewPanel();
 
         setName("Form"); // NOI18N
 
-        jSplitPane1.setBorder(null);
-        jSplitPane1.setDividerLocation(200);
-        jSplitPane1.setDividerSize(0);
-        jSplitPane1.setName("jSplitPane1"); // NOI18N
-        jSplitPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        previewSplitPane.setBorder(null);
+        previewSplitPane.setDividerLocation(200);
+        previewSplitPane.setDividerSize(0);
+        previewSplitPane.setName("previewSplitPane"); // NOI18N
+        previewSplitPane.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                jSplitPane1ComponentResized(evt);
+                previewSplitPaneComponentResized(evt);
             }
         });
 
-        jPanel1.setName("jPanel1"); // NOI18N
+        originalPreviewContainerPanel.setName("originalPreviewContainerPanel"); // NOI18N
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        originalLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(PreviewPanel.class);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        originalLabel.setText(resourceMap.getString("originalLabel.text")); // NOI18N
+        originalLabel.setName("originalLabel"); // NOI18N
 
-        imagePreviewPanel1.setName("imagePreviewPanel1"); // NOI18N
-        imagePreviewPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        originalPreviewPanel.setName("originalPreviewPanel"); // NOI18N
+        originalPreviewPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                imagePreviewPanel1ComponentResized(evt);
+                originalPreviewPanelComponentResized(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout originalPreviewContainerPanelLayout = new javax.swing.GroupLayout(originalPreviewContainerPanel);
+        originalPreviewContainerPanel.setLayout(originalPreviewContainerPanelLayout);
+        originalPreviewContainerPanelLayout.setHorizontalGroup(
+            originalPreviewContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(originalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addGroup(originalPreviewContainerPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(imagePreviewPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addComponent(originalPreviewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+        originalPreviewContainerPanelLayout.setVerticalGroup(
+            originalPreviewContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(originalPreviewContainerPanelLayout.createSequentialGroup()
+                .addComponent(originalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imagePreviewPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(originalPreviewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jSplitPane1.setLeftComponent(jPanel1);
+        previewSplitPane.setLeftComponent(originalPreviewContainerPanel);
 
-        jPanel2.setName("jPanel2"); // NOI18N
+        filteredPreviewContainerPanel.setName("filteredPreviewContainerPanel"); // NOI18N
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+        filteredLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        filteredLabel.setText(resourceMap.getString("filteredLabel.text")); // NOI18N
+        filteredLabel.setName("filteredLabel"); // NOI18N
 
-        imagePreviewPanel2.setName("imagePreviewPanel2"); // NOI18N
-        imagePreviewPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
+        filteredPreviewPanel.setName("filteredPreviewPanel"); // NOI18N
+        filteredPreviewPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                imagePreviewPanel2ComponentResized(evt);
+                filteredPreviewPanelComponentResized(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout filteredPreviewContainerPanelLayout = new javax.swing.GroupLayout(filteredPreviewContainerPanel);
+        filteredPreviewContainerPanel.setLayout(filteredPreviewContainerPanelLayout);
+        filteredPreviewContainerPanelLayout.setHorizontalGroup(
+            filteredPreviewContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(filteredLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+            .addGroup(filteredPreviewContainerPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(imagePreviewPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(filteredPreviewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+        filteredPreviewContainerPanelLayout.setVerticalGroup(
+            filteredPreviewContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filteredPreviewContainerPanelLayout.createSequentialGroup()
+                .addComponent(filteredLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(imagePreviewPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(filteredPreviewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jSplitPane1.setRightComponent(jPanel2);
+        previewSplitPane.setRightComponent(filteredPreviewContainerPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+            .addComponent(previewSplitPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addComponent(previewSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jSplitPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSplitPane1ComponentResized
-        jSplitPane1.setDividerLocation(0.5);
-    }//GEN-LAST:event_jSplitPane1ComponentResized
+    private void previewSplitPaneComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_previewSplitPaneComponentResized
+        previewSplitPane.setDividerLocation(0.5);
+    }//GEN-LAST:event_previewSplitPaneComponentResized
 
-    private void imagePreviewPanel1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_imagePreviewPanel1ComponentResized
+    private void originalPreviewPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_originalPreviewPanelComponentResized
         setPreviewOriginal();
-    }//GEN-LAST:event_imagePreviewPanel1ComponentResized
+    }//GEN-LAST:event_originalPreviewPanelComponentResized
 
-    private void imagePreviewPanel2ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_imagePreviewPanel2ComponentResized
+    private void filteredPreviewPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_filteredPreviewPanelComponentResized
         setPreviewFiltered();
-    }//GEN-LAST:event_imagePreviewPanel2ComponentResized
+    }//GEN-LAST:event_filteredPreviewPanelComponentResized
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.chalmers.platypus.view.gui.ImagePreviewPanel imagePreviewPanel1;
-    private edu.chalmers.platypus.view.gui.ImagePreviewPanel imagePreviewPanel2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel filteredLabel;
+    private javax.swing.JPanel filteredPreviewContainerPanel;
+    private edu.chalmers.platypus.view.gui.ImagePreviewPanel filteredPreviewPanel;
+    private javax.swing.JLabel originalLabel;
+    private javax.swing.JPanel originalPreviewContainerPanel;
+    private edu.chalmers.platypus.view.gui.ImagePreviewPanel originalPreviewPanel;
+    private javax.swing.JSplitPane previewSplitPane;
     // End of variables declaration//GEN-END:variables
 
     @Override

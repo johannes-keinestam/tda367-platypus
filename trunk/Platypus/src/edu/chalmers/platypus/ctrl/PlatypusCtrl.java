@@ -14,6 +14,7 @@ import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.util.StateChanges;
 import java.awt.Image;
 import java.util.List;
@@ -82,10 +83,22 @@ public class PlatypusCtrl {
 	public void addFilter(IFilter filter) {
 		Locator.getModel().getFilterContainer().addFilter(filter);
 	}
+
+        public void loadPreset(Preset preset) {
+            Locator.getModel().getActiveFilters().loadPreset(preset);
+        }
+
+        public void savePreset(String name) {
+            Locator.getModel().getActiveFilters().savePreset(name);
+        }
 	
 	public ArrayList<IFilter> getLoadedFilterList() {
 		return Locator.getModel().getFilterContainer().getList();
 	}
+
+        public ArrayList<Preset> getLoadedPresetList() {
+            return Locator.getModel().getPresets();
+        }
 	
 	public void setNewPreview(BatchImage preview){
 		Locator.getModel().setPreview(preview);

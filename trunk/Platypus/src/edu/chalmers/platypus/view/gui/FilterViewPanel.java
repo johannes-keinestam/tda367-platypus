@@ -73,7 +73,7 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     	}
     }
     private void showFilterPanel(FilterPanel panel) {
-    	jSplitPane1.setRightComponent(panel);
+    	filterViewSplitPane.setRightComponent(panel);
         setDivider();
     	System.out.println("Showing filter: "+(currentPanelIndex+1)+"/"+(addedFilterPanels.size()));
     }
@@ -101,8 +101,8 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     }
     
     public void setDivider() {
-        if (jSplitPane1 != null) {
-        	jSplitPane1.setDividerLocation(0.6);
+        if (filterViewSplitPane != null) {
+        	filterViewSplitPane.setDividerLocation(0.6);
         }
     }
     
@@ -115,47 +115,42 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        previewPanel1 = new edu.chalmers.platypus.view.gui.PreviewPanel();
-        //filterPanel1 = new edu.chalmers.platypus.view.FilterPanel(null, this);
+        filterViewSplitPane = new javax.swing.JSplitPane();
+        previewPanel = new edu.chalmers.platypus.view.gui.PreviewPanel();
 
         setName("Form"); // NOI18N
 
-        jSplitPane1.setDividerLocation(180);
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setName("jSplitPane1"); // NOI18N
-        jSplitPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        filterViewSplitPane.setDividerLocation(180);
+        filterViewSplitPane.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        filterViewSplitPane.setName("filterViewSplitPane"); // NOI18N
+        filterViewSplitPane.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                jSplitPane1ComponentResized(evt);
+                filterViewSplitPaneComponentResized(evt);
             }
         });
 
-        previewPanel1.setName("previewPanel1"); // NOI18N
-        jSplitPane1.setTopComponent(previewPanel1);
-
-        //filterPanel1.setName("filterPanel1"); // NOI18N
-        //jSplitPane1.setRightComponent(filterPanel1);
+        previewPanel.setName("previewPanel"); // NOI18N
+        filterViewSplitPane.setTopComponent(previewPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+            .addComponent(filterViewSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+            .addComponent(filterViewSplitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jSplitPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jSplitPane1ComponentResized
+    private void filterViewSplitPaneComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_filterViewSplitPaneComponentResized
     	setDivider();
-    }//GEN-LAST:event_jSplitPane1ComponentResized
+    }//GEN-LAST:event_filterViewSplitPaneComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.chalmers.platypus.view.gui.FilterPanel filterPanel1;
-    private javax.swing.JSplitPane jSplitPane1;
-    private edu.chalmers.platypus.view.gui.PreviewPanel previewPanel1;
+    private javax.swing.JSplitPane filterViewSplitPane;
+    private edu.chalmers.platypus.view.gui.PreviewPanel previewPanel;
     // End of variables declaration//GEN-END:variables
 
     private PlatypusView parent;

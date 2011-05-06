@@ -22,64 +22,80 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabel2" alignment="0" pref="364" max="32767" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" pref="364" max="32767" attributes="0"/>
+                  <Component id="savingFileLabel" alignment="0" pref="364" max="32767" attributes="0"/>
+                  <Component id="loaderPanel" alignment="0" pref="364" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jLabel3" alignment="0" pref="384" max="32767" attributes="0"/>
+          <Component id="applyingFilterLabel" alignment="0" pref="384" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="160" max="32767" attributes="0"/>
+              <Component id="abortOperationButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="159" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel1" pref="135" max="32767" attributes="0"/>
+              <Component id="loaderPanel" pref="135" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jLabel3" pref="98" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="savingFileLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="applyingFilterLabel" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <Component id="abortOperationButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="52" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="loaderPanel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="icon" type="javax.swing.Icon" resourceKey="jLabel1.icon"/>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
+        <Property name="icon" type="javax.swing.Icon" resourceKey="loaderPanel.icon"/>
+        <Property name="text" type="java.lang.String" resourceKey="loaderPanel.text"/>
         <Property name="verticalAlignment" type="int" value="3"/>
-        <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="loaderPanel" noResource="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="savingFileLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="savingFileText" type="code"/>
         </Property>
         <Property name="verticalAlignment" type="int" value="1"/>
-        <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="savingFileLabel" noResource="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="this.savingFileText = resourceMap.getString(&quot;jLabel2.text&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="this.savingFileText = resourceMap.getString(&quot;savingFileLabel.text&quot;);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="applyingFilterLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="applyFilterText" type="code"/>
         </Property>
         <Property name="verticalAlignment" type="int" value="1"/>
-        <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="applyingFilterLabel" noResource="true"/>
         <Property name="verticalTextPosition" type="int" value="1"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="applyFilterText = resourceMap.getString(&quot;jLabel3.text&quot;);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="applyFilterText = resourceMap.getString(&quot;applyingFilterLabel.text&quot;);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="abortOperationButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="abortOperationButton.text"/>
+        <Property name="name" type="java.lang.String" value="abortOperationButton" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="abortOperationButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

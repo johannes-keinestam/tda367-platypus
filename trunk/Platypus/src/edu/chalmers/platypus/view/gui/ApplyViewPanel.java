@@ -38,11 +38,11 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
     }
 
     public void setFileName(String name) {
-        jLabel2.setText(this.savingFileText + " " + name);
+        savingFileLabel.setText(this.savingFileText + " " + name);
     }
 
     public void setFilterName(String name) {
-        jLabel3.setText(this.applyFilterText + " " + name);
+        applyingFilterLabel.setText(this.applyFilterText + " " + name);
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -53,31 +53,40 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        loaderPanel = new javax.swing.JLabel();
+        savingFileLabel = new javax.swing.JLabel();
+        applyingFilterLabel = new javax.swing.JLabel();
+        abortOperationButton = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loaderPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ApplyViewPanel.class);
-        jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel1.setName("jLabel1"); // NOI18N
+        loaderPanel.setIcon(resourceMap.getIcon("loaderPanel.icon")); // NOI18N
+        loaderPanel.setText(resourceMap.getString("loaderPanel.text")); // NOI18N
+        loaderPanel.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        loaderPanel.setName("loaderPanel"); // NOI18N
 
-        this.savingFileText = resourceMap.getString("jLabel2.text");
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText(savingFileText);
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel2.setName("jLabel2"); // NOI18N
+        this.savingFileText = resourceMap.getString("savingFileLabel.text");
+        savingFileLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        savingFileLabel.setText(savingFileText);
+        savingFileLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        savingFileLabel.setName("savingFileLabel"); // NOI18N
 
-        applyFilterText = resourceMap.getString("jLabel3.text");
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText(applyFilterText);
-        jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel3.setName("jLabel3"); // NOI18N
-        jLabel3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        applyFilterText = resourceMap.getString("applyingFilterLabel.text");
+        applyingFilterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        applyingFilterLabel.setText(applyFilterText);
+        applyingFilterLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        applyingFilterLabel.setName("applyingFilterLabel"); // NOI18N
+        applyingFilterLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        abortOperationButton.setText(resourceMap.getString("abortOperationButton.text")); // NOI18N
+        abortOperationButton.setName("abortOperationButton"); // NOI18N
+        abortOperationButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abortOperationButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,29 +95,40 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
+                    .addComponent(savingFileLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                    .addComponent(loaderPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addComponent(applyingFilterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addComponent(abortOperationButton)
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addComponent(loaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(savingFileLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(applyingFilterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(abortOperationButton)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void abortOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abortOperationButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abortOperationButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton abortOperationButton;
+    private javax.swing.JLabel applyingFilterLabel;
+    private javax.swing.JLabel loaderPanel;
+    private javax.swing.JLabel savingFileLabel;
     // End of variables declaration//GEN-END:variables
 
     private PlatypusView parent;

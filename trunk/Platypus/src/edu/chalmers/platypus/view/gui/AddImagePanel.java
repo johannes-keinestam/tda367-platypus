@@ -11,6 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
@@ -37,45 +38,56 @@ public class AddImagePanel extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        loadOverlayLabel = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(AddImagePanel.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddImagePanel.class);
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setName("Form"); // NOI18N
         setOpaque(false);
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(resourceMap.getColor("jButton1.background")); // NOI18N
-        jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
-        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusable(false);
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        loadOverlayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loadOverlayLabel.setIcon(resourceMap.getIcon("loadOverlayLabel.icon")); // NOI18N
+        loadOverlayLabel.setText(resourceMap.getString("loadOverlayLabel.text")); // NOI18N
+        loadOverlayLabel.setName("loadOverlayLabel"); // NOI18N
+        add(loadOverlayLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 90));
+        loadOverlayLabel.setVisible(false);
+
+        addButton.setBackground(resourceMap.getColor("addButton.background")); // NOI18N
+        addButton.setFont(resourceMap.getFont("addButton.font")); // NOI18N
+        addButton.setIcon(resourceMap.getIcon("addButton.icon")); // NOI18N
+        addButton.setText(resourceMap.getString("addButton.text")); // NOI18N
+        addButton.setContentAreaFilled(false);
+        addButton.setFocusable(false);
+        addButton.setName("addButton"); // NOI18N
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 120, 90));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(ActionEvent evt) {                                         
+    private void addButtonActionPerformed(ActionEvent evt) {
         listToAddTo.openFileChooser();
-    }                                        
+    }
+
+    public void setEnabled() {
+        loadOverlayLabel.setVisible(false);
+        addButton.setEnabled(true);
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+    public void setDisabled() {
+        addButton.setEnabled(false);
+        loadOverlayLabel.setVisible(true);
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addButton;
+    private javax.swing.JLabel loadOverlayLabel;
     // End of variables declaration//GEN-END:variables
 	
     private BatchThumbPanel listToAddTo;

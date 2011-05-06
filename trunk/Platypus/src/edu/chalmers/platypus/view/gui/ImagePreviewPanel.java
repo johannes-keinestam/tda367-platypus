@@ -29,11 +29,11 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         updateImage();
     }
     public void engageWaitState() {
-        jLabel1.setEnabled(false);
+        previewLabel.setEnabled(false);
     }
     public void updateImage() {
-        jLabel1.setEnabled(true);
-        jLabel1.setIcon(image);
+        previewLabel.setEnabled(true);
+        previewLabel.setIcon(image);
     }
 
     /** This method is called from within the constructor to
@@ -45,34 +45,34 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        previewLabel = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        previewLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ImagePreviewPanel.class);
-        jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jLabel1.setDisabledIcon(resourceMap.getIcon("jLabel1.disabledIcon")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
-        jLabel1.setOpaque(true);
+        previewLabel.setIcon(resourceMap.getIcon("previewLabel.icon")); // NOI18N
+        previewLabel.setText(resourceMap.getString("previewLabel.text")); // NOI18N
+        previewLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        previewLabel.setDisabledIcon(resourceMap.getIcon("previewLabel.disabledIcon")); // NOI18N
+        previewLabel.setName("previewLabel"); // NOI18N
+        previewLabel.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+            .addComponent(previewLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+            .addComponent(previewLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel previewLabel;
     // End of variables declaration//GEN-END:variables
 
     private ImageIcon image;

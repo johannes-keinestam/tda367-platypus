@@ -19,48 +19,35 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSplitPane1" alignment="0" pref="463" max="32767" attributes="0"/>
+          <Component id="filterViewSplitPane" alignment="0" pref="463" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jSplitPane1" alignment="0" pref="320" max="32767" attributes="0"/>
+          <Component id="filterViewSplitPane" alignment="0" pref="320" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JSplitPane" name="jSplitPane1">
+    <Container class="javax.swing.JSplitPane" name="filterViewSplitPane">
       <Properties>
         <Property name="dividerLocation" type="int" value="180"/>
         <Property name="orientation" type="int" value="0"/>
-        <Property name="name" type="java.lang.String" value="jSplitPane1" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="filterViewSplitPane" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jSplitPane1ComponentResized"/>
+        <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="filterViewSplitPaneComponentResized"/>
       </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
-        <Component class="edu.chalmers.platypus.view.gui.PreviewPanel" name="previewPanel1">
+        <Component class="edu.chalmers.platypus.view.gui.PreviewPanel" name="previewPanel">
           <Properties>
-            <Property name="name" type="java.lang.String" value="previewPanel1" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="previewPanel" noResource="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
               <JSplitPaneConstraints position="top"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="edu.chalmers.platypus.view.gui.FilterPanel" name="filterPanel1">
-          <Properties>
-            <Property name="name" type="java.lang.String" value="filterPanel1" noResource="true"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.FilterPanel(this)"/>
-          </AuxValues>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout$JSplitPaneConstraintsDescription">
-              <JSplitPaneConstraints position="right"/>
             </Constraint>
           </Constraints>
         </Component>
