@@ -11,9 +11,13 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Desktop;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -23,11 +27,13 @@ import java.util.logging.Logger;
  *
  * @author skoldator
  */
-public class FinishedViewPanel extends javax.swing.JPanel {
+public class FinishedViewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
     /** Creates new form FinishedViewPanel */
     public FinishedViewPanel() {
         initComponents();
+
+        ComBus.subscribe(this);
     }
 
     public FinishedViewPanel(PlatypusView parent) {
@@ -43,7 +49,7 @@ public class FinishedViewPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        operationFinishedButton = new javax.swing.JLabel();
+        operationFinishedLabel = new javax.swing.JLabel();
         openPathButton = new javax.swing.JButton();
         restartButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
@@ -51,10 +57,10 @@ public class FinishedViewPanel extends javax.swing.JPanel {
         setName("Form"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FinishedViewPanel.class);
-        operationFinishedButton.setFont(resourceMap.getFont("operationFinishedButton.font")); // NOI18N
-        operationFinishedButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        operationFinishedButton.setText(resourceMap.getString("operationFinishedButton.text")); // NOI18N
-        operationFinishedButton.setName("operationFinishedButton"); // NOI18N
+        operationFinishedLabel.setFont(resourceMap.getFont("operationFinishedLabel.font")); // NOI18N
+        operationFinishedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        operationFinishedLabel.setText(resourceMap.getString("operationFinishedLabel.text")); // NOI18N
+        operationFinishedLabel.setName("operationFinishedLabel"); // NOI18N
 
         openPathButton.setText(resourceMap.getString("openPathButton.text")); // NOI18N
         openPathButton.setName("openPathButton"); // NOI18N
@@ -84,7 +90,7 @@ public class FinishedViewPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(operationFinishedButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(operationFinishedLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(openPathButton, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
@@ -102,7 +108,7 @@ public class FinishedViewPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(operationFinishedButton, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addComponent(operationFinishedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(openPathButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -137,10 +143,22 @@ public class FinishedViewPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
     private javax.swing.JButton openPathButton;
-    private javax.swing.JLabel operationFinishedButton;
+    private javax.swing.JLabel operationFinishedLabel;
     private javax.swing.JButton restartButton;
     // End of variables declaration//GEN-END:variables
 
     private PlatypusView parent;
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        String change = evt.getPropertyName();
+        if (change.equals(StateChanges.SAVE_OPERATION_FINISHED.toString())) {
+            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FinishedViewPanel.class);
+            operationFinishedLabel.setText(resourceMap.getString("operationFinishedLabel.text"));
+        } else if (change.equals(StateChanges.SAVE_OPERATION_ABORTED.toString())) {
+            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FinishedViewPanel.class);
+            operationFinishedLabel.setText(resourceMap.getString("operationFinishedLabel.alttext"));
+        }
+    }
 
 }

@@ -19,7 +19,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="operationFinishedButton" alignment="1" pref="400" max="32767" attributes="0"/>
+          <Component id="operationFinishedLabel" alignment="1" pref="400" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="openPathButton" pref="380" max="32767" attributes="0"/>
@@ -41,7 +41,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="operationFinishedButton" pref="92" max="32767" attributes="0"/>
+              <Component id="operationFinishedLabel" pref="92" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="1"/>
               <Component id="openPathButton" min="-2" pref="50" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
@@ -54,12 +54,12 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="operationFinishedButton">
+    <Component class="javax.swing.JLabel" name="operationFinishedLabel">
       <Properties>
-        <Property name="font" type="java.awt.Font" resourceKey="operationFinishedButton.font"/>
+        <Property name="font" type="java.awt.Font" resourceKey="operationFinishedLabel.font"/>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" resourceKey="operationFinishedButton.text"/>
-        <Property name="name" type="java.lang.String" value="operationFinishedButton" noResource="true"/>
+        <Property name="text" type="java.lang.String" resourceKey="operationFinishedLabel.text"/>
+        <Property name="name" type="java.lang.String" value="operationFinishedLabel" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="openPathButton">

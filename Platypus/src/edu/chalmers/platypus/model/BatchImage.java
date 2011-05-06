@@ -39,15 +39,19 @@ public class BatchImage {
 			ImageReader reader = (ImageReader) readers.next();
 			reader.setInput(iis, true);
 			ImageReadParam param = reader.getDefaultReadParam();
-			//param.setSourceSubsampling(40, 40, 0,0);
 			float imageRatio = reader.getAspectRatio(0);
 
+                        //Only scale if needed, else return original
+                        if (reader.getHeight(0) > height && reader.getWidth(0) > width) {
+                            if (imageRatio <= 1.0){
+                                param.setSourceSubsampling(reader.getHeight(0)/height, reader.getHeight(0)/height, 0,0);
+                            } else {
+                                param.setSourceSubsampling(reader.getWidth(0)/width, reader.getWidth(0)/width, 0,0);
+                            }
+                        } else {
+                            return reader.read(0);
+                        }
 			
-			if (imageRatio <= 1.0){
-                            param.setSourceSubsampling(reader.getHeight(0)/height, reader.getHeight(0)/height, 0,0);
-			} else {
-                            param.setSourceSubsampling(reader.getWidth(0)/width, reader.getWidth(0)/width, 0,0);
-			}
 			BufferedImage b = reader.read(0, param);
                         
                         double thumbRatio = (double) width / (double) height;

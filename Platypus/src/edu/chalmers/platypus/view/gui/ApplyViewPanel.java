@@ -12,6 +12,7 @@
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.StateChanges;
@@ -120,7 +121,7 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
     }// </editor-fold>//GEN-END:initComponents
 
     private void abortOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abortOperationButtonActionPerformed
-        // TODO add your handling code here:
+        Locator.getCtrl().abortSaveOperation();
     }//GEN-LAST:event_abortOperationButtonActionPerformed
 
 
@@ -146,6 +147,8 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
             IFilter f = (IFilter) evt.getNewValue();
             setFilterName(f.getName());
         } else if (change.equals(StateChanges.SAVE_OPERATION_FINISHED.toString())) {
+            parent.showNextView();
+        } else if (change.equals(StateChanges.SAVE_OPERATION_ABORTED.toString())) {
             parent.showNextView();
         }
     }
