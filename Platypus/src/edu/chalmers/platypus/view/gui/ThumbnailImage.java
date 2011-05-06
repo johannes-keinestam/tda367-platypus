@@ -32,30 +32,38 @@ public class ThumbnailImage extends javax.swing.JPanel {
         initComponents();
         this.img = img;
         this.parent = parent;
-        jLabel2.setText(img.getFileName());
-        jLabel1.setIcon(new ImageIcon(img.getThumbnail(120,90)));
+        nameLabel.setText(img.getFileName());
+        thumbLabel.setIcon(new ImageIcon(img.getThumbnail(120,90)));
     }
     
     public void showControls(){
-        jButton1.setVisible(true);
-        jLabel2.setVisible(true);
-        jLabel3.setVisible(true);
-        jCheckBox1.setVisible(true);
+        deleteButton.setVisible(true);
+        nameLabel.setVisible(true);
+        overlayLabel.setVisible(true);
+        previewCheckBox.setVisible(true);
     }
 
     public void hideControls(){
-        jButton1.setVisible(false);
-        jLabel2.setVisible(false);
-        jLabel3.setVisible(false);
-        jCheckBox1.setVisible(false);
+        deleteButton.setVisible(false);
+        nameLabel.setVisible(false);
+        overlayLabel.setVisible(false);
+        previewCheckBox.setVisible(false);
     }
     
     public BatchImage getBatchImage() {
     	return img;
     }
-    
+
+    public void selectAsPreview() {
+        previewCheckBox.setSelected(true);
+        parent.setPreview(this);
+    }
     public void deselectAsPreview() {
-    	jCheckBox1.setSelected(false);
+    	previewCheckBox.setSelected(false);
+    }
+
+    public boolean isPreview() {
+        return previewCheckBox.isSelected();
     }
     
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
@@ -82,11 +90,11 @@ public class ThumbnailImage extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
+        previewCheckBox = new javax.swing.JCheckBox();
+        nameLabel = new javax.swing.JLabel();
+        overlayLabel = new javax.swing.JLabel();
+        thumbLabel = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,78 +109,81 @@ public class ThumbnailImage extends javax.swing.JPanel {
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(null);
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(ThumbnailImage.class);
-        jButton1.setIcon(resourceMap.getIcon("jButton1.icon")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.setPressedIcon(resourceMap.getIcon("jButton1.pressedIcon")); // NOI18N
-        jButton1.setRequestFocusEnabled(false);
-        jButton1.setRolloverIcon(resourceMap.getIcon("jButton1.rolloverIcon")); // NOI18N
-        jButton1.setRolloverSelectedIcon(resourceMap.getIcon("jButton1.rolloverSelectedIcon")); // NOI18N
-        jButton1.setVerifyInputWhenFocusTarget(false);
-        jPanel1.add(jButton1);
-        jButton1.setBounds(96, 0, 24, 24);
-        jButton1.setVisible(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ThumbnailImage.class);
+        deleteButton.setIcon(resourceMap.getIcon("deleteButton.icon")); // NOI18N
+        deleteButton.setText(resourceMap.getString("deleteButton.text")); // NOI18N
+        deleteButton.setBorderPainted(false);
+        deleteButton.setContentAreaFilled(false);
+        deleteButton.setFocusPainted(false);
+        deleteButton.setFocusable(false);
+        deleteButton.setName("deleteButton"); // NOI18N
+        deleteButton.setPressedIcon(resourceMap.getIcon("deleteButton.pressedIcon")); // NOI18N
+        deleteButton.setRequestFocusEnabled(false);
+        deleteButton.setRolloverIcon(resourceMap.getIcon("deleteButton.rolloverIcon")); // NOI18N
+        deleteButton.setRolloverSelectedIcon(resourceMap.getIcon("deleteButton.rolloverSelectedIcon")); // NOI18N
+        deleteButton.setVerifyInputWhenFocusTarget(false);
+        jPanel1.add(deleteButton);
+        deleteButton.setBounds(96, 0, 24, 24);
+        deleteButton.setVisible(false);
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton1MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-            	jButton1MouseExited(evt);
+                jButton1MouseExited(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText(resourceMap.getString("jCheckBox1.text")); // NOI18N
-        jCheckBox1.setVisible(false);
-        jCheckBox1.setToolTipText(resourceMap.getString("jCheckBox1.toolTipText")); // NOI18N
-        jCheckBox1.setName("jCheckBox1"); // NOI18N
-        jCheckBox1.setOpaque(false);
-        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBox1ItemStateChanged(evt);
+        previewCheckBox.setText(resourceMap.getString("previewCheckBox.text")); // NOI18N
+        previewCheckBox.setToolTipText(resourceMap.getString("previewCheckBox.toolTipText")); // NOI18N
+        previewCheckBox.setName("previewCheckBox"); // NOI18N
+        previewCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                previewCheckBoxMouseClicked(evt);
             }
         });
-        jCheckBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel1.add(previewCheckBox);
+        previewCheckBox.setBounds(0, 0, 20, 21);
+        previewCheckBox.setVisible(false);
+        previewCheckBox.setOpaque(false);
+        previewCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jButton1MouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-            	jButton1MouseExited(evt);
+                jButton1MouseExited(evt);
             }
         });
-        jPanel1.add(jCheckBox1);
-        jCheckBox1.setBounds(0, 0, 20, 21);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel2.setName("jLabel2"); // NOI18N
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(0, 70, 120, 20);
-        jLabel2.setVisible(false);
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setText(resourceMap.getString("nameLabel.text")); // NOI18N
+        nameLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nameLabel.setName("nameLabel"); // NOI18N
+        jPanel1.add(nameLabel);
+        nameLabel.setBounds(0, 70, 120, 20);
+        nameLabel.setVisible(false);
 
-        jLabel3.setIcon(resourceMap.getIcon("jLabel3.icon")); // NOI18N
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(0, 0, 120, 90);
-        jLabel3.setVisible(false);
+        overlayLabel.setIcon(resourceMap.getIcon("overlayLabel.icon")); // NOI18N
+        overlayLabel.setText(resourceMap.getString("overlayLabel.text")); // NOI18N
+        overlayLabel.setName("overlayLabel"); // NOI18N
+        jPanel1.add(overlayLabel);
+        overlayLabel.setBounds(0, 0, 120, 90);
+        overlayLabel.setVisible(false);
 
-        jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setAlignmentX(0.5F);
-        jLabel1.setName("jLabel1"); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(0, 0, 120, 90);
+        thumbLabel.setBackground(resourceMap.getColor("thumbLabel.background")); // NOI18N
+        thumbLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        thumbLabel.setIcon(resourceMap.getIcon("thumbLabel.icon")); // NOI18N
+        thumbLabel.setText(resourceMap.getString("thumbLabel.text")); // NOI18N
+        thumbLabel.setAlignmentX(0.5F);
+        thumbLabel.setName("thumbLabel"); // NOI18N
+        thumbLabel.setOpaque(true);
+        jPanel1.add(thumbLabel);
+        thumbLabel.setBounds(0, 0, 120, 90);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -186,11 +197,13 @@ public class ThumbnailImage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-        	parent.setPreview(this);
+    private void previewCheckBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previewCheckBoxMouseClicked
+        if (previewCheckBox.isSelected()) {
+            selectAsPreview();
+        } else {
+            parent.setFirstAsPreview();
         }
-    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+    }//GEN-LAST:event_previewCheckBoxMouseClicked
     
     private void jButton1ActionPerformed(ActionEvent evt) {
     	PlatypusGUI.getInstance().removeImageFromBatch(img);
@@ -198,12 +211,12 @@ public class ThumbnailImage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel overlayLabel;
+    private javax.swing.JCheckBox previewCheckBox;
+    private javax.swing.JLabel thumbLabel;
     // End of variables declaration//GEN-END:variables
 	
     private BatchImage img;

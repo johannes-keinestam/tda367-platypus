@@ -42,23 +42,23 @@
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="deleteButton">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" resourceKey="jButton1.icon"/>
-            <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="deleteButton.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="deleteButton.text"/>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
-            <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
-            <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="jButton1.pressedIcon"/>
+            <Property name="name" type="java.lang.String" value="deleteButton" noResource="true"/>
+            <Property name="pressedIcon" type="javax.swing.Icon" resourceKey="deleteButton.pressedIcon"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
-            <Property name="rolloverIcon" type="javax.swing.Icon" resourceKey="jButton1.rolloverIcon"/>
-            <Property name="rolloverSelectedIcon" type="javax.swing.Icon" resourceKey="jButton1.rolloverSelectedIcon"/>
+            <Property name="rolloverIcon" type="javax.swing.Icon" resourceKey="deleteButton.rolloverIcon"/>
+            <Property name="rolloverSelectedIcon" type="javax.swing.Icon" resourceKey="deleteButton.rolloverSelectedIcon"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton1.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="deleteButton.setVisible(false);&#xa;deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        jButton1MouseEntered(evt);&#xa;    }&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        jButton1MouseExited(evt);&#xa;    }&#xa;});&#xa;deleteButton.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        jButton1ActionPerformed(evt);&#xa;    }&#xa;});"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -66,30 +66,33 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="previewCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jCheckBox1.text"/>
-            <Property name="toolTipText" type="java.lang.String" resourceKey="jCheckBox1.toolTipText"/>
-            <Property name="name" type="java.lang.String" value="jCheckBox1" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="previewCheckBox.text"/>
+            <Property name="toolTipText" type="java.lang.String" resourceKey="previewCheckBox.toolTipText"/>
+            <Property name="name" type="java.lang.String" value="previewCheckBox" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jCheckBox1ItemStateChanged"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="previewCheckBoxMouseClicked"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="previewCheckBox.setVisible(false);&#xa;previewCheckBox.setOpaque(false);&#xa;previewCheckBox.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    public void mouseEntered(java.awt.event.MouseEvent evt) {&#xa;        jButton1MouseEntered(evt);&#xa;    }&#xa;    public void mouseExited(java.awt.event.MouseEvent evt) {&#xa;        jButton1MouseExited(evt);&#xa;    }&#xa;});"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="0" y="0" width="20" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="nameLabel">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
+            <Property name="text" type="java.lang.String" resourceKey="nameLabel.text"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
-            <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="nameLabel" noResource="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel2.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="nameLabel.setVisible(false);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -97,14 +100,14 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="overlayLabel">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" resourceKey="jLabel3.icon"/>
-            <Property name="text" type="java.lang.String" resourceKey="jLabel3.text"/>
-            <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="overlayLabel.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="overlayLabel.text"/>
+            <Property name="name" type="java.lang.String" value="overlayLabel" noResource="true"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel3.setVisible(false);"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="overlayLabel.setVisible(false);"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -112,12 +115,15 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="thumbLabel">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" resourceKey="jLabel1.icon"/>
-            <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
+            <Property name="background" type="java.awt.Color" resourceKey="thumbLabel.background"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" resourceKey="thumbLabel.icon"/>
+            <Property name="text" type="java.lang.String" resourceKey="thumbLabel.text"/>
             <Property name="alignmentX" type="float" value="0.5"/>
-            <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="thumbLabel" noResource="true"/>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

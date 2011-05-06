@@ -50,20 +50,7 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
         l.setAlignment(WrapLayout.LEFT);
         setLayout(l);
 
-        this.setDropTarget(new DropTarget() {
-            @Override
-            public synchronized void drop(DropTargetDropEvent dtde) {
-                dtde.acceptDrop(DnDConstants.ACTION_COPY);
-                Transferable t = dtde.getTransferable();
-                List fileList;
-                try {
-                    fileList = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
-                } catch (Exception e) {
-                    return;
-                }
-                addImagesToBatch(fileList.toArray());
-            }
-        });
+        enableDragDrop();
 
         addPanel(addImageButton);
         ComBus.subscribe(this);
@@ -75,16 +62,24 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
         panel.add(addToList);
         panel.setOpaque(true);
         add(addToList);
-        revalidate();   
+        revalidate();
     }
 
+    public void setFirstAsPreview() {
+        if (getComponent(1) instanceof ThumbnailImage) {
+            ((ThumbnailImage)getComponent(1)).selectAsPreview();
+        }
+    }
     private void removePanel(BatchImage img) {
     	for (Component c : getComponents()) {
     		if (c instanceof ThumbnailImage) {
     			if (((ThumbnailImage)c).getBatchImage() == img) {
-    				remove(c);
-    				revalidate();
-    				repaint();
+                            remove(c);
+                            revalidate();
+                            repaint();
+                            if (((ThumbnailImage)c).isPreview()) {
+                                setFirstAsPreview();
+                            }
     			}
     		}
     	}
@@ -102,10 +97,20 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
         }
     }
 
+    public void enableDragDrop() {
+        this.setDropTarget(dropTarget);
+    }
+
+    public void disableDragDrop() {
+        this.setDropTarget(null);
+    }
+
     private void addImagesToBatch(final Object[] array) {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+                addImageButton.setDisabled();
+                disableDragDrop();
                 for (Object o : array) {
                     if (o instanceof File) {
                         File current = (File)o;
@@ -114,6 +119,8 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
                         }
                     }
                 }
+                addImageButton.setEnabled();
+                enableDragDrop();
             }
         });
         t.start();
@@ -129,6 +136,7 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
     		}
     	}
     	Locator.getCtrl().setNewPreview(img.getBatchImage());
+        previewSet = true;
     }
 
     @Override
@@ -136,13 +144,19 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
 	String change = evt.getPropertyName();
 	if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
             BatchImage addedImage = (BatchImage)evt.getNewValue();
-            addPanel(new ThumbnailImage(addedImage, this));
+            ThumbnailImage thumb = new ThumbnailImage(addedImage, this);
+            if (previewSet == false) {
+                thumb.selectAsPreview();
+            }
+            addPanel(thumb);
 	} else if (change.equals(StateChanges.IMAGE_REMOVED_FROM_BATCH.toString())) {
             BatchImage removedImage = (BatchImage)evt.getOldValue();
             removePanel(removedImage);
         } else if (change.equals(StateChanges.MODEL_RESET.toString())) {
             removeAll();
             addPanel(addImageButton);
+            repaint();
+            revalidate();
         }
     }
 
@@ -174,7 +188,22 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
     // End of variables declaration//GEN-END:variables
 
     private final AddImagePanel addImageButton = new AddImagePanel(this);
+    private boolean previewSet = false;
     private final FileFilter filter = new FileNameExtensionFilter("Supported pictures " +
                 "(*.jpg, *.png, *.gif)",
                 "jpeg","JPEG","JPG","jpg","png","PNG","gif","GIF");
+    private final DropTarget dropTarget = new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent dtde) {
+                dtde.acceptDrop(DnDConstants.ACTION_COPY);
+                Transferable t = dtde.getTransferable();
+                List fileList;
+                try {
+                    fileList = (List) t.getTransferData(DataFlavor.javaFileListFlavor);
+                } catch (Exception e) {
+                    return;
+                }
+                addImagesToBatch(fileList.toArray());
+            }
+        };
 }

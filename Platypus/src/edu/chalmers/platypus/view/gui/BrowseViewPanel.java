@@ -12,6 +12,7 @@
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.Locator;
 import java.awt.Color;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
@@ -42,12 +43,12 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
 
     public void setButtonNext() {
         ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(BrowseViewPanel.class);
-        jButton1.setText(resourceMap.getString("jButton1.alttext"));
+        nextViewButton.setText(resourceMap.getString("nextViewButton.alttext"));
     }
     
     public void setButtonAdd() {
         ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(BrowseViewPanel.class);
-        jButton1.setText(resourceMap.getString("jButton1.text"));
+        nextViewButton.setText(resourceMap.getString("nextViewButton.text"));
     }
     
 	@Override
@@ -66,39 +67,44 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        batchThumbPanel1 = new edu.chalmers.platypus.view.gui.BatchThumbPanel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        nextViewButton = new javax.swing.JButton();
+        batchThumbScrollPane = new javax.swing.JScrollPane();
+        batchThumbPanel = new edu.chalmers.platypus.view.gui.BatchThumbPanel();
+        clearBatchButton = new javax.swing.JButton();
+        loadPresetButton = new javax.swing.JButton();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(BrowseViewPanel.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
         setName("Form"); // NOI18N
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nextViewButton.setText(resourceMap.getString("nextViewButton.text")); // NOI18N
+        nextViewButton.setName("nextViewButton"); // NOI18N
+        nextViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nextViewButtonActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setBackground(resourceMap.getColor("jScrollPane1.background")); // NOI18N
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+        batchThumbScrollPane.setBackground(resourceMap.getColor("batchThumbScrollPane.background")); // NOI18N
+        batchThumbScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        batchThumbScrollPane.setName("batchThumbScrollPane"); // NOI18N
 
-        batchThumbPanel1.setName("batchThumbPanel1"); // NOI18N
-        jScrollPane1.setViewportView(batchThumbPanel1);
+        batchThumbPanel.setName("batchThumbPanel"); // NOI18N
+        batchThumbScrollPane.setViewportView(batchThumbPanel);
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
-
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        clearBatchButton.setText(resourceMap.getString("clearBatchButton.text")); // NOI18N
+        clearBatchButton.setName("clearBatchButton"); // NOI18N
+        clearBatchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                clearBatchButtonActionPerformed(evt);
+            }
+        });
+
+        loadPresetButton.setText(resourceMap.getString("loadPresetButton.text")); // NOI18N
+        loadPresetButton.setName("loadPresetButton"); // NOI18N
+        loadPresetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadPresetButtonActionPerformed(evt);
             }
         });
 
@@ -109,31 +115,32 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                    .addComponent(batchThumbScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(clearBatchButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(loadPresetButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(nextViewButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(batchThumbScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(nextViewButton)
+                    .addComponent(loadPresetButton)
+                    .addComponent(clearBatchButton))
                 .addContainerGap())
         );
 
-        jScrollPane1.getViewport().setBackground(Color.WHITE);
+        batchThumbScrollPane.getViewport().setBackground(Color.WHITE);
+        batchThumbScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void nextViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextViewButtonActionPerformed
     	if (parent != null) {
         	if (parent.numberOfFilterPanels() == 0) {
             	parent.showAddFilterDialog();
@@ -142,20 +149,24 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
                 parent.showNextView();
         	}
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_nextViewButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void loadPresetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadPresetButtonActionPerformed
         if (parent != null) {
             parent.showLoadPresetDialog();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_loadPresetButtonActionPerformed
+
+    private void clearBatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBatchButtonActionPerformed
+        Locator.getCtrl().resetModel();
+    }//GEN-LAST:event_clearBatchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.chalmers.platypus.view.gui.BatchThumbPanel batchThumbPanel1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private edu.chalmers.platypus.view.gui.BatchThumbPanel batchThumbPanel;
+    private javax.swing.JScrollPane batchThumbScrollPane;
+    private javax.swing.JButton clearBatchButton;
+    private javax.swing.JButton loadPresetButton;
+    private javax.swing.JButton nextViewButton;
     // End of variables declaration//GEN-END:variables
 
     private PlatypusView parent;

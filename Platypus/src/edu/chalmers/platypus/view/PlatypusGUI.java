@@ -9,11 +9,13 @@ import javax.swing.ListModel;
 import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.view.gui.FilterPanel;
 import edu.chalmers.platypus.view.gui.PlatypusApp;
 
 public class PlatypusGUI {
 	private static PlatypusGUI instance;
+        private File path;
 
 	private PlatypusGUI() {	
 		PlatypusApp.showGUI(null);
@@ -50,13 +52,19 @@ public class PlatypusGUI {
     public ListModel getNewPresetList() {
         //Fetch list from ctrl, update with it
     	DefaultListModel model = new DefaultListModel();
-    	for (IFilter filter : Locator.getCtrl().getLoadedFilterList()) {
-    		model.addElement(filter);
+    	for (Preset preset : Locator.getCtrl().getLoadedPresetList()) {
+    		model.addElement(preset);
     	}
     	return model;
     }
 
     public void saveImages(String path, String ext) {
     	Locator.getCtrl().saveImages(path, ext);
+        this.path = new File(path);
     }
+
+    public File getLastSavePath() {
+        return this.path;
+    }
+
 }

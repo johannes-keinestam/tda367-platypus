@@ -11,6 +11,9 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.model.Preset;
+import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,9 +28,6 @@ import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-//import edu.chalmers.platypus.Locator;
-//import edu.chalmers.platypus.model.IFilter;
 
 /**
  *
@@ -48,12 +48,8 @@ public class LoadPresetPanel extends javax.swing.JPanel {
     }
 
     public void updateList() {
-        /** //Fetch list from ctrl, update with it
-    	DefaultListModel model = new DefaultListModel();
-    	for (IPreset preset : Locator.getCtrl().getLoadedFilterList()) {
-    		model.addElement(preset);
-    	}
-    	jList1.setModel(model);*/
+        //Fetch list from ctrl, update with it
+    	loadedPresetList.setModel(PlatypusGUI.getInstance().getNewPresetList());
     }
     
     /** This method is called from within the constructor to
@@ -65,95 +61,95 @@ public class LoadPresetPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        presetListScrollPane = new javax.swing.JScrollPane();
+        loadedPresetList = new javax.swing.JList();
+        presetInfoPanel = new javax.swing.JPanel();
+        contentInfoLabel = new javax.swing.JLabel();
+        creationInfoLabel = new javax.swing.JLabel();
+        contentLabel = new javax.swing.JLabel();
+        creationLabel = new javax.swing.JLabel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(LoadPresetPanel.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(LoadPresetPanel.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
         setName("Form"); // NOI18N
 
-        jScrollPane1.setName("jScrollPane1"); // NOI18N
+        presetListScrollPane.setName("presetListScrollPane"); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Preset 1", "Preset 2" };
+        loadedPresetList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Förinställning 1", "Förinställning 2" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList1.setFixedCellHeight(20);
-        jList1.setName("jList1"); // NOI18N
-        jList1.setSelectionBackground(resourceMap.getColor("jList1.selectionBackground")); // NOI18N
-        jList1.setSelectionForeground(resourceMap.getColor("jList1.selectionForeground")); // NOI18N
-        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        loadedPresetList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        loadedPresetList.setFixedCellHeight(20);
+        loadedPresetList.setName("loadedPresetList"); // NOI18N
+        loadedPresetList.setSelectionBackground(resourceMap.getColor("loadedPresetList.selectionBackground")); // NOI18N
+        loadedPresetList.setSelectionForeground(resourceMap.getColor("loadedPresetList.selectionForeground")); // NOI18N
+        loadedPresetList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList1ValueChanged(evt);
+                loadedPresetListValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        presetListScrollPane.setViewportView(loadedPresetList);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel1.border.title"))); // NOI18N
-        jPanel1.setName("jPanel1"); // NOI18N
+        presetInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("presetInfoPanel.border.title"))); // NOI18N
+        presetInfoPanel.setName("presetInfoPanel"); // NOI18N
 
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        contentInfoLabel.setText(resourceMap.getString("contentInfoLabel.text")); // NOI18N
+        contentInfoLabel.setName("contentInfoLabel"); // NOI18N
 
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
+        creationInfoLabel.setText(resourceMap.getString("creationInfoLabel.text")); // NOI18N
+        creationInfoLabel.setName("creationInfoLabel"); // NOI18N
 
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
+        contentLabel.setText(resourceMap.getString("contentLabel.text")); // NOI18N
+        contentLabel.setName("contentLabel"); // NOI18N
 
-        jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
-        jLabel4.setName("jLabel4"); // NOI18N
+        creationLabel.setText(resourceMap.getString("creationLabel.text")); // NOI18N
+        creationLabel.setName("creationLabel"); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout presetInfoPanelLayout = new javax.swing.GroupLayout(presetInfoPanel);
+        presetInfoPanel.setLayout(presetInfoPanelLayout);
+        presetInfoPanelLayout.setHorizontalGroup(
+            presetInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, presetInfoPanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                .addGroup(presetInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(contentLabel)
+                    .addComponent(creationLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
+                .addGroup(presetInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(creationInfoLabel)
+                    .addComponent(contentInfoLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+        presetInfoPanelLayout.setVerticalGroup(
+            presetInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(presetInfoPanelLayout.createSequentialGroup()
+                .addGroup(presetInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(contentInfoLabel)
+                    .addComponent(contentLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                .addGroup(presetInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creationInfoLabel)
+                    .addComponent(creationLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        okButton.setText(resourceMap.getString("okButton.text")); // NOI18N
+        okButton.setName("okButton"); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                okButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText(resourceMap.getString("cancelButton.text")); // NOI18N
+        cancelButton.setName("cancelButton"); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
 
@@ -164,66 +160,66 @@ public class LoadPresetPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(presetListScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                    .addComponent(presetInfoPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(okButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                .addComponent(presetListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(presetInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(okButton)
+                    .addComponent(cancelButton))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-    	/**Object selection = jList1.getSelectedValue();
-    	if (selection instanceof IPreset) { //Should always be true
-        	IPreset preset = (IPreset)selection;
-            jLabel1.setText(preset.getContent());
-            jLabel2.setText(preset.getCreationDate());
-        	((TitledBorder)jPanel1.getBorder()).setTitle(preset.getName());
-        	jPanel1.repaint();
-    	}*/
+    private void loadedPresetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_loadedPresetListValueChanged
+    	Object selection = loadedPresetList.getSelectedValue();
+    	if (selection instanceof Preset) { //Should always be true
+            Preset preset = (Preset)selection;
+            contentInfoLabel.setText(preset.getFilters());
+            creationInfoLabel.setText(preset.getDate().toLocaleString());
+            ((TitledBorder)presetInfoPanel.getBorder()).setTitle(preset.getName());
+            presetInfoPanel.repaint();
+    	}
     	
-    }//GEN-LAST:event_jList1ValueChanged
+    }//GEN-LAST:event_loadedPresetListValueChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
     	closeContainerDialog();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	Object selection = jList1.getSelectedValue();
-    	/**if (selection instanceof IPreset) { //Should always be true
-        	IPreset preset = (IPreset)selection;
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+    	Object selection = loadedPresetList.getSelectedValue();
+    	if (selection instanceof Preset) { //Should always be true
+        	Preset preset = (Preset)selection;
         	Locator.getCtrl().loadPreset(preset);
-    	}*/
+    	}
         closeContainerDialog();
-        parentView.showNextView();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        //parentView.showNextView();
+    }//GEN-LAST:event_okButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JList jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel contentInfoLabel;
+    private javax.swing.JLabel contentLabel;
+    private javax.swing.JLabel creationInfoLabel;
+    private javax.swing.JLabel creationLabel;
+    private javax.swing.JList loadedPresetList;
+    private javax.swing.JButton okButton;
+    private javax.swing.JPanel presetInfoPanel;
+    private javax.swing.JScrollPane presetListScrollPane;
     // End of variables declaration//GEN-END:variables
 
     private ArrayList<String> presets;

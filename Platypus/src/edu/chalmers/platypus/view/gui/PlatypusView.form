@@ -34,12 +34,12 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
               <SubComponents>
-                <Component class="edu.chalmers.platypus.view.StartViewPanel" name="startViewPanel1">
+                <Component class="edu.chalmers.platypus.view.gui.StartViewPanel" name="startViewPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="startViewPanel1" noResource="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.StartViewPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.StartViewPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -47,12 +47,12 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="edu.chalmers.platypus.view.BrowseViewPanel" name="imageBrowserPanel1">
+                <Component class="edu.chalmers.platypus.view.gui.BrowseViewPanel" name="imageBrowserPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="imageBrowserPanel1" noResource="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.BrowseViewPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.BrowseViewPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -60,12 +60,12 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="edu.chalmers.platypus.view.FilterViewPanel" name="filterViewPanel1">
+                <Component class="edu.chalmers.platypus.view.gui.FilterViewPanel" name="filterViewPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="filterViewPanel1" noResource="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.FilterViewPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.FilterViewPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -73,12 +73,12 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="edu.chalmers.platypus.view.SaveViewPanel" name="saveViewPanel1">
+                <Component class="edu.chalmers.platypus.view.gui.SaveViewPanel" name="saveViewPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="saveViewPanel1" noResource="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.SaveViewPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.SaveViewPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -86,12 +86,12 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="edu.chalmers.platypus.view.ApplyViewPanel" name="applyViewPanel1">
+                <Component class="edu.chalmers.platypus.view.gui.ApplyViewPanel" name="applyViewPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="applyViewPanel1" noResource="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.ApplyViewPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.ApplyViewPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -99,12 +99,12 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="edu.chalmers.platypus.view.FinishedViewPanel" name="finishedViewPanel1">
+                <Component class="edu.chalmers.platypus.view.gui.FinishedViewPanel" name="finishedViewPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="finishedViewPanel1" noResource="true"/>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.FinishedViewPanel(this)"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.FinishedViewPanel(this)"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -167,7 +167,7 @@
             <MenuItem class="javax.swing.JMenuItem" name="aboutMenuItem">
               <Properties>
                 <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
-                  <action class="edu.chalmers.platypus.view.PlatypusView" id="showAboutBox" methodName="showAboutBox"/>
+                  <action class="edu.chalmers.platypus.view.gui.PlatypusView" id="showAboutBox" methodName="showAboutBox"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="aboutMenuItem" noResource="true"/>
               </Properties>
