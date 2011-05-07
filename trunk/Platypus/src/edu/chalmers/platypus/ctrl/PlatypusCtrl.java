@@ -115,9 +115,7 @@ public class PlatypusCtrl {
                 }
 		BufferedImage original = Locator.getModel().getPreview().getThumbnail(width, height);
 		
-		new Thread(new RunBatch(original));
-		
-		ImageIcon preview = new ImageIcon(original);
+		ImageIcon preview = new ImageIcon(new RunBatch().getFilteredImage(original));
 		return preview;
 	}
 	
@@ -130,7 +128,7 @@ public class PlatypusCtrl {
 	
 	public void saveImages(String path, String ext) {
 		
-        new Thread(new RunBatch(path, ext)).start();
+        new RunBatch().start(path, ext);
         
 	}
 
