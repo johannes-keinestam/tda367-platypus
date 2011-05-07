@@ -1,4 +1,4 @@
-package edu.chalmers.platypus;
+package edu.chalmers.platypus.util;
 
 import edu.chalmers.platypus.ctrl.PlatypusCtrl;
 import edu.chalmers.platypus.model.PlatypusModel;

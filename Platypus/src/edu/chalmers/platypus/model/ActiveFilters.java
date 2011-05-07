@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import edu.chalmers.platypus.ComBus;
+import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.StateChanges;
 
 public class ActiveFilters {

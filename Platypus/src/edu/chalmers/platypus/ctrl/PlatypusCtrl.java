@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import edu.chalmers.platypus.ComBus;
-import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.Preset;
+import edu.chalmers.platypus.util.ComBus;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 
 public class PlatypusCtrl {

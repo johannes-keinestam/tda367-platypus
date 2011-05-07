@@ -9,8 +9,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.PlatypusModel;
+import edu.chalmers.platypus.util.Locator;
 
 public class PlatypusCtrlTest {
 

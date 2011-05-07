@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-import edu.chalmers.platypus.ComBus;
 import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
 

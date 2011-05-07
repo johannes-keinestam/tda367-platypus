@@ -7,8 +7,8 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 
-import edu.chalmers.platypus.ComBus;
-import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.util.ComBus;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 
 public class FilterContainer {

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 
-import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.Preset;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.view.gui.FilterPanel;
 import edu.chalmers.platypus.view.gui.PlatypusApp;
 
