@@ -4,6 +4,7 @@ package edu.chalmers.platypus;
 
 import edu.chalmers.platypus.ctrl.PlatypusCtrl;
 import edu.chalmers.platypus.model.PlatypusModel;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.view.PlatypusGUI;
 /**
  *

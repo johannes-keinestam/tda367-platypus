@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import edu.chalmers.platypus.ComBus;
-import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.util.ComBus;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 
 public class RunBatch implements Runnable {
@@ -38,14 +38,14 @@ public class RunBatch implements Runnable {
 		
 		ArrayList<BatchImage> imageBatch = Locator.getModel().getImageBatch();
 		for (BatchImage batchImage : imageBatch) {
-			ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.PROCESSING_IMAGE.toString(), batchImage, null));
+			ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.PROCESSING_IMAGE.toString(), null, batchImage));
 			this.currentImage = batchImage.getImage();
 			applyFilters();
 			
 			File outputFile = new File(this.writePath + File.separatorChar + batchImage.getFileName() + "_new." + this.writeExtension);
 			try {
 				ImageIO.write(this.currentImage, this.writeExtension, outputFile);
-				ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVED_IMAGE.toString(), outputFile, null));
+				ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVED_IMAGE.toString(), null, outputFile));
 			} catch (IOException e) {
 				System.out.println("Failed to write image: " + outputFile.getName());
 				e.printStackTrace();

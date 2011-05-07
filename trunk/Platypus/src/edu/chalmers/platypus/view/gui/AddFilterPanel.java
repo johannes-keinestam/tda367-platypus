@@ -26,8 +26,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import edu.chalmers.platypus.Locator;
 import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.util.Locator;
 
 /**
  *

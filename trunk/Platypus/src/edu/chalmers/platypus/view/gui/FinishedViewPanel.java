@@ -11,8 +11,8 @@
 
 package edu.chalmers.platypus.view.gui;
 
-import edu.chalmers.platypus.ComBus;
-import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.util.ComBus;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Desktop;

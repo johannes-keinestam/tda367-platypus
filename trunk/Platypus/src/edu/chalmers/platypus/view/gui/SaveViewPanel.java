@@ -11,7 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
-import edu.chalmers.platypus.Locator;
+import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 import java.awt.event.ItemEvent;
 import java.beans.PropertyChangeEvent;
