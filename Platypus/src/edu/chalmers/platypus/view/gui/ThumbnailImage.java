@@ -11,8 +11,8 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.view.BatchThumbPanel;
 import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
 
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.view.PlatypusGUI;

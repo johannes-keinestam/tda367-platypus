@@ -7,9 +7,7 @@ package edu.chalmers.platypus.view.gui;
 import java.awt.CardLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -18,8 +16,6 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
 
-import edu.chalmers.platypus.model.IFilter;
-import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
 
 /**
@@ -101,7 +97,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         jPanel1 = new javax.swing.JPanel();
         startViewPanel1 = new edu.chalmers.platypus.view.gui.StartViewPanel(this);
         imageBrowserPanel1 = new edu.chalmers.platypus.view.gui.BrowseViewPanel(this);
-        filterViewPanel1 = new edu.chalmers.platypus.view.gui.FilterViewPanel(this);
+        filterViewPanel1 = new edu.chalmers.platypus.view.FilterViewPanel(this);
         saveViewPanel1 = new edu.chalmers.platypus.view.gui.SaveViewPanel(this);
         applyViewPanel1 = new edu.chalmers.platypus.view.gui.ApplyViewPanel(this);
         finishedViewPanel1 = new edu.chalmers.platypus.view.gui.FinishedViewPanel(this);
@@ -179,7 +175,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private edu.chalmers.platypus.view.gui.ApplyViewPanel applyViewPanel1;
-    private edu.chalmers.platypus.view.gui.FilterViewPanel filterViewPanel1;
+    private edu.chalmers.platypus.view.FilterViewPanel filterViewPanel1;
     private edu.chalmers.platypus.view.gui.FinishedViewPanel finishedViewPanel1;
     private edu.chalmers.platypus.view.gui.BrowseViewPanel imageBrowserPanel1;
     private javax.swing.JPanel jPanel1;

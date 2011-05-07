@@ -16,8 +16,6 @@ import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 

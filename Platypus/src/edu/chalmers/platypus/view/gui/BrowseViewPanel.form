@@ -79,7 +79,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="edu.chalmers.platypus.view.gui.BatchThumbPanel" name="batchThumbPanel">
+        <Component class="edu.chalmers.platypus.view.BatchThumbPanel" name="batchThumbPanel">
           <Properties>
             <Property name="name" type="java.lang.String" value="batchThumbPanel" noResource="true"/>
           </Properties>

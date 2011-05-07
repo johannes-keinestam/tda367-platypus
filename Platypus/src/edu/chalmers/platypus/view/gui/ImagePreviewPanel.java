@@ -11,7 +11,6 @@
 
 package edu.chalmers.platypus.view.gui;
 
-import edu.chalmers.platypus.util.Locator;
 
 import javax.swing.ImageIcon;
 
