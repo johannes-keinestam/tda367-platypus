@@ -2,7 +2,6 @@ package edu.chalmers.platypus.ctrl;
 
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +15,6 @@ import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.util.StateChanges;
-import java.awt.Image;
-import java.util.List;
 
 public class PlatypusCtrl {
 	private static PlatypusCtrl instance;
@@ -118,7 +115,7 @@ public class PlatypusCtrl {
                 }
 		BufferedImage original = Locator.getModel().getPreview().getThumbnail(width, height);
 		
-		new Thread(new ApplyFilter(original));
+		new Thread(new RunBatch(original));
 		
 		ImageIcon preview = new ImageIcon(original);
 		return preview;
@@ -132,27 +129,12 @@ public class PlatypusCtrl {
 	}
 	
 	public void saveImages(String path, String ext) {
-		ArrayList<BatchImage> imageBatch = Locator.getModel().getImageBatch();
-		for (BatchImage batchImage : imageBatch) {
-			ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.PROCESSING_IMAGE.toString(), batchImage, batchImage));
-			BufferedImage filteredImage = batchImage.getImage();
-			
-			new Thread(new ApplyFilter(filteredImage)).start();
-			
-			File outputFile = new File(path + File.separatorChar + batchImage.getFileName() + "_new." + ext);
-			try {				
-				ImageIO.write(filteredImage, ext, outputFile);
-				ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVED_IMAGE.toString(), outputFile, outputFile));
-			} catch (IOException e) {
-				System.out.println("Failed to write image: " + outputFile.getName());
-				e.printStackTrace();
-			}
-		}
-                ComBus.notifyListeners(new PropertyChangeEvent(this, StateChanges.SAVE_OPERATION_FINISHED.toString(), null, null));
-	
+		
+        new Thread(new RunBatch(path, ext)).start();
+        
 	}
 
-        public void abortSaveOperation() {
-            // TODO add code
-        }
+    public void abortSaveOperation() {
+    	// TODO add code
+    }
 }
