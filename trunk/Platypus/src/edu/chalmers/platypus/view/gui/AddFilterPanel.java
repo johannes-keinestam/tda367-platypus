@@ -13,21 +13,13 @@ package edu.chalmers.platypus.view.gui;
 
 import java.awt.Component;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import edu.chalmers.platypus.model.IFilter;
-import edu.chalmers.platypus.util.Locator;
 
 /**
  *

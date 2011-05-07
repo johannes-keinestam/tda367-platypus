@@ -11,6 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.view.FilterViewPanel;
 import javax.swing.border.TitledBorder;
 
 import edu.chalmers.platypus.model.IFilter;

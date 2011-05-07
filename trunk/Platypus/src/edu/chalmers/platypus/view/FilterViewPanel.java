@@ -9,18 +9,18 @@
  * Created on 2011-apr-01, 18:24:29
  */
 
-package edu.chalmers.platypus.view.gui;
+package edu.chalmers.platypus.view;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.StateChanges;
-import edu.chalmers.platypus.view.PlatypusGUI;
+import edu.chalmers.platypus.view.gui.FilterPanel;
+import edu.chalmers.platypus.view.gui.PlatypusView;
 
 /**
  *

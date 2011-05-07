@@ -9,31 +9,27 @@
  * Created on 2011-maj-02, 22:28:42
  */
 
-package edu.chalmers.platypus.view.gui;
+package edu.chalmers.platypus.view;
 
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
-import edu.chalmers.platypus.view.PlatypusGUI;
+import edu.chalmers.platypus.view.gui.AddImagePanel;
+import edu.chalmers.platypus.view.gui.ThumbnailImage;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
-import javax.swing.TransferHandler;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 

@@ -12,11 +12,9 @@
 package edu.chalmers.platypus.view.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.ImageIcon;
 
 import org.jdesktop.application.ResourceMap;
 
@@ -69,7 +67,7 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
 
         nextViewButton = new javax.swing.JButton();
         batchThumbScrollPane = new javax.swing.JScrollPane();
-        batchThumbPanel = new edu.chalmers.platypus.view.gui.BatchThumbPanel();
+        batchThumbPanel = new edu.chalmers.platypus.view.BatchThumbPanel();
         clearBatchButton = new javax.swing.JButton();
         loadPresetButton = new javax.swing.JButton();
 
@@ -162,7 +160,7 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
     }//GEN-LAST:event_clearBatchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private edu.chalmers.platypus.view.gui.BatchThumbPanel batchThumbPanel;
+    private edu.chalmers.platypus.view.BatchThumbPanel batchThumbPanel;
     private javax.swing.JScrollPane batchThumbScrollPane;
     private javax.swing.JButton clearBatchButton;
     private javax.swing.JButton loadPresetButton;

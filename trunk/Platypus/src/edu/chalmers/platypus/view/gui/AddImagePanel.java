@@ -11,6 +11,7 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import edu.chalmers.platypus.view.BatchThumbPanel;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
