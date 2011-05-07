@@ -26,11 +26,12 @@ import javax.swing.JFileChooser;
 public class SaveViewPanel extends javax.swing.JPanel {
 
     /** Creates new form SavePanel */
-    public SaveViewPanel() {
-        initComponents();
+	public SaveViewPanel() {
+		initComponents();
 
-        pathTextField.setText(System.getenv("USERPROFILE")+File.separator+"Platypus"+File.separator+"Pictures");
-    }
+		pathTextField.setText(System.getenv("USERPROFILE") + File.separator
+				+ "PlatyPix" + File.separator + "Pictures");
+	}
 
     public SaveViewPanel(PlatypusView parent) {
         this();
