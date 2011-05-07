@@ -11,13 +11,14 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import javax.swing.ImageIcon;
+
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
-import java.awt.Image;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.ImageIcon;
 
 /**
  *
