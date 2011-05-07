@@ -45,7 +45,7 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                ImageIcon i = Locator.getCtrl().getPreviewOriginal(filteredPreviewPanel.getWidth()-2,filteredPreviewPanel.getHeight()-2);
+                ImageIcon i = Locator.getCtrl().getPreviewFiltered(filteredPreviewPanel.getWidth()-2,filteredPreviewPanel.getHeight()-2);
                 filteredPreviewPanel.setImage(i);
             }
         });
