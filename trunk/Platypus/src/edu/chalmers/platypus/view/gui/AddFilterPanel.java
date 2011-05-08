@@ -20,6 +20,12 @@ import javax.swing.JList;
 import javax.swing.border.TitledBorder;
 
 import edu.chalmers.platypus.model.IFilter;
+import edu.chalmers.platypus.util.Locator;
+import java.io.File;
+import java.net.MalformedURLException;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -42,7 +48,28 @@ public class AddFilterPanel extends javax.swing.JPanel {
     public void updateList() {
     	loadedFiltersList.setModel(parentView.getGUICtrl().getNewFilterList());
     }
-    
+
+    public void openFileChooser() {
+        JFileChooser browser = new JFileChooser();
+        browser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        browser.setFileFilter(filter);
+        browser.setAcceptAllFileFilterUsed(false);
+        browser.setMultiSelectionEnabled(false);
+        int result = browser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            importNewFilter(browser.getSelectedFile());
+        }
+    }
+
+    private void importNewFilter(File filter){
+        try{
+            Locator.getCtrl().importNewFilter(filter.toURI().toURL());
+            updateList();
+        }catch(MalformedURLException murle){
+            murle.printStackTrace();
+        }
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -60,6 +87,7 @@ public class AddFilterPanel extends javax.swing.JPanel {
         filterImageLabel = new javax.swing.JLabel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        importFilterButton = new javax.swing.JButton();
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(AddFilterPanel.class);
         setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("Form.border.title"))); // NOI18N
@@ -156,6 +184,14 @@ public class AddFilterPanel extends javax.swing.JPanel {
             }
         });
 
+        importFilterButton.setText(resourceMap.getString("importFilterButton.text")); // NOI18N
+        importFilterButton.setName("importFilterButton"); // NOI18N
+        importFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importFilterButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,8 +202,10 @@ public class AddFilterPanel extends javax.swing.JPanel {
                     .addComponent(filterAreaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(filterListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(importFilterButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                         .addComponent(cancelButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(okButton)))
                 .addContainerGap())
         );
@@ -181,9 +219,12 @@ public class AddFilterPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(okButton)
-                    .addComponent(cancelButton))
+                    .addComponent(cancelButton)
+                    .addComponent(importFilterButton))
                 .addContainerGap())
         );
+
+        filterAreaPanel.getAccessibleContext().setAccessibleName(resourceMap.getString("filterAreaPanel.AccessibleContext.accessibleName")); // NOI18N
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadedFiltersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_loadedFiltersListValueChanged
@@ -216,6 +257,10 @@ public class AddFilterPanel extends javax.swing.JPanel {
         closeContainerDialog();
     }//GEN-LAST:event_okButtonActionPerformed
 
+    private void importFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFilterButtonActionPerformed
+        openFileChooser();
+    }//GEN-LAST:event_importFilterButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
@@ -224,10 +269,14 @@ public class AddFilterPanel extends javax.swing.JPanel {
     private javax.swing.JTextArea filterDescriptionTextArea;
     private javax.swing.JLabel filterImageLabel;
     private javax.swing.JScrollPane filterListScrollPane;
+    private javax.swing.JButton importFilterButton;
     private javax.swing.JList loadedFiltersList;
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 
+    private final FileFilter filter = new FileNameExtensionFilter("Supported Files " +
+                "(*.jar)",
+                "jar","JAR");
     private ArrayList<String> loadedFilters;
     private final JDialog containerDialog;
     private final PlatypusView parentView;
