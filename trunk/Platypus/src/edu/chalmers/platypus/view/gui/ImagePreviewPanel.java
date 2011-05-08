@@ -12,6 +12,7 @@
 package edu.chalmers.platypus.view.gui;
 
 
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 /**
@@ -32,6 +33,8 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         previewLabel.setEnabled(false);
     }
     public void updateImage() {
+        previewLabel.setMinimumSize(new Dimension(0,0));
+        this.setMinimumSize(new Dimension(0, 0));
         previewLabel.setEnabled(true);
         previewLabel.setIcon(image);
     }

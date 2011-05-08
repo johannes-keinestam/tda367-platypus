@@ -11,24 +11,29 @@
 
 package edu.chalmers.platypus.view.gui;
 
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import javax.swing.ImageIcon;
-
+import javax.swing.Timer;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author skoldator
  */
-public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeListener {
+public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeListener, ActionListener {
+
+    private Timer  resizeTimer;
 
     /** Creates new form PreviewPanel */
     public PreviewPanel() {
         initComponents();
+        resizeTimer = new Timer(500,this);
         ComBus.subscribe(this);
     }
 
@@ -170,11 +175,11 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
     }//GEN-LAST:event_previewSplitPaneComponentResized
 
     private void originalPreviewPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_originalPreviewPanelComponentResized
-        setPreviewOriginal();
+        resizeTimer.start();
     }//GEN-LAST:event_originalPreviewPanelComponentResized
 
     private void filteredPreviewPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_filteredPreviewPanelComponentResized
-        setPreviewFiltered();
+        resizeTimer.start();
     }//GEN-LAST:event_filteredPreviewPanelComponentResized
 
 
@@ -196,6 +201,15 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
 	} else if (change.equals(StateChanges.PREVIEW_IMAGE_UPDATED.toString())) {
             setPreviewFiltered();
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        resizeTimer.stop();
+        originalPreviewPanel.setMinimumSize(new Dimension(0, 0));
+        filteredPreviewPanel.setMinimumSize(new Dimension(0, 0));
+        setPreviewOriginal();
+        setPreviewFiltered();
     }
 
 }
