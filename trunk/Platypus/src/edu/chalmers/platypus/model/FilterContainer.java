@@ -48,7 +48,7 @@ public class FilterContainer {
 		return null;
 	}
 
-	public void importFilter(URL[] url) {
+	public boolean importFilter(URL[] url) {
 		URLClassLoader loader = new URLClassLoader(url);
 		try {
 			Class filter = loader
@@ -57,16 +57,14 @@ public class FilterContainer {
 				IFilter f = (IFilter) filter.newInstance();
 				loadedFilters.add(f);
 				System.out.println(f.getName() + " loaded");
+				return true;
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return false;
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return false;
 			}
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			return false;
 		}
 
 	}
