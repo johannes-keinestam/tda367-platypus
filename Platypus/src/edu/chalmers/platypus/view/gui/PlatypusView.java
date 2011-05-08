@@ -15,6 +15,7 @@ import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
+import edu.chalmers.platypus.view.ErrorNotifier;
 
 import edu.chalmers.platypus.view.PlatypusGUI;
 
@@ -171,6 +172,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
+		errorNotifier = new ErrorNotifier(this);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -184,6 +186,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
     private javax.swing.JMenuBar menuBar;
     private edu.chalmers.platypus.view.gui.SaveViewPanel saveViewPanel1;
     private edu.chalmers.platypus.view.gui.StartViewPanel startViewPanel1;
+    private edu.chalmers.platypus.view.ErrorNotifier errorNotifier;
     // End of variables declaration//GEN-END:variables
 
 

@@ -3,6 +3,7 @@ package edu.chalmers.platypus.ctrl;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -144,5 +145,17 @@ public class PlatypusCtrl {
 
 	public void abortSaveOperation() {
 		// TODO add code
+	}
+	
+	public void importNewFilter(URL filter){
+		URL url[] = new URL[1];
+		url[0] = filter;
+		if(Locator.getModel().getFilterContainer().importFilter(url)){
+			
+		}else{
+			PropertyChangeEvent pce = new PropertyChangeEvent(this,
+					StateChanges.ERROR_OCCURED.toString(), null, "The specified file is not a valid filter");
+			ComBus.notifyListeners(pce);
+		}
 	}
 }
