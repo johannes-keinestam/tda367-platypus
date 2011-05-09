@@ -1,14 +1,10 @@
 package edu.chalmers.platypus.model;
 
-import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-
-import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.StateChanges;
 
 public class FilterContainer {
 
@@ -28,11 +24,6 @@ public class FilterContainer {
 
 	public void addFilter(IFilter filter) {
 		loadedFilters.add(filter);
-		PropertyChangeEvent pce = new PropertyChangeEvent(this,
-				StateChanges.NEW_FILTER_ADDED_TO_APPLICATION.toString(), null,
-				filter);
-		ComBus.notifyListeners(pce);
-
 	}
 
 	public ArrayList<IFilter> getList() {
