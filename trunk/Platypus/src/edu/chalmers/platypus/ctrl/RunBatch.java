@@ -17,7 +17,6 @@ import edu.chalmers.platypus.util.StateChanges;
 public class RunBatch implements Runnable {
 	private static String writePath;
 	private static String writeExtension;
-	private static RunBatch hej;
 
 	public static void start(String writePath, String writeExtension) {
 		RunBatch.writePath = writePath;
@@ -36,7 +35,6 @@ public class RunBatch implements Runnable {
 	@Override
 	public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
-			RunBatch.hej = this;
 			ArrayList<BatchImage> imageBatch = Locator.getModel()
 					.getImageBatch();
 			for (BatchImage batchImage : imageBatch) {
@@ -72,7 +70,7 @@ public class RunBatch implements Runnable {
 
 	private static BufferedImage applyFilters(BufferedImage img) {
 		for (IFilter filter : Locator.getModel().getActiveFilters().getList()) {
-			ComBus.notifyListeners(new PropertyChangeEvent(null,
+			ComBus.notifyListeners(new PropertyChangeEvent(Locator.getCtrl(),
 					StateChanges.APPLYING_FILTER.toString(), null, filter));
 			img = filter.applyFilter(img);
 		}
