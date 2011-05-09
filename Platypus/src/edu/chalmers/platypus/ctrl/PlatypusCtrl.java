@@ -24,7 +24,8 @@ import edu.chalmers.platypus.util.StateChanges;
 public class PlatypusCtrl {
 	private static PlatypusCtrl instance;
 
-	private PlatypusCtrl() {}
+	private PlatypusCtrl() {
+	}
 
 	public static PlatypusCtrl getInstance() {
 		if (instance == null) {
@@ -100,6 +101,9 @@ public class PlatypusCtrl {
 
 	public void addFilter(IFilter filter) {
 		Locator.getModel().getFilterContainer().addFilter(filter);
+		ComBus.notifyListeners(new PropertyChangeEvent(this,
+				StateChanges.NEW_FILTER_ADDED_TO_APPLICATION.toString(), null,
+				filter));
 	}
 
 	public void loadPreset(Preset preset) {
@@ -157,65 +161,72 @@ public class PlatypusCtrl {
 
 	public void abortSaveOperation() {
 		RunBatch.stop();
+		ComBus.notifyListeners(new PropertyChangeEvent(this,
+				StateChanges.SAVE_OPERATION_ABORTED.toString(), null, null));
 	}
-	
-	public void importNewFilter(File filter){
+
+	public void importNewFilter(File filter) {
 		URL filterURL = null;
 		URL url[] = new URL[1];
-		
+
 		try {
 			filterURL = filter.toURI().toURL();
 			url[0] = filterURL;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
-		
-		if(Locator.getModel().getFilterContainer().importFilter(url)){
+
+		if (Locator.getModel().getFilterContainer().importFilter(url)) {
 			copyNewFilter(filter);
-		}else{
+		} else {
 			PropertyChangeEvent pce = new PropertyChangeEvent(this,
-					StateChanges.ERROR_OCCURED.toString(), null, "The specified file is not a valid filter");
+					StateChanges.ERROR_OCCURED.toString(), null,
+					"The specified file is not a valid filter");
 			ComBus.notifyListeners(pce);
 		}
 	}
-	
-	public void copyNewFilter(File filter){
+
+	public void copyNewFilter(File filter) {
 		String filterFileName = filter.getPath();
-		
+
 		FileChannel outputChannel = null;
-		FileChannel sourceChannel = null; 
-			
-		File outputFile = new File(System.getenv("USERPROFILE")+"/PlatyPix/Filters/" + 
-					filterFileName.substring(filterFileName.lastIndexOf(File.separator)+1, filterFileName.length()));
+		FileChannel sourceChannel = null;
+
+		File outputFile = new File(System.getenv("USERPROFILE")
+				+ "/PlatyPix/Filters/"
+				+ filterFileName.substring(
+						filterFileName.lastIndexOf(File.separator) + 1,
+						filterFileName.length()));
 		try {
 			sourceChannel = new FileInputStream(filter).getChannel();
 			outputChannel = new FileOutputStream(outputFile).getChannel();
-			
+
 			try {
-				outputChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+				outputChannel.transferFrom(sourceChannel, 0,
+						sourceChannel.size());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-		      if (sourceChannel != null)
-		          try {
-		            sourceChannel.close();
-		          } catch (IOException e) {
-		        	  e.printStackTrace();
-		          }
-		        if (outputChannel != null)
-		          try {
-		            outputChannel.close();
-		          } catch (IOException e) {
-		        	  e.printStackTrace();
-		          }
-		      }
-		
+			if (sourceChannel != null)
+				try {
+					sourceChannel.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			if (outputChannel != null)
+				try {
+					outputChannel.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+
 	}
-	
+
 }

@@ -1,7 +1,6 @@
 
 package edu.chalmers.platypus.model;
 
-import java.beans.PropertyChangeEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,11 +8,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-
-import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.StateChanges;
 
 public class ActiveFilters {
         private static ActiveFilters activeFiltersObject;

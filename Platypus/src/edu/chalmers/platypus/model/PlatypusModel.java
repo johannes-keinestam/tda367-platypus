@@ -1,22 +1,11 @@
 package edu.chalmers.platypus.model;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.Locator;
-import edu.chalmers.platypus.util.StateChanges;
 
 public class PlatypusModel {
 	private final ActiveFilters activeFilters;
