@@ -26,7 +26,6 @@ public class ErrorNotifier implements PropertyChangeListener{
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		System.out.println("Stuff happens");
        	String change = evt.getPropertyName();
 		if (change.equals(StateChanges.ERROR_OCCURED.toString())) {
             String message = (String) evt.getNewValue();
