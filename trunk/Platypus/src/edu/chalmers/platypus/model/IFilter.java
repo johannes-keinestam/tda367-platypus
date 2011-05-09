@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public interface IFilter extends Serializable{
-
+	
 	public String getName();
 	
 	public String getDescription();
