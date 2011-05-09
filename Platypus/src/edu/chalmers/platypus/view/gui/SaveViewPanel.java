@@ -80,7 +80,7 @@ public class SaveViewPanel extends javax.swing.JPanel {
             }
         });
 
-        formatComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".JPG", ".PNG", ".TIFF", ".BMP", ".GIF", ".RAW" }));
+        formatComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".JPG", ".PNG" , ".GIF" }));
         formatComboBox.setName("formatComboBox"); // NOI18N
 
         javax.swing.GroupLayout pictureSavePanelLayout = new javax.swing.GroupLayout(pictureSavePanel);
