@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.border.TitledBorder;
@@ -245,11 +246,19 @@ public class AddFilterPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-    	Object selection = loadedFiltersList.getSelectedValue();
-    	if (selection instanceof IFilter) { //Should always be true
-        	IFilter filter = (IFilter)selection;
-        	parentView.getGUICtrl().addFilterToBatch(filter);
-    	}
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Object selection = loadedFiltersList.getSelectedValue();
+            	if (selection instanceof IFilter) { //Should always be true
+                	IFilter filter = (IFilter)selection;
+                	parentView.getGUICtrl().addFilterToBatch(filter);
+            	}
+            }
+        });
+        
+        t.start();
+
         closeContainerDialog();
     }//GEN-LAST:event_okButtonActionPerformed
 
