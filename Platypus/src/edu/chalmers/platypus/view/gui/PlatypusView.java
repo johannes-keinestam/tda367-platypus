@@ -15,6 +15,9 @@ import org.jdesktop.application.Action;
 import org.jdesktop.application.FrameView;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
+
+import edu.chalmers.platypus.util.ComBus;
+import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.ErrorNotifier;
 
 import edu.chalmers.platypus.view.PlatypusGUI;
@@ -28,6 +31,8 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         super(app);
 
         initComponents();
+        
+        ComBus.subscribe(this);
         
         parent = PlatypusGUI.getInstance();
     }
@@ -195,7 +200,10 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
     private JDialog addFilterDialog;
     private JDialog loadPresetDialog;
     public void propertyChange(PropertyChangeEvent evt) {
-
+       	String change = evt.getPropertyName();
+		if (change.equals(StateChanges.DUPLICATE_FILTER_SELECTED.toString())) {
+			showAddFilterDialog();
+		}
     }
 
 }
