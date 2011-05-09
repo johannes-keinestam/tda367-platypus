@@ -11,6 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 
@@ -75,8 +77,18 @@ public class PlatypusCtrl {
 
 	public void addFilterToBatch(IFilter filter) {
 		PropertyChangeEvent pce;
-		if(!Locator.getModel().getActiveFilters().getList().contains(filter)){
+		if (!Locator.getModel().getActiveFilters().getList().contains(filter)) {
 			Locator.getModel().getActiveFilters().getList().add(filter);
+			if (filter instanceof Observable) {
+				((Observable) filter).addObserver(new Observer() {
+					@Override
+					public void update(Observable o, Object arg) {
+						ComBus.notifyListeners(new PropertyChangeEvent(this,
+								StateChanges.PREVIEW_IMAGE_UPDATED.toString(),
+								null, o));
+					}
+				});
+			}
 			pce = new PropertyChangeEvent(this,
 					StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString(), null, filter);
 		}else{
