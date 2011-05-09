@@ -61,6 +61,7 @@
     <Component class="javax.swing.JButton" name="nextViewButton">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="nextViewButton.text"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="nextViewButton" noResource="true"/>
       </Properties>
       <Events>
@@ -98,6 +99,7 @@
     <Component class="javax.swing.JButton" name="loadPresetButton">
       <Properties>
         <Property name="text" type="java.lang.String" resourceKey="loadPresetButton.text"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="name" type="java.lang.String" value="loadPresetButton" noResource="true"/>
       </Properties>
       <Events>
