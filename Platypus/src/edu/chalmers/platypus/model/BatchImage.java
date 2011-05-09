@@ -23,11 +23,11 @@ public class BatchImage {
 	public BufferedImage getThumbnail(int width, int height) {
 		try {
 
-                        //Rough scaling
-			if(width == -1 && height == -1){
-                            return getImage();
-                        }
-			
+			// Rough scaling
+			if (width == -1 && height == -1) {
+				return getImage();
+			}
+
 			ImageInputStream iis = ImageIO.createImageInputStream(imageFile);
 			Iterator readers = ImageIO.getImageReaders(iis);
 			ImageReader reader = (ImageReader) readers.next();
@@ -35,38 +35,40 @@ public class BatchImage {
 			ImageReadParam param = reader.getDefaultReadParam();
 			float imageRatio = reader.getAspectRatio(0);
 
-                        //Only scale if needed, else return original
-                        if (reader.getHeight(0) > height && reader.getWidth(0) > width) {
-                            if (imageRatio <= 1.0){
-                                param.setSourceSubsampling(reader.getHeight(0)/height, reader.getHeight(0)/height, 0,0);
-                            } else {
-                                param.setSourceSubsampling(reader.getWidth(0)/width, reader.getWidth(0)/width, 0,0);
-                            }
-                        } else {
-                            return reader.read(0);
-                        }
-			
+			// Only scale if needed, else return original
+			if (reader.getHeight(0) > height && reader.getWidth(0) > width) {
+				if (imageRatio <= 1.0) {
+					param.setSourceSubsampling(reader.getHeight(0) / height,
+							reader.getHeight(0) / height, 0, 0);
+				} else {
+					param.setSourceSubsampling(reader.getWidth(0) / width,
+							reader.getWidth(0) / width, 0, 0);
+				}
+			} else {
+				return reader.read(0);
+			}
+
 			BufferedImage b = reader.read(0, param);
-                        
-                        double thumbRatio = (double) width / (double) height;
-                        int imageWidth = b.getWidth();
-                        int imageHeight = b.getHeight();
-                        double aspectRatio = (double) imageWidth / (double) imageHeight;
 
-                        int scaleWidth = width;
-                        int scaleHeight = height;
-                        if (thumbRatio < aspectRatio) {
-                            scaleHeight = (int) (width / aspectRatio);
-                        } else {
-                            scaleWidth = (int) (height * aspectRatio);
-                        }
+			double thumbRatio = (double) width / (double) height;
+			int imageWidth = b.getWidth();
+			int imageHeight = b.getHeight();
+			double aspectRatio = (double) imageWidth / (double) imageHeight;
 
-                        BufferedImage scaledImage = new BufferedImage(scaleWidth, scaleHeight,
-                                b.getType());
-                        Graphics2D graphics2D = scaledImage.createGraphics();
-                        graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-                                RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-                        graphics2D.drawImage(b, 0, 0, scaleWidth, scaleHeight, null);
+			int scaleWidth = width;
+			int scaleHeight = height;
+			if (thumbRatio < aspectRatio) {
+				scaleHeight = (int) (width / aspectRatio);
+			} else {
+				scaleWidth = (int) (height * aspectRatio);
+			}
+
+			BufferedImage scaledImage = new BufferedImage(scaleWidth,
+					scaleHeight, b.getType());
+			Graphics2D graphics2D = scaledImage.createGraphics();
+			graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+					RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+			graphics2D.drawImage(b, 0, 0, scaleWidth, scaleHeight, null);
 
 			return scaledImage;
 		} catch (IOException e) {
@@ -75,11 +77,11 @@ public class BatchImage {
 			return null;
 		}
 	}
-	
+
 	public BufferedImage getImage() {
 		try {
 			return ImageIO.read(imageFile);
-		} catch (final MalformedURLException e) {		
+		} catch (final MalformedURLException e) {
 			e.printStackTrace();
 			return null;
 		} catch (final IOException e) {
@@ -91,8 +93,10 @@ public class BatchImage {
 	public String getFileName() {
 		String fileName = imageFile.getPath();
 		System.out.println(fileName);
-		System.out.println(fileName.substring(fileName.lastIndexOf(File.separator)+1, fileName.lastIndexOf('.')));
-		return fileName.substring(fileName.lastIndexOf(File.separator)+1, fileName.lastIndexOf('.'));
+		System.out.println(fileName.substring(
+				fileName.lastIndexOf(File.separator) + 1,
+				fileName.lastIndexOf('.')));
+		return fileName.substring(fileName.lastIndexOf(File.separator) + 1,
+				fileName.lastIndexOf('.'));
 	}
 }
-

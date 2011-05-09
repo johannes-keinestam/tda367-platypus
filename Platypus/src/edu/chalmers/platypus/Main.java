@@ -17,7 +17,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		
+
 		String writeDirectory = System.getenv("USERPROFILE")
 				+ File.separatorChar + "PlatyPix" + File.separatorChar;
 		for (Directories dir : Directories.values()) {
@@ -26,7 +26,8 @@ public class Main {
 					+ dir.toString().substring(0, 1)
 					+ dir.toString().substring(1).toLowerCase();
 			if (new File(writeDirectory).mkdirs())
-				System.out.println("Created directory: \"" + writeDirectory + "\"");
+				System.out.println("Created directory: \"" + writeDirectory
+						+ "\"");
 			else
 				System.out.println("Directory: \"" + writeDirectory
 						+ "\" already exists");
