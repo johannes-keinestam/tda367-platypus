@@ -17,6 +17,7 @@ import edu.chalmers.platypus.util.StateChanges;
 
 public class PlatypusCtrl {
 	private static PlatypusCtrl instance;
+	private RunBatch runBatch = new RunBatch();
 
 	private PlatypusCtrl() {}
 
@@ -123,8 +124,7 @@ public class PlatypusCtrl {
 		BufferedImage original = Locator.getModel().getPreview()
 				.getThumbnail(width, height);
 
-		ImageIcon preview = new ImageIcon(
-				new RunBatch().getFilteredImage(original));
+		ImageIcon preview = new ImageIcon(runBatch.getFilteredImage(original));
 		return preview;
 	}
 
@@ -138,13 +138,11 @@ public class PlatypusCtrl {
 	}
 
 	public void saveImages(String path, String ext) {
-
-		new RunBatch().start(path, ext);
-
+		runBatch.start(path, ext);
 	}
 
 	public void abortSaveOperation() {
-		// TODO add code
+		runBatch.stop();
 	}
 	
 	public void importNewFilter(URL filter){
