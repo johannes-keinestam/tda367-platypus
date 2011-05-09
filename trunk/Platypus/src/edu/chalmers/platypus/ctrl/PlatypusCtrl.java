@@ -67,9 +67,18 @@ public class PlatypusCtrl {
 	}
 
 	public void addFilterToBatch(IFilter filter) {
-		Locator.getModel().getActiveFilters().getList().add(filter);
-		PropertyChangeEvent pce = new PropertyChangeEvent(this,
-				StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString(), null, filter);
+		PropertyChangeEvent pce;
+		if(!Locator.getModel().getActiveFilters().getList().contains(filter)){
+			Locator.getModel().getActiveFilters().getList().add(filter);
+			pce = new PropertyChangeEvent(this,
+					StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString(), null, filter);
+		}else{
+			pce = new PropertyChangeEvent(this,
+					StateChanges.ERROR_OCCURED.toString(), null, "The selected filter is already in use");
+			ComBus.notifyListeners(pce);
+			pce = new PropertyChangeEvent(this,
+					StateChanges.DUPLICATE_FILTER_SELECTED.toString(), null, null);
+		}
 		ComBus.notifyListeners(pce);
 	}
 
@@ -137,9 +146,9 @@ public class PlatypusCtrl {
 		PropertyChangeEvent pce = new PropertyChangeEvent(this,
 				StateChanges.NEW_PREVIEW_IMAGE.toString(), null, null);
 		ComBus.notifyListeners(pce);
-		PropertyChangeEvent pce2 = new PropertyChangeEvent(this,
+		pce = new PropertyChangeEvent(this,
 				StateChanges.PREVIEW_IMAGE_UPDATED.toString(), null, null);
-		ComBus.notifyListeners(pce2);
+		ComBus.notifyListeners(pce);
 	}
 
 	public void saveImages(String path, String ext) {
