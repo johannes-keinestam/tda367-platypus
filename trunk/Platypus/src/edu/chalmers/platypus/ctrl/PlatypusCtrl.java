@@ -65,6 +65,12 @@ public class PlatypusCtrl {
 				break;
 			}
 		}
+		if(list.isEmpty()){
+			PropertyChangeEvent pce = new PropertyChangeEvent(this,
+					StateChanges.IMAGE_BATCH_EMPTY.toString(), img,
+					null);
+			ComBus.notifyListeners(pce);
+		}
 	}
 
 	public void addFilterToBatch(IFilter filter) {

@@ -62,7 +62,7 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
     }
 
     public void setFirstAsPreview() {
-        if (getComponent(1) instanceof ThumbnailImage) {
+        if (getComponents().length != 1 && getComponent(1) instanceof ThumbnailImage) {
             ((ThumbnailImage)getComponent(1)).selectAsPreview();
         }
     }
