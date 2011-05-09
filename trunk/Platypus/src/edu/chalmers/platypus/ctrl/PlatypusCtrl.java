@@ -67,10 +67,9 @@ public class PlatypusCtrl {
 				break;
 			}
 		}
-		if(list.isEmpty()){
+		if (list.isEmpty()) {
 			PropertyChangeEvent pce = new PropertyChangeEvent(this,
-					StateChanges.IMAGE_BATCH_EMPTY.toString(), img,
-					null);
+					StateChanges.IMAGE_BATCH_EMPTY.toString(), img, null);
 			ComBus.notifyListeners(pce);
 		}
 	}
@@ -90,13 +89,16 @@ public class PlatypusCtrl {
 				});
 			}
 			pce = new PropertyChangeEvent(this,
-					StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString(), null, filter);
-		}else{
+					StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString(), null,
+					filter);
+		} else {
 			pce = new PropertyChangeEvent(this,
-					StateChanges.ERROR_OCCURED.toString(), null, "The selected filter is already in use");
+					StateChanges.ERROR_OCCURED.toString(), null,
+					"The selected filter is already in use");
 			ComBus.notifyListeners(pce);
 			pce = new PropertyChangeEvent(this,
-					StateChanges.DUPLICATE_FILTER_SELECTED.toString(), null, null);
+					StateChanges.DUPLICATE_FILTER_SELECTED.toString(), null,
+					null);
 		}
 		ComBus.notifyListeners(pce);
 	}
