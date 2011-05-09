@@ -186,5 +186,10 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
                 if (change.equals(StateChanges.IMAGE_BATCH_EMPTY.toString())){
                     disableNextButtons();
                 }
+                if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())){
+                	if (this.isShowing()){
+                			parent.showNextView();
+                	}
+                }
 	}
 }
