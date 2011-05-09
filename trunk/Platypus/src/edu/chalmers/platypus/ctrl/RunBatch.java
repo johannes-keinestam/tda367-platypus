@@ -18,8 +18,6 @@ public class RunBatch implements Runnable {
 	private Thread t;
 	private String writePath;
 	private String writeExtension;
-	private ArrayList<IFilter> activeFilters = Locator.getModel()
-			.getActiveFilters().getList();
 
 	public void start(String writePath, String writeExtension) {
 		this.writePath = writePath;
@@ -71,7 +69,7 @@ public class RunBatch implements Runnable {
 	}
 
 	private BufferedImage applyFilters(BufferedImage img) {
-		for (IFilter filter : activeFilters) {
+		for (IFilter filter : Locator.getModel().getActiveFilters().getList()) {
 			img = filter.applyFilter(img);
 		}
 		return img;
