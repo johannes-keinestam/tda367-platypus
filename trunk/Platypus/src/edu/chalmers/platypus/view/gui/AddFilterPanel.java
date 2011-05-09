@@ -62,12 +62,8 @@ public class AddFilterPanel extends javax.swing.JPanel {
     }
 
     private void importNewFilter(File filter){
-        try{
-            Locator.getCtrl().importNewFilter(filter.toURI().toURL());
-            updateList();
-        }catch(MalformedURLException murle){
-            murle.printStackTrace();
-        }
+    	Locator.getCtrl().importNewFilter(filter);
+    	updateList();
     }
 
     /** This method is called from within the constructor to

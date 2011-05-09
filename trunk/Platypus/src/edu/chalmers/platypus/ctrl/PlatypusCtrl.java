@@ -3,7 +3,13 @@ package edu.chalmers.platypus.ctrl;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -144,15 +150,63 @@ public class PlatypusCtrl {
 		RunBatch.stop();
 	}
 	
-	public void importNewFilter(URL filter){
+	public void importNewFilter(File filter){
+		URL filterURL = null;
 		URL url[] = new URL[1];
-		url[0] = filter;
+		
+		try {
+			filterURL = filter.toURI().toURL();
+			url[0] = filterURL;
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		
 		if(Locator.getModel().getFilterContainer().importFilter(url)){
-			
+			copyNewFilter(filter);
 		}else{
 			PropertyChangeEvent pce = new PropertyChangeEvent(this,
 					StateChanges.ERROR_OCCURED.toString(), null, "The specified file is not a valid filter");
 			ComBus.notifyListeners(pce);
 		}
 	}
+	
+	public void copyNewFilter(File filter){
+		String filterFileName = filter.getPath();
+		
+		FileChannel outputChannel = null;
+		FileChannel sourceChannel = null; 
+			
+		File outputFile = new File(System.getenv("USERPROFILE")+"/PlatyPix/Filters/" + 
+					filterFileName.substring(filterFileName.lastIndexOf(File.separator)+1, filterFileName.length()));
+		try {
+			sourceChannel = new FileInputStream(filter).getChannel();
+			outputChannel = new FileOutputStream(outputFile).getChannel();
+			
+			try {
+				outputChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+		      if (sourceChannel != null)
+		          try {
+		            sourceChannel.close();
+		          } catch (IOException e) {
+		        	  e.printStackTrace();
+		          }
+		        if (outputChannel != null)
+		          try {
+		            outputChannel.close();
+		          } catch (IOException e) {
+		        	  e.printStackTrace();
+		          }
+		      }
+		
+	}
+	
 }
