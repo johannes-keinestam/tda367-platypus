@@ -14,9 +14,12 @@ package edu.chalmers.platypus.view.gui;
 import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.view.PlatypusGUI;
+import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.DefaultListCellRenderer;
 
 import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -83,6 +86,21 @@ public class LoadPresetPanel extends javax.swing.JPanel {
             }
         });
         presetListScrollPane.setViewportView(loadedPresetList);
+        loadedPresetList.setCellRenderer(new DefaultListCellRenderer(){
+            @Override
+            public Component getListCellRendererComponent(JList list, Object value,
+                int index, boolean isSelected, boolean cellHasFocus) {
+
+                DefaultListCellRenderer component = (DefaultListCellRenderer)super.
+                getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                if (value instanceof Preset) {
+                    String text = ((Preset)value).getName();
+                    component.setText(text);
+                }
+                return component;
+            }
+        });
 
         presetInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("presetInfoPanel.border.title"))); // NOI18N
         presetInfoPanel.setName("presetInfoPanel"); // NOI18N

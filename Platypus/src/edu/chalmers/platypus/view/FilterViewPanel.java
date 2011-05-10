@@ -50,7 +50,7 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     public void addFilterPanel(IFilter filter) {
     	addedFilterPanels.add(new FilterPanel(filter, this));
     	currentPanelIndex++;
-    	updateFilterPanelButtons();
+    	updateFilterPanels();
     	showFilterPanel(addedFilterPanels.get(addedFilterPanels.size()-1));
     	parent.setBrowseButtonNext();
     }
@@ -67,7 +67,7 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     				currentPanelIndex = addedFilterPanels.size()-1;
     				showFilterPanel(addedFilterPanels.get(addedFilterPanels.size()-1));
     			}
-    	    	updateFilterPanelButtons();
+    	    	updateFilterPanels();
     	    	break;
     		}
     	}
@@ -94,9 +94,14 @@ public class FilterViewPanel extends javax.swing.JPanel implements PropertyChang
     	}
     }
     
-    private void updateFilterPanelButtons() {
-    	for (int i = 0; i <= addedFilterPanels.size()-2; i++) {
-    		addedFilterPanels.get(i).setAddButtonToNext();
+    private void updateFilterPanels() {
+    	for (int i = 0; i <= addedFilterPanels.size()-1; i++) {
+            if (i != addedFilterPanels.size()-1) {
+                addedFilterPanels.get(i).setAddButtonToNext();
+            } else {
+                addedFilterPanels.get(i).setAddButtonToAdd();
+            }
+            addedFilterPanels.get(i).setFilterNumber(i+1, addedFilterPanels.size());
     	}
     }
     
