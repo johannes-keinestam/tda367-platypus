@@ -198,7 +198,12 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
         String change = evt.getPropertyName();
 	if (change.equals(StateChanges.NEW_PREVIEW_IMAGE.toString())) {
             setPreviewOriginal();
+            setPreviewFiltered();
 	} else if (change.equals(StateChanges.PREVIEW_IMAGE_UPDATED.toString())) {
+            setPreviewFiltered();
+        } else if (change.equals(StateChanges.FILTER_REMOVED_FROM_BATCH.toString())) {
+            setPreviewFiltered();
+        } else if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())) {
             setPreviewFiltered();
         }
     }

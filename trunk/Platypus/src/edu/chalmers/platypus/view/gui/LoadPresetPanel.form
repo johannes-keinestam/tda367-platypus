@@ -86,6 +86,9 @@
           <Events>
             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="loadedPresetListValueChanged"/>
           </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="loadedPresetList.setCellRenderer(new DefaultListCellRenderer(){&#xa;    @Override&#xa;    public Component getListCellRendererComponent(JList list, Object value,&#xa;        int index, boolean isSelected, boolean cellHasFocus) {&#xa;&#xa;        DefaultListCellRenderer component = (DefaultListCellRenderer)super.&#xa;                getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;&#xa;        if (value instanceof Preset) {&#xa;            String text = ((Preset)value).getName();&#xa;            component.setText(text);&#xa;        }&#xa;        return component;&#xa;    }&#xa;});"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

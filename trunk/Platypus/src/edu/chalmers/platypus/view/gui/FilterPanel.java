@@ -42,7 +42,14 @@ public class FilterPanel extends javax.swing.JPanel {
     }
     public void setAddButtonToNext() {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(FilterPanel.class);
-        nextButton.setText(resourceMap.getString("jButton1.alttext"));
+        nextButton.setText(resourceMap.getString("nextButton.alttext"));
+    }
+    public void setAddButtonToAdd() {
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(FilterPanel.class);
+        nextButton.setText(resourceMap.getString("nextButton.text"));
+    }
+    public void setFilterNumber(int number, int totalNumber) {
+            ((TitledBorder)getBorder()).setTitle(filter.getName() + " (" + number + "/" + totalNumber + ")");
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -71,6 +78,7 @@ public class FilterPanel extends javax.swing.JPanel {
 
         filterScrollPane.setBorder(null);
         filterScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        filterScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         filterScrollPane.setName("filterScrollPane"); // NOI18N
 
         jPanel1.setName("jPanel1"); // NOI18N
@@ -146,6 +154,8 @@ public class FilterPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        activateFilterCheckBox.setVisible(false);
+        filterScrollPane.getVerticalScrollBar().setUnitIncrement(10);
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

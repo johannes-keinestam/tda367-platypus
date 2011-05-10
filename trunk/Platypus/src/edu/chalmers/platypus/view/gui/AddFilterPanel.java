@@ -222,6 +222,7 @@ public class AddFilterPanel extends javax.swing.JPanel {
         );
 
         filterAreaPanel.getAccessibleContext().setAccessibleName(resourceMap.getString("filterAreaPanel.AccessibleContext.accessibleName")); // NOI18N
+        okButton.setEnabled(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loadedFiltersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_loadedFiltersListValueChanged
@@ -238,7 +239,11 @@ public class AddFilterPanel extends javax.swing.JPanel {
         	filterDescriptionTextArea.setText(filter.getDescription());
         	((TitledBorder)filterAreaPanel.getBorder()).setTitle(filter.getName());
         	filterAreaPanel.repaint();
-    	}
+
+                okButton.setEnabled(true);
+    	} else if (selection == null) {
+            okButton.setEnabled(false);
+        }
     }//GEN-LAST:event_loadedFiltersListValueChanged
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
