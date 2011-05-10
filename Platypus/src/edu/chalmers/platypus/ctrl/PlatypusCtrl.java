@@ -7,14 +7,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.StreamCorruptedException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.ImageIcon;
+
+import org.apache.commons.io.input.ClassLoaderObjectInputStream;
 
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
@@ -126,9 +131,6 @@ public class PlatypusCtrl {
 				filter));
 	}
 
-	public void loadPreset(Preset preset) {
-		Locator.getModel().getActiveFilters().loadPreset(preset);
-	}
 
 	public void savePreset(String name) {
 		Locator.getModel().getActiveFilters().savePreset(name);
@@ -248,5 +250,59 @@ public class PlatypusCtrl {
 		}
 
 	}
+	
+	public void loadPreset(Preset preset){
+    	File folder = new File(System.getenv("USERPROFILE")
+				+ "/PlatyPix/Filters");
+
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<IFilter> al = new ArrayList<IFilter>();
+		for (int i = 0; i < listOfFiles.length; i++) {
+			if (listOfFiles[i].isFile()) {
+				URL url[] = new URL[1];
+				try {
+					url[0] = new URL("file:///" + System.getenv("USERPROFILE")
+							+ "/PlatyPix/Filters/" + listOfFiles[i].getName());
+					
+					URLClassLoader loader = new URLClassLoader(url);
+					
+					IFilter readFilter;
+					
+					FileInputStream fiss;
+					try {
+						fiss = new FileInputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+preset.getName()+"/"+listOfFiles[i].getName().replace(".jar", "")+".preset");
+							
+						try {
+							ClassLoaderObjectInputStream cl = new ClassLoaderObjectInputStream(loader, fiss);
+							try {
+								readFilter =  (IFilter) cl.readObject();
+								addFilterToBatch(readFilter);
+								System.out.println(readFilter.getName()+" in preset");
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							catch (InvalidClassException e){
+								e.printStackTrace();
+							}
+						} catch (StreamCorruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					} catch (FileNotFoundException e1) {
+						// TODO Auto-generated catch block
+						//e1.printStackTrace();
+					}
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+        
+    }
 
 }

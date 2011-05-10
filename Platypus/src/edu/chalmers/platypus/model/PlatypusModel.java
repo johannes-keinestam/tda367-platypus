@@ -52,7 +52,7 @@ public class PlatypusModel {
 
 	public ArrayList<Preset> getPresets() {
 		File folder = new File(System.getenv("USERPROFILE")
-				+ "/Platypus/Presets");
+				+ "/PlatyPix/Presets");
 		File[] listOfFiles = folder.listFiles();
 		FileInputStream fis;
 		ArrayList<Preset> presets = new ArrayList<Preset>();
