@@ -32,14 +32,6 @@
     <Component class="javax.swing.JLabel" name="previewLabel">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="icon" type="javax.swing.Icon" resourceKey="previewLabel.icon"/>
-        <Property name="text" type="java.lang.String" resourceKey="previewLabel.text"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder roundedCorners="true"/>
-          </Border>
-        </Property>
-        <Property name="disabledIcon" type="javax.swing.Icon" resourceKey="previewLabel.disabledIcon"/>
         <Property name="name" type="java.lang.String" value="previewLabel" noResource="true"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
