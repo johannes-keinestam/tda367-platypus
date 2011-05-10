@@ -53,11 +53,6 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         setName("Form"); // NOI18N
 
         previewLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(ImagePreviewPanel.class);
-        previewLabel.setIcon(resourceMap.getIcon("previewLabel.icon")); // NOI18N
-        previewLabel.setText(resourceMap.getString("previewLabel.text")); // NOI18N
-        previewLabel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        previewLabel.setDisabledIcon(resourceMap.getIcon("previewLabel.disabledIcon")); // NOI18N
         previewLabel.setName("previewLabel"); // NOI18N
         previewLabel.setOpaque(true);
 
