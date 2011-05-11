@@ -131,7 +131,6 @@ public class PlatypusCtrl {
 				filter));
 	}
 
-
 	public void savePreset(String name) {
 		Locator.getModel().getActiveFilters().savePreset(name);
 	}
@@ -183,8 +182,6 @@ public class PlatypusCtrl {
 
 	public void abortSaveOperation() {
 		RunBatch.stop();
-		ComBus.notifyListeners(new PropertyChangeEvent(this,
-				StateChanges.SAVE_OPERATION_ABORTED.toString(), null, null));
 	}
 
 	public void importNewFilter(File filter) {
@@ -250,9 +247,9 @@ public class PlatypusCtrl {
 		}
 
 	}
-	
-	public void loadPreset(Preset preset){
-    	File folder = new File(System.getenv("USERPROFILE")
+
+	public void loadPreset(Preset preset) {
+		File folder = new File(System.getenv("USERPROFILE")
 				+ "/PlatyPix/Filters");
 
 		File[] listOfFiles = folder.listFiles();
@@ -263,26 +260,30 @@ public class PlatypusCtrl {
 				try {
 					url[0] = new URL("file:///" + System.getenv("USERPROFILE")
 							+ "/PlatyPix/Filters/" + listOfFiles[i].getName());
-					
+
 					URLClassLoader loader = new URLClassLoader(url);
-					
+
 					IFilter readFilter;
-					
+
 					FileInputStream fiss;
 					try {
-						fiss = new FileInputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+preset.getName()+"/"+listOfFiles[i].getName().replace(".jar", "")+".preset");
-							
+						fiss = new FileInputStream(System.getenv("USERPROFILE")
+								+ "/PlatyPix/Presets/" + preset.getName() + "/"
+								+ listOfFiles[i].getName().replace(".jar", "")
+								+ ".preset");
+
 						try {
-							ClassLoaderObjectInputStream cl = new ClassLoaderObjectInputStream(loader, fiss);
+							ClassLoaderObjectInputStream cl = new ClassLoaderObjectInputStream(
+									loader, fiss);
 							try {
-								readFilter =  (IFilter) cl.readObject();
+								readFilter = (IFilter) cl.readObject();
 								addFilterToBatch(readFilter);
-								System.out.println(readFilter.getName()+" in preset");
+								System.out.println(readFilter.getName()
+										+ " in preset");
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
-							}
-							catch (InvalidClassException e){
+							} catch (InvalidClassException e) {
 								e.printStackTrace();
 							}
 						} catch (StreamCorruptedException e1) {
@@ -294,7 +295,7 @@ public class PlatypusCtrl {
 						}
 					} catch (FileNotFoundException e1) {
 						// TODO Auto-generated catch block
-						//e1.printStackTrace();
+						// e1.printStackTrace();
 					}
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
@@ -302,7 +303,7 @@ public class PlatypusCtrl {
 				}
 			}
 		}
-        
-    }
+
+	}
 
 }
