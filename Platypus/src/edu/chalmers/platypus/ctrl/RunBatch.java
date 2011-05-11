@@ -34,34 +34,29 @@ public class RunBatch implements Runnable {
 
 	@Override
 	public void run() {
-		while (!Thread.currentThread().isInterrupted()) {
-			ArrayList<BatchImage> imageBatch = Locator.getModel()
-					.getImageBatch();
-			for (BatchImage batchImage : imageBatch) {
+		for (BatchImage batchImage : Locator.getModel().getImageBatch()) {
+			ComBus.notifyListeners(new PropertyChangeEvent(this,
+					StateChanges.PROCESSING_IMAGE.toString(), null, batchImage));
+
+			BufferedImage currentImage = applyFilters(batchImage.getImage());
+
+			File outputFile = new File(RunBatch.writePath + File.separatorChar
+					+ batchImage.getFileName() + "_new."
+					+ RunBatch.writeExtension);
+			try {
+				Thread.sleep(10);
+				ImageIO.write(currentImage, RunBatch.writeExtension, outputFile);
 				ComBus.notifyListeners(new PropertyChangeEvent(this,
-						StateChanges.PROCESSING_IMAGE.toString(), null,
-						batchImage));
-				BufferedImage currentImage = batchImage.getImage();
-				currentImage = applyFilters(currentImage);
-
-				File outputFile = new File(RunBatch.writePath
-						+ File.separatorChar + batchImage.getFileName()
-						+ "_new." + RunBatch.writeExtension);
-				try {
-					ImageIO.write(currentImage, RunBatch.writeExtension,
-							outputFile);
-					ComBus.notifyListeners(new PropertyChangeEvent(this,
-							StateChanges.SAVED_IMAGE.toString(), null,
-							outputFile));
-				} catch (IOException e) {
-					System.out.println("Failed to write image: "
-							+ outputFile.getName() + " to "
-							+ RunBatch.writePath);
-					e.printStackTrace();
-				}
+						StateChanges.SAVED_IMAGE.toString(), null, outputFile));
+			} catch (IOException ioe) {
+				System.out.println("Failed to write image: "
+						+ outputFile.getName() + " to " + RunBatch.writePath);
+			} catch (InterruptedException ie) {
+				ComBus.notifyListeners(new PropertyChangeEvent(this,
+						StateChanges.SAVE_OPERATION_ABORTED.toString(), null,
+						null));
+				return;
 			}
-
-			Thread.currentThread().interrupt();
 		}
 
 		ComBus.notifyListeners(new PropertyChangeEvent(this,
