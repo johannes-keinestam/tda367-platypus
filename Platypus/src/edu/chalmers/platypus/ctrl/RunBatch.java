@@ -58,7 +58,7 @@ public class RunBatch implements Runnable {
 				return;
 			}
 		}
-
+		System.gc();
 		ComBus.notifyListeners(new PropertyChangeEvent(this,
 				StateChanges.SAVE_OPERATION_FINISHED.toString(), null, null));
 	}
@@ -68,6 +68,7 @@ public class RunBatch implements Runnable {
 			ComBus.notifyListeners(new PropertyChangeEvent(Locator.getCtrl(),
 					StateChanges.APPLYING_FILTER.toString(), null, filter));
 			img = filter.applyFilter(img);
+			System.gc();
 		}
 		return img;
 	}
