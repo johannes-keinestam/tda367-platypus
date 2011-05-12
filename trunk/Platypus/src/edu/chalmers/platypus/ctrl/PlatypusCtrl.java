@@ -249,60 +249,12 @@ public class PlatypusCtrl {
 	}
 
 	public void loadPreset(Preset preset) {
-		File folder = new File(System.getenv("USERPROFILE")
-				+ "/PlatyPix/Filters");
-
-		File[] listOfFiles = folder.listFiles();
-		ArrayList<IFilter> al = new ArrayList<IFilter>();
-		for (int i = 0; i < listOfFiles.length; i++) {
-			if (listOfFiles[i].isFile()) {
-				URL url[] = new URL[1];
-				try {
-					url[0] = new URL("file:///" + System.getenv("USERPROFILE")
-							+ "/PlatyPix/Filters/" + listOfFiles[i].getName());
-
-					URLClassLoader loader = new URLClassLoader(url);
-
-					IFilter readFilter;
-
-					FileInputStream fiss;
-					try {
-						fiss = new FileInputStream(System.getenv("USERPROFILE")
-								+ "/PlatyPix/Presets/" + preset.getName() + "/"
-								+ listOfFiles[i].getName().replace(".jar", "")
-								+ ".preset");
-
-						try {
-							ClassLoaderObjectInputStream cl = new ClassLoaderObjectInputStream(
-									loader, fiss);
-							try {
-								readFilter = (IFilter) cl.readObject();
-								addFilterToBatch(readFilter);
-								System.out.println(readFilter.getName()
-										+ " in preset");
-							} catch (ClassNotFoundException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (InvalidClassException e) {
-								e.printStackTrace();
-							}
-						} catch (StreamCorruptedException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
-					} catch (FileNotFoundException e1) {
-						// TODO Auto-generated catch block
-						// e1.printStackTrace();
-					}
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+		for (String name : preset.getFilters()) {
+			IFilter filter = Locator.getModel().getFilterContainer().getFilter(name);
+			filter.loadState(preset.getName());
+			addFilterToBatch(filter);
 		}
+		
 
 	}
 

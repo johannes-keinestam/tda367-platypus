@@ -17,4 +17,8 @@ public interface IFilter extends Serializable {
 	public ImageIcon getDescriptiveImage();
 
 	public JPanel getPanel();
+	
+	public void saveState(String folder);
+	
+	public void loadState(String folder);
 }
