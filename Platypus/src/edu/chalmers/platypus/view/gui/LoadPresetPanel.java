@@ -195,7 +195,11 @@ public class LoadPresetPanel extends javax.swing.JPanel {
     	Object selection = loadedPresetList.getSelectedValue();
     	if (selection instanceof Preset) { //Should always be true
             Preset preset = (Preset)selection;
-            contentInfoLabel.setText(preset.getFilters());
+            String filters = "";
+            for (String filter : preset.getFilters()) {
+				filters = filters+filter+", ";
+			}
+            contentInfoLabel.setText(filters);
             creationInfoLabel.setText(preset.getDate().toLocaleString());
             ((TitledBorder)presetInfoPanel.getBorder()).setTitle(preset.getName());
             presetInfoPanel.repaint();

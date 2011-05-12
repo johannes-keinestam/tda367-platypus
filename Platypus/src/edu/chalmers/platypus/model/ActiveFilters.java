@@ -54,26 +54,7 @@ public class ActiveFilters {
     		}
     		
     		for (IFilter filter : activeFilters) {
-    			FileOutputStream fos;
-    			try {
-    				fos = new FileOutputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+name+"/"+filter.getName()+".preset");
-    				ObjectOutputStream oos;
-    				try {
-    					 oos = new ObjectOutputStream(fos);
-    					 oos.writeObject(filter);
-    			         oos.close();
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-    				catch (NullPointerException e){
-    					e.printStackTrace();
-    				}
-    	           
-    			} catch (FileNotFoundException e) {
-    				// TODO Auto-generated catch block
-    				e.printStackTrace();
-    			}
+    			filter.saveState(name);
     		}
 			//Saves the info file
 			FileOutputStream fos;
@@ -82,9 +63,9 @@ public class ActiveFilters {
 				ObjectOutputStream oos;
 				try {
 					 oos = new ObjectOutputStream(fos);
-					 String filters = "";
-					 for (IFilter filter : activeFilters) {
-						filters = filters+filter.getName()+", ";
+					 String[] filters = new String[activeFilters.size()];
+					 for (int i = 0; i < activeFilters.size(); i++) {
+						filters[i] = activeFilters.get(i).getName();
 					}
 					 oos.writeObject(new Preset(name, filters));
 			         oos.close();

@@ -10,9 +10,9 @@ public class Preset implements Serializable {
 	private static final long serialVersionUID = 310479221482604361L;
 	String name;
 	Date date;
-	String filters;
+	String[] filters;
 
-	public Preset(String name, String filters) {
+	public Preset(String name, String filters[]) {
 		this.name = name;
 		this.filters = filters;
 		this.date = new Date();
@@ -26,7 +26,7 @@ public class Preset implements Serializable {
 		return date;
 	}
 
-	public String getFilters() {
+	public String[] getFilters() {
 		return filters;
 	}
 }
