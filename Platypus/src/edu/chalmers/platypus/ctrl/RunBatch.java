@@ -17,15 +17,20 @@ import edu.chalmers.platypus.util.StateChanges;
 public class RunBatch implements Runnable {
 	private static String writePath;
 	private static String writeExtension;
+	private static Thread t;
 
 	public static void start(String writePath, String writeExtension) {
 		RunBatch.writePath = writePath;
 		RunBatch.writeExtension = writeExtension;
-		new Thread(new RunBatch()).start();
+		t = new Thread(new RunBatch());
+		t.start();
 	}
 
 	public static void stop() {
-		Thread.currentThread().interrupt();
+		t.stop();
+		ComBus.notifyListeners(new PropertyChangeEvent(t,
+				StateChanges.SAVE_OPERATION_ABORTED.toString(), null,
+				null));
 	}
 
 	public static BufferedImage getFilteredImage(BufferedImage img) {
