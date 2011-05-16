@@ -7,20 +7,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.StreamCorruptedException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
 import javax.swing.ImageIcon;
-
-import org.apache.commons.io.input.ClassLoaderObjectInputStream;
-
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.Preset;
@@ -28,7 +21,7 @@ import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 
-public class PlatypusCtrl {
+public class PlatypusCtrl implements IImageCtrl, IFilterCtrl, IPreviewCtrl, IPresetCtrl {
 	private static PlatypusCtrl instance;
 
 	private PlatypusCtrl() {
@@ -79,6 +72,18 @@ public class PlatypusCtrl {
 		}
 	}
 
+	public void saveImages(String path, String ext) {
+		RunBatch.start(path, ext);
+	}
+
+	public void abortSaveOperation() {
+		RunBatch.stop();
+	}
+	
+	public ArrayList<IFilter> getLoadedFilterList() {
+		return Locator.getModel().getFilterContainer().getList();
+	}
+	
 	public void addFilterToBatch(IFilter filter) {
 		PropertyChangeEvent pce;
 		if (!Locator.getModel().getActiveFilters().getList().contains(filter)) {
@@ -129,59 +134,6 @@ public class PlatypusCtrl {
 		ComBus.notifyListeners(new PropertyChangeEvent(this,
 				StateChanges.NEW_FILTER_ADDED_TO_APPLICATION.toString(), null,
 				filter));
-	}
-
-	public void savePreset(String name) {
-		Locator.getModel().getActiveFilters().savePreset(name);
-	}
-
-	public ArrayList<IFilter> getLoadedFilterList() {
-		return Locator.getModel().getFilterContainer().getList();
-	}
-
-	public ArrayList<Preset> getLoadedPresetList() {
-		return Locator.getModel().getPresets();
-	}
-
-	public void setNewPreview(BatchImage preview) {
-		Locator.getModel().setPreview(preview);
-		previewChanged();
-	}
-
-	public ImageIcon getPreviewOriginal(int width, int height) {
-		if (Locator.getModel().getPreview() == null) {
-			return null;
-		}
-		return new ImageIcon(Locator.getModel().getPreview()
-				.getThumbnail(width, height));
-	}
-
-	public ImageIcon getPreviewFiltered(int width, int height) {
-		if (Locator.getModel().getPreview() == null) {
-			return null;
-		}
-		BufferedImage original = Locator.getModel().getPreview()
-				.getThumbnail(width, height);
-
-		ImageIcon preview = new ImageIcon(RunBatch.getFilteredImage(original));
-		return preview;
-	}
-
-	public void previewChanged() {
-		PropertyChangeEvent pce = new PropertyChangeEvent(this,
-				StateChanges.NEW_PREVIEW_IMAGE.toString(), null, null);
-		ComBus.notifyListeners(pce);
-		pce = new PropertyChangeEvent(this,
-				StateChanges.PREVIEW_IMAGE_UPDATED.toString(), null, null);
-		ComBus.notifyListeners(pce);
-	}
-
-	public void saveImages(String path, String ext) {
-		RunBatch.start(path, ext);
-	}
-
-	public void abortSaveOperation() {
-		RunBatch.stop();
 	}
 
 	public void importNewFilter(File filter) {
@@ -248,14 +200,56 @@ public class PlatypusCtrl {
 
 	}
 
+
+	public void setNewPreview(BatchImage preview) {
+		Locator.getModel().setPreview(preview);
+		previewChanged();
+	}
+
+	public ImageIcon getPreviewOriginal(int width, int height) {
+		if (Locator.getModel().getPreview() == null) {
+			return null;
+		}
+		return new ImageIcon(Locator.getModel().getPreview()
+				.getThumbnail(width, height));
+	}
+
+	public ImageIcon getPreviewFiltered(int width, int height) {
+		if (Locator.getModel().getPreview() == null) {
+			return null;
+		}
+		BufferedImage original = Locator.getModel().getPreview()
+				.getThumbnail(width, height);
+
+		ImageIcon preview = new ImageIcon(RunBatch.getFilteredImage(original));
+		return preview;
+	}
+
+	public void previewChanged() {
+		PropertyChangeEvent pce = new PropertyChangeEvent(this,
+				StateChanges.NEW_PREVIEW_IMAGE.toString(), null, null);
+		ComBus.notifyListeners(pce);
+		pce = new PropertyChangeEvent(this,
+				StateChanges.PREVIEW_IMAGE_UPDATED.toString(), null, null);
+		ComBus.notifyListeners(pce);
+	}
+	
+	public ArrayList<Preset> getLoadedPresetList() {
+		return Locator.getModel().getPresets();
+	}
+
 	public void loadPreset(Preset preset) {
 		for (String name : preset.getFilters()) {
 			IFilter filter = Locator.getModel().getFilterContainer().getFilter(name);
 			filter.loadState(preset.getName());
 			addFilterToBatch(filter);
 		}
-		
-
 	}
+	
+	public void savePreset(String name) {
+		Locator.getModel().getActiveFilters().savePreset(name);
+	}
+	
+
 
 }
