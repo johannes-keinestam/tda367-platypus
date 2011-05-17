@@ -12,6 +12,7 @@ import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.view.gui.FilterPanel;
 import edu.chalmers.platypus.view.gui.PlatypusApp;
+import javax.swing.ImageIcon;
 
 public class PlatypusGUI {
 	private static PlatypusGUI instance;
@@ -40,6 +41,33 @@ public class PlatypusGUI {
 	public void removeFilterFromBatch(IFilter filter) {
     	Locator.getCtrl().removeFilterFromBatch(filter);
 	}
+        public void loadPreset(Preset preset) {
+            Locator.getCtrl().loadPreset(preset);
+        }
+        public void savePreset(String name) {
+            Locator.getCtrl().savePreset(name);
+        }
+        public void importFilter(File filter) {
+            Locator.getCtrl().importNewFilter(filter);
+        }
+        public void resetModel() {
+            Locator.getCtrl().resetModel();
+        }
+        public void clearBatch() {
+            Locator.getCtrl().clearImageBatch();
+        }
+        public void setPreview(BatchImage newPreview) {
+            Locator.getCtrl().setNewPreview(newPreview);
+        }
+        public void abortSaveOperation() {
+            Locator.getCtrl().abortSaveOperation();
+        }
+        public ImageIcon getPreviewOriginal(int width, int height) {
+            return Locator.getCtrl().getPreviewOriginal(width, height);
+        }
+        public ImageIcon getPreviewFiltered(int width, int height) {
+            return Locator.getCtrl().getPreviewFiltered(width, height);
+        }
     public ListModel getNewFilterList() {
         //Fetch list from ctrl, update with it
     	DefaultListModel model = new DefaultListModel();

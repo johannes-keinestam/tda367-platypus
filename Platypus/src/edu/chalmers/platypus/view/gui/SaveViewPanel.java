@@ -1,35 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * SavePanel.java
- *
- * Created on 2011-apr-01, 17:55:38
- */
-
 package edu.chalmers.platypus.view.gui;
 
-import edu.chalmers.platypus.util.Locator;
+import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.event.ItemEvent;
 import java.io.File;
 import javax.swing.JFileChooser;
 
 /**
- *
- * @author skoldator
+ * Panel which shows the user settings for saving their pictures.
  */
 public class SaveViewPanel extends javax.swing.JPanel {
 
-    /** Creates new form SavePanel */
-	public SaveViewPanel() {
-		initComponents();
+    /** Constructor */
+    public SaveViewPanel() {
+        initComponents();
 
-		pathTextField.setText(System.getenv("USERPROFILE") + File.separator
-				+ "PlatyPix" + File.separator + "Pictures");
-	}
+        pathTextField.setText(System.getenv("USERPROFILE") + File.separator
+                        + "PlatyPix" + File.separator + "Pictures");
+    }
 
+    /** Constructor */
     public SaveViewPanel(PlatypusView parent) {
         this();
         this.parent = parent;
@@ -211,10 +200,11 @@ public class SaveViewPanel extends javax.swing.JPanel {
         });
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Save button clicked. Saves images, and preset if selected */
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	parent.getGUICtrl().saveImages(pathTextField.getText(), formatComboBox.getSelectedItem().toString().toLowerCase().substring(1));
         if (savePresetCheckBox.isSelected()) {
-            Locator.getCtrl().savePreset(presetNameTextField.getText());
+            PlatypusGUI.getInstance().savePreset(presetNameTextField.getText());
         }
         parent.showNextView();
     }                                        
@@ -228,7 +218,10 @@ public class SaveViewPanel extends javax.swing.JPanel {
         browser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         browser.setMultiSelectionEnabled(false);
         browser.showSaveDialog(this);
-        pathTextField.setText(browser.getSelectedFile().getPath());
+        String path = browser.getSelectedFile().getPath();
+        if (path != null) {
+            pathTextField.setText(path);
+        }
     }//GEN-LAST:event_browseButtonActionPerformed
 
     private void savePresetCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_savePresetCheckBoxItemStateChanged

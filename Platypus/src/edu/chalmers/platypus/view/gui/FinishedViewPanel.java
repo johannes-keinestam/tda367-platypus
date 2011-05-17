@@ -1,18 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * FinishedViewPanel.java
- *
- * Created on 2011-apr-01, 19:59:21
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Desktop;
@@ -20,26 +8,29 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
- *
- * @author skoldator
+ * Panel which tells the user that the save operation is finished. Allows the
+ * user to open the save path, restart the program or exit the program.
  */
 public class FinishedViewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
-    /** Creates new form FinishedViewPanel */
+    /** Constructor */
     public FinishedViewPanel() {
         initComponents();
 
         ComBus.subscribe(this);
     }
 
+    /** Constructor
+     *
+     * @param parent main view
+     */
     public FinishedViewPanel(PlatypusView parent) {
         this();
         this.parent = parent;
     }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -119,15 +110,19 @@ public class FinishedViewPanel extends javax.swing.JPanel implements PropertyCha
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Restart application button pressed. Resets model and shows first view
+     *  (StartViewPanel) */
     private void restartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restartButtonActionPerformed
-        Locator.getCtrl().resetModel();
+        PlatypusGUI.getInstance().resetModel();
         parent.showNextView();
     }//GEN-LAST:event_restartButtonActionPerformed
 
+    /** Exit application button pressed. Exits to desktop. */
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
 
+    /** Open path button pressed. Opens save directory in OS file browser */
     private void openPathButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPathButtonActionPerformed
         File savePath = PlatypusGUI.getInstance().getLastSavePath();
         if (savePath.isDirectory()) {
@@ -139,7 +134,6 @@ public class FinishedViewPanel extends javax.swing.JPanel implements PropertyCha
         }
     }//GEN-LAST:event_openPathButtonActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitButton;
     private javax.swing.JButton openPathButton;
@@ -147,17 +141,28 @@ public class FinishedViewPanel extends javax.swing.JPanel implements PropertyCha
     private javax.swing.JButton restartButton;
     // End of variables declaration//GEN-END:variables
 
+    /** Reference to main view */
     private PlatypusView parent;
 
+    /** Recieves info about backend operations */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String change = evt.getPropertyName();
+
         if (change.equals(StateChanges.SAVE_OPERATION_FINISHED.toString())) {
-            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FinishedViewPanel.class);
-            operationFinishedLabel.setText(resourceMap.getString("operationFinishedLabel.text"));
+            //Save operation finished. Sets text to "Operation finished"
+            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.
+                    application.Application.getInstance().getContext().
+                    getResourceMap(FinishedViewPanel.class);
+            operationFinishedLabel.setText(resourceMap.
+                    getString("operationFinishedLabel.text"));
         } else if (change.equals(StateChanges.SAVE_OPERATION_ABORTED.toString())) {
-            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(FinishedViewPanel.class);
-            operationFinishedLabel.setText(resourceMap.getString("operationFinishedLabel.alttext"));
+            //Save operation aborted. Sets text to "Operation aborted"
+            org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.
+                    application.Application.getInstance().getContext().
+                    getResourceMap(FinishedViewPanel.class);
+            operationFinishedLabel.setText(resourceMap.
+                    getString("operationFinishedLabel.alttext"));
         }
     }
 

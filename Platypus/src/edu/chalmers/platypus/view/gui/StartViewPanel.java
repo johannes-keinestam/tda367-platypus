@@ -1,31 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * StartViewPanel.java
- *
- * Created on 2011-apr-01, 19:56:39
- */
-
 package edu.chalmers.platypus.view.gui;
 
 /**
- *
- * @author skoldator
+ * Panel which shows logo and Start button.
  */
 public class StartViewPanel extends javax.swing.JPanel {
 
-    /** Creates new form StartViewPanel */
+    /** Constructor */
     public StartViewPanel() {
         initComponents();
     }
 
+    /** Constructor */
     public StartViewPanel(PlatypusView parent) {
         this();
         this.parent = parent;
     }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

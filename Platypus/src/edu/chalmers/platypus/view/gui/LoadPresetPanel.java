@@ -1,18 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * AddFilterPanel.java
- *
- * Created on 2011-apr-01, 20:10:41
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.model.Preset;
-import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -23,24 +11,33 @@ import javax.swing.JList;
 import javax.swing.border.TitledBorder;
 
 /**
- *
- * @author skoldator
+ * Panel, typically placed in a JDialog. Shows user a list of available presets
+ * and lets them load it through the GUI.
  */
 public class LoadPresetPanel extends javax.swing.JPanel {
 
-	/** Creates new form AddFilterPanel */
+    /** Constructor
+     *
+     * @param container dialog which this panel will be added to
+     * @param parent main view
+     */
     public LoadPresetPanel(JDialog container, PlatypusView parent) {
         initComponents();
+
         containerDialog = container;
         parentView = parent;
+
+        //Initial population of list
         updateList();
     }
 
-    public void closeContainerDialog() {
+    /** Closes dialog containing this panel */
+    private void closeContainerDialog() {
         containerDialog.setVisible(false);
     }
 
-    public void updateList() {
+    /** Updates list of available presets */
+    private void updateList() {
         //Fetch list from ctrl, update with it
     	loadedPresetList.setModel(PlatypusGUI.getInstance().getNewPresetList());
     }
@@ -191,6 +188,7 @@ public class LoadPresetPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** */
     private void loadedPresetListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_loadedPresetListValueChanged
     	Object selection = loadedPresetList.getSelectedValue();
     	if (selection instanceof Preset) { //Should always be true
@@ -215,10 +213,9 @@ public class LoadPresetPanel extends javax.swing.JPanel {
     	Object selection = loadedPresetList.getSelectedValue();
     	if (selection instanceof Preset) { //Should always be true
         	Preset preset = (Preset)selection;
-        	Locator.getCtrl().loadPreset(preset);
+        	PlatypusGUI.getInstance().loadPreset(preset);
     	}
         closeContainerDialog();
-        //parentView.showNextView();
     }//GEN-LAST:event_okButtonActionPerformed
 
 

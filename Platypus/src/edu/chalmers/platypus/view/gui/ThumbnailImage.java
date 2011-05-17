@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ThumbnailImage.java
- *
- * Created on 2011-mar-24, 20:34:20
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.view.BatchThumbPanel;
@@ -19,15 +8,17 @@ import edu.chalmers.platypus.view.PlatypusGUI;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author skoldator
+ * Panel which shows a thumbnail image. Allows the user to delete it or set
+ * it as preview.
  */
 public class ThumbnailImage extends javax.swing.JPanel {
 
+    /** Constructor */
     public ThumbnailImage() {
         initComponents();
     }
-    
+
+    /** Constructor */
     public ThumbnailImage(BatchImage img, BatchThumbPanel parent) {
         initComponents();
         this.img = img;
@@ -35,7 +26,8 @@ public class ThumbnailImage extends javax.swing.JPanel {
         nameLabel.setText(img.getFileName());
         thumbLabel.setIcon(new ImageIcon(img.getThumbnail(120,90)));
     }
-    
+
+    /** Show controls, i.e. file name overlay, delete button, preview checkbox */
     public void showControls(){
         deleteButton.setVisible(true);
         nameLabel.setVisible(true);
@@ -43,25 +35,34 @@ public class ThumbnailImage extends javax.swing.JPanel {
         previewCheckBox.setVisible(true);
     }
 
+    /** Hide controls */
     public void hideControls(){
         deleteButton.setVisible(false);
         nameLabel.setVisible(false);
         overlayLabel.setVisible(false);
         previewCheckBox.setVisible(false);
     }
-    
+
+    /** Get BatchImage associated with this preview panel */
     public BatchImage getBatchImage() {
     	return img;
     }
 
+    /** Selects the image associated with this thumbnail panel as preview */
     public void selectAsPreview() {
         previewCheckBox.setSelected(true);
         parent.setPreview(this);
     }
+
+    /** Deselects the image associated with this thumbnail panel as preview */
     public void deselectAsPreview() {
     	previewCheckBox.setSelected(false);
     }
 
+    /**
+     * Returns true if the image associated with this thumbnail panel
+     * is currently set as preview
+     */
     public boolean isPreview() {
         return previewCheckBox.isSelected();
     }

@@ -18,6 +18,8 @@ public class BatchImage {
 
 	public BatchImage(final File file) {
 		this.imageFile = file;
+                System.out.println("Loaded file: " + file.getPath().substring(
+				file.getPath().lastIndexOf(File.separator) + 1));
 	}
 
 	public BufferedImage getThumbnail(int width, int height) {
@@ -92,10 +94,6 @@ public class BatchImage {
 
 	public String getFileName() {
 		String fileName = imageFile.getPath();
-		System.out.println(fileName);
-		System.out.println(fileName.substring(
-				fileName.lastIndexOf(File.separator) + 1,
-				fileName.lastIndexOf('.')));
 		return fileName.substring(fileName.lastIndexOf(File.separator) + 1,
 				fileName.lastIndexOf('.'));
 	}

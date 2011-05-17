@@ -72,6 +72,13 @@ public class PlatypusCtrl implements IImageCtrl, IFilterCtrl, IPreviewCtrl, IPre
 		}
 	}
 
+        public void clearImageBatch() {
+            Locator.getModel().getImageBatch().clear();
+            PropertyChangeEvent pce = new PropertyChangeEvent(this,
+					StateChanges.IMAGE_BATCH_CLEARED.toString(), null, null);
+            ComBus.notifyListeners(pce);
+        }
+
 	public void saveImages(String path, String ext) {
 		RunBatch.start(path, ext);
 	}

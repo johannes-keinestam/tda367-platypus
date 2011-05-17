@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ImagePreviewPanel.java
- *
- * Created on 2011-apr-01, 19:41:46
- */
-
 package edu.chalmers.platypus.view.gui;
 
 
@@ -16,25 +5,36 @@ import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author skoldator
+ * Panel which shows a preview image.
  */
 public class ImagePreviewPanel extends javax.swing.JPanel {
 
-    /** Creates new form ImagePreviewPanel */
+    /** Constructor */
     public ImagePreviewPanel() {
         initComponents();
     }
+
+    /**
+     * Sets preview image.
+     *
+     * @param img image that will be shown as preview
+     */
     public void setImage(ImageIcon img) {
         image = img;
         updateImage();
     }
+
+    /** Grays out the preview image */
     public void engageWaitState() {
         previewLabel.setEnabled(false);
     }
-    public void updateImage() {
+
+    /** Updates set image */
+    private void updateImage() {
+        //Sets minimum size so panel is resizable downwards
         previewLabel.setMinimumSize(new Dimension(0,0));
         this.setMinimumSize(new Dimension(0, 0));
+        
         previewLabel.setEnabled(true);
         previewLabel.setIcon(image);
     }
@@ -68,10 +68,10 @@ public class ImagePreviewPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel previewLabel;
     // End of variables declaration//GEN-END:variables
 
+    /** Reference to current preview image */
     private ImageIcon image;
 }

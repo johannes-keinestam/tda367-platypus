@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * FilterPanel.java
- *
- * Created on 2011-apr-01, 19:50:03
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.view.FilterViewPanel;
@@ -17,40 +6,60 @@ import javax.swing.border.TitledBorder;
 import edu.chalmers.platypus.model.IFilter;
 
 /**
- *
- * @author skoldator
+ * Panel which shows the panel supplied by a filter. One instance of this panel
+ * exists for each added filter.
  */
 public class FilterPanel extends javax.swing.JPanel {
 
-    /** Creates new form FilterPanel */
-    public FilterPanel() {
+    /** Constructor */
+    private FilterPanel() {
         initComponents();
     }
+
+    /** Constructor
+     *
+     * @param filter filter to show in the panel
+     * @param parent the filter view that this panel will be shown in
+     */
     public FilterPanel(IFilter filter, FilterViewPanel parent) {
         this();
         this.parent = parent;
         this.filter = filter;
-        
+
+        //If there is a filter, set title of panel accordingly and shows 
+        //filter panel in scrollpane
         if (filter != null) {
             ((TitledBorder)getBorder()).setTitle(filter.getName());
             filterScrollPane.setViewportView(filter.getPanel());
         }
     }
 
+    /** Returns the filter associated with this panel */
     public IFilter getFilter() {
     	return filter;
     }
+
+    /** Sets button on the right to "Next" */
     public void setAddButtonToNext() {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(FilterPanel.class);
         nextButton.setText(resourceMap.getString("nextButton.alttext"));
     }
+
+    /** Sets button on the right to "Add" */
     public void setAddButtonToAdd() {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(FilterPanel.class);
         nextButton.setText(resourceMap.getString("nextButton.text"));
     }
+
+    /** Sets the filter number
+     *
+     * @param number the number which this filter panel has
+     * @param totalNumber total number of filter panels
+     */
     public void setFilterNumber(int number, int totalNumber) {
             ((TitledBorder)getBorder()).setTitle(filter.getName() + " (" + number + "/" + totalNumber + ")");
     }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -78,7 +87,6 @@ public class FilterPanel extends javax.swing.JPanel {
 
         filterScrollPane.setBorder(null);
         filterScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        filterScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         filterScrollPane.setName("filterScrollPane"); // NOI18N
 
         jPanel1.setName("jPanel1"); // NOI18N
@@ -167,28 +175,32 @@ public class FilterPanel extends javax.swing.JPanel {
             }
         });
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    /** Previous button pressed. Shows previous view (BrowseViewPanel) */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (parent != null) {
             parent.showPreviousFilterPanel();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /** Finish button pressed. Shows next view (SaveViewPanel) */
     private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         if (parent != null) {
             parent.getMainView().showNextView();
         }
     }//GEN-LAST:event_finishButtonActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //Next/Add filter button pressed. Either shows next filter panel or
+        //opens Add filter dialog
         if (parent != null) {
             parent.showNextFilterPanel();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /** Remove filter button pressed. Calls controller to remove current filter. */
     private void removeFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeFilterButtonActionPerformed
         parent.getMainView().getGUICtrl().removeFilterFromBatch(filter);
     }//GEN-LAST:event_removeFilterButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox activateFilterCheckBox;
@@ -200,6 +212,8 @@ public class FilterPanel extends javax.swing.JPanel {
     private javax.swing.JButton removeFilterButton;
     // End of variables declaration//GEN-END:variables
 
+    /** Reference to panel which this panel is placed in */
     private FilterViewPanel parent;
+    /** The filter associated with this panel */
     private IFilter filter;
 }

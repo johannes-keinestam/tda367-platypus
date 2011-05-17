@@ -56,7 +56,8 @@ public class FilterContainer {
 			try {
 				IFilter f = (IFilter) filter.newInstance();
 				loadedFilters.add(f);
-				System.out.println(f.getName() + " loaded");
+				System.out.println("Filter loaded: " +
+                                        f.getName());
 				return true;
 			} catch (InstantiationException e) {
 				return false;
@@ -150,7 +151,6 @@ public class FilterContainer {
 			libraryLoader = new URLClassLoader(url);
 			try {
 				Class cl = libraryLoader.loadClass(file);
-				System.out.println(cl.toString());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
