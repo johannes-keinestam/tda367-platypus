@@ -25,12 +25,13 @@ public class Main {
 					writeDirectory.lastIndexOf(File.separatorChar) + 1)
 					+ dir.toString().substring(0, 1)
 					+ dir.toString().substring(1).toLowerCase();
-			if (new File(writeDirectory).mkdirs())
+			if (new File(writeDirectory).mkdirs()) {
 				System.out.println("Created directory: \"" + writeDirectory
 						+ "\"");
-			else
+                        } else {
 				System.out.println("Directory: \"" + writeDirectory
 						+ "\" already exists");
+                        }
 		}
 
 		PlatypusModel model = PlatypusModel.getInstance();

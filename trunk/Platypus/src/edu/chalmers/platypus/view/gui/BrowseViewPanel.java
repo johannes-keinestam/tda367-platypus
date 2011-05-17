@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ImageBrowserPanel.java
- *
- * Created on 2011-mar-24, 20:30:14
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import java.awt.Color;
@@ -19,42 +8,45 @@ import java.beans.PropertyChangeListener;
 import org.jdesktop.application.ResourceMap;
 
 import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.view.PlatypusGUI;
 
 /**
- *
- * @author skoldator
+ * Panel that shows the list of thumbnails and buttons
  */
 public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
-    /** Creates new form ImageBrowserPanel */
+    /** Constructor */
     public BrowseViewPanel() {
         initComponents();
         ComBus.subscribe(this);
     }
 
+    /** Constructor */
     public BrowseViewPanel(PlatypusView parent) {
         this();
         this.parent = parent;
     }
 
+    /** Sets the button that shows next panel (FilterViewPanel) to "Next" */
     public void setButtonNext() {
         ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(BrowseViewPanel.class);
         nextViewButton.setText(resourceMap.getString("nextViewButton.alttext"));
     }
-    
+
+    /** Sets the button that shows next panel (FilterViewPanel) to "Add filter" */
     public void setButtonAdd() {
         ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(BrowseViewPanel.class);
         nextViewButton.setText(resourceMap.getString("nextViewButton.text"));
     }
 
-
+    /** Enables Add filter and Load preset buttons */
     public void enableNextButtons(){
         nextViewButton.setEnabled(true);
         loadPresetButton.setEnabled(true);
     }
 
+    /** Disables Add filter and Load preset buttons */
     public void disableNextButtons(){
         nextViewButton.setEnabled(false);
         loadPresetButton.setEnabled(false);
@@ -142,6 +134,10 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
         batchThumbScrollPane.getVerticalScrollBar().setUnitIncrement(20);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Next/Add filter button pressed. Next view (FilterViewPanel) shows if
+     * there are filters already added, and shows Add Filter dialog if not.
+     */
     private void nextViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextViewButtonActionPerformed
     	if (parent != null) {
             if (parent.numberOfFilterPanels() == 0) {
@@ -153,14 +149,16 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
         }
     }//GEN-LAST:event_nextViewButtonActionPerformed
 
+    /** Load preset button pressed. Shows Load Preset dialog. */
     private void loadPresetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadPresetButtonActionPerformed
         if (parent != null) {
             parent.showLoadPresetDialog();
         }
     }//GEN-LAST:event_loadPresetButtonActionPerformed
 
+    /** Clear batch button clicked. Calls controller to clear batch. */
     private void clearBatchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBatchButtonActionPerformed
-        Locator.getCtrl().resetModel();
+        PlatypusGUI.getInstance().clearBatch();
     }//GEN-LAST:event_clearBatchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -171,25 +169,28 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
     private javax.swing.JButton nextViewButton;
     // End of variables declaration//GEN-END:variables
 
+    /** Reference to main window panel */
     private PlatypusView parent;
 
-
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		String change = evt.getPropertyName();
-		if (change.equals(StateChanges.MODEL_RESET.toString())) {
-                    setButtonAdd();
-		}
-                if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
-                    enableNextButtons();
-                }
-                if (change.equals(StateChanges.IMAGE_BATCH_EMPTY.toString())){
-                    disableNextButtons();
-                }
-                if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())){
-                	if (this.isShowing()){
-                			parent.showNextView();
-                	}
-                }
-	}
+    /** Recieves info about backend operations */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        String change = evt.getPropertyName();
+        if (change.equals(StateChanges.MODEL_RESET.toString())) {
+            //Filters and images cleared. Sets Next button to Add
+            setButtonAdd();
+        } else if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
+            //Image added to batch. Enables Add filter and Load preset buttons
+            enableNextButtons();
+        } else if (change.equals(StateChanges.IMAGE_BATCH_EMPTY.toString())) {
+            //Image batch empty. Disables Add filter and Load preset buttons
+            disableNextButtons();
+        } else if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())) {
+            //New filter added to batch. Shows next view (FilterViewPanel)
+            //if this view is currently showing
+            if (this.isShowing()){
+                parent.showNextView();
+            }
+        }
+    }
 }

@@ -1,69 +1,67 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * AddFilterPanel.java
- *
- * Created on 2011-apr-01, 20:10:41
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import java.awt.Component;
-import java.util.ArrayList;
 
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.border.TitledBorder;
 
 import edu.chalmers.platypus.model.IFilter;
-import edu.chalmers.platypus.util.Locator;
+import edu.chalmers.platypus.view.PlatypusGUI;
 import java.io.File;
-import java.net.MalformedURLException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
+ * Panel, typically placed in a JDialog. Shows the user a list of loaded filters
+ * and allows them to add them to the batch.
  *
- * @author skoldator
+ * Also allows the user to import filters from their harddrive.
+ *
  */
 public class AddFilterPanel extends javax.swing.JPanel {
 
-	/** Creates new form AddFilterPanel */
+    /** Constructor */
     public AddFilterPanel(JDialog container, PlatypusView parent) {
         initComponents();
         containerDialog = container;
-        parentView = parent;
+
+        //Initial population of list
         updateList();
     }
 
+    /** Closes the dialog in which it is placed*/
     public void closeContainerDialog() {
         containerDialog.setVisible(false);
     }
 
+    /** Updates list by requesting a new copy from the controller */
     public void updateList() {
-    	loadedFiltersList.setModel(parentView.getGUICtrl().getNewFilterList());
+    	loadedFiltersList.setModel(PlatypusGUI.getInstance().getNewFilterList());
     }
 
+    /** Opens file chooser dialog for choosing a filter to import */
     public void openFileChooser() {
         JFileChooser browser = new JFileChooser();
+
+        //Only allow single files with the extension .jar
         browser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         browser.setFileFilter(filter);
         browser.setAcceptAllFileFilterUsed(false);
         browser.setMultiSelectionEnabled(false);
+
+        //Gets chosen file and calls the controller to import if OK pressed
         int result = browser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             importNewFilter(browser.getSelectedFile());
         }
     }
 
+    /** Import given filter */
     private void importNewFilter(File filter){
-    	Locator.getCtrl().importNewFilter(filter);
+    	PlatypusGUI.getInstance().importFilter(filter);
     	updateList();
     }
 
@@ -225,52 +223,64 @@ public class AddFilterPanel extends javax.swing.JPanel {
         okButton.setEnabled(false);
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Updates lower panel to show info about currently chosen filter */
     private void loadedFiltersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_loadedFiltersListValueChanged
-    	Object selection = loadedFiltersList.getSelectedValue();
-    	if (selection instanceof IFilter) { //Should always be true
-        	IFilter filter = (IFilter)selection;
-                if (filter.getDescriptiveImage() != null) {
-                    filterImageLabel.setIcon(filter.getDescriptiveImage());
-                    filterImageLabel.setVisible(true);
-                } else {
-                    filterImageLabel.setIcon(null);
-                    filterImageLabel.setVisible(false);
-                }
-        	filterDescriptionTextArea.setText(filter.getDescription());
-        	((TitledBorder)filterAreaPanel.getBorder()).setTitle(filter.getName());
-        	filterAreaPanel.repaint();
+    	//Gets selected item in the list
+        Object selection = loadedFiltersList.getSelectedValue();
 
-                okButton.setEnabled(true);
+    	if (selection instanceof IFilter) { //Should always be true
+            IFilter filter = (IFilter)selection;
+
+            if (filter.getDescriptiveImage() != null) {
+                //Set image and show its panel only if there is one
+                filterImageLabel.setIcon(filter.getDescriptiveImage());
+                filterImageLabel.setVisible(true);
+            } else {
+                filterImageLabel.setIcon(null);
+                filterImageLabel.setVisible(false);
+            }
+
+            //Set description text and title of the panel
+            filterDescriptionTextArea.setText(filter.getDescription());
+            ((TitledBorder)filterAreaPanel.getBorder()).setTitle(filter.getName());
+            filterAreaPanel.repaint();
+
+            //Enable OK button if filter is actually selected
+            okButton.setEnabled(true);
     	} else if (selection == null) {
+            // Disable OK button if no filter is selected
             okButton.setEnabled(false);
         }
     }//GEN-LAST:event_loadedFiltersListValueChanged
 
+    /** Close dialog if cancel is pressed */
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
     	closeContainerDialog();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    /** Load filter if OK pressed*/
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        //Creates thread so loading cannot freeze GUI
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 Object selection = loadedFiltersList.getSelectedValue();
-            	if (selection instanceof IFilter) { //Should always be true
-                	IFilter filter = (IFilter)selection;
-                	parentView.getGUICtrl().addFilterToBatch(filter);
+                if (selection instanceof IFilter) { //Should always be true
+                    IFilter filter = (IFilter)selection;
+                    PlatypusGUI.getInstance().addFilterToBatch(filter);
             	}
             }
         });
-        
-        t.start();
 
+        //Starts Load Filter thread and closes dialog
+        t.start();
         closeContainerDialog();
     }//GEN-LAST:event_okButtonActionPerformed
 
+    /** Opens file chooser if Import Filter is pressed */
     private void importFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFilterButtonActionPerformed
         openFileChooser();
     }//GEN-LAST:event_importFilterButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
@@ -284,10 +294,10 @@ public class AddFilterPanel extends javax.swing.JPanel {
     private javax.swing.JButton okButton;
     // End of variables declaration//GEN-END:variables
 
+    /** File filter allowing only .JAR files */
     private final FileFilter filter = new FileNameExtensionFilter("Supported Files " +
                 "(*.jar)",
                 "jar","JAR");
-    private ArrayList<String> loadedFilters;
+    /** Reference to the dialog which this panel is placed within */
     private final JDialog containerDialog;
-    private final PlatypusView parentView;
 }

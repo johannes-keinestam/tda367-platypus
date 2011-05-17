@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * AddImagePanel.java
- *
- * Created on 2011-mar-25, 18:49:20
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.view.BatchThumbPanel;
@@ -17,15 +6,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 
 /**
- *
- * @author skoldator
+ * Clickable panel that adds images to batch
  */
 public class AddImagePanel extends JPanel {
 
-    /** Creates new form AddImagePanel */
+    /** Constructor */
     private AddImagePanel() {
         initComponents();
     }
+
+    /** Constructor */
     public AddImagePanel(BatchThumbPanel listToAddTo) {
         this();
         this.listToAddTo = listToAddTo;
@@ -94,15 +84,20 @@ public class AddImagePanel extends JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Panel clicked, opens file chooser */
     private void addButtonActionPerformed(ActionEvent evt) {
         listToAddTo.openFileChooser();
     }
 
+    /** Sets panel clickable and sets cursor to "hand" */
     public void setEnabled() {
         loadOverlayLabel.setVisible(false);
         addButton.setEnabled(true);
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
+
+    /** Sets panel unclickable, shows loader animation and
+     * sets cursor to "wait" */
     public void setDisabled() {
         addButton.setEnabled(false);
         loadOverlayLabel.setVisible(true);
@@ -114,6 +109,7 @@ public class AddImagePanel extends JPanel {
     private javax.swing.JPanel containerPanel;
     private javax.swing.JLabel loadOverlayLabel;
     // End of variables declaration//GEN-END:variables
-	
+
+    /** Reference to list that wants the images */
     private BatchThumbPanel listToAddTo;
 }

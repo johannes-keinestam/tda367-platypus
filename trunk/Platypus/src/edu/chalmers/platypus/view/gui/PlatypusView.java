@@ -23,15 +23,20 @@ import edu.chalmers.platypus.view.ErrorNotifier;
 import edu.chalmers.platypus.view.PlatypusGUI;
 
 /**
- * The application's main frame.
+ * The application's main frame. Shows all the panels with "View" in their
+ * name as cards in its layout. Allows navigating between these and does
+ * minor assignments that affects the whole frame.
  */
 public class PlatypusView extends FrameView implements PropertyChangeListener {
 
+    /** Constructor */
     public PlatypusView(SingleFrameApplication app) {
         super(app);
 
         initComponents();
-        
+        ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(PlatypusApp.class).getContext().getResourceMap(PlatypusView.class);
+        this.getFrame().setIconImage(resourceMap.getImageIcon("frame.icon").getImage());
+
         ComBus.subscribe(this);
         
         parent = PlatypusGUI.getInstance();
@@ -47,6 +52,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         PlatypusApp.getApplication().show(aboutBox);
     }
 
+    /** Shows the dialog for adding filters to batch. */
     public void showAddFilterDialog() {
         ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(PlatypusView.class);
         addFilterDialog = new JDialog(this.getFrame(), resourceMap.getString("filterDialogTitle.text"), true);
@@ -55,7 +61,8 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         addFilterDialog.setLocationRelativeTo(this.getComponent());
     	addFilterDialog.setVisible(true);
     }
-    
+
+    /** Shows the dialog for loading presets */
     public void showLoadPresetDialog() {
         ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(PlatypusView.class);
         loadPresetDialog = new JDialog(this.getFrame(), resourceMap.getString("presetDialogTitle.text"), true);
@@ -64,27 +71,33 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         loadPresetDialog.setLocationRelativeTo(this.getComponent());
     	loadPresetDialog.setVisible(true);
     }
-    
+
+    /** Returns the number of filter panels currently added */
     public int numberOfFilterPanels() {
     	return filterViewPanel1.numberOfActiveFilters();
     }
-    
+
+    /** Returns the GUI Ctrl (PlatypusGUI) */
     public PlatypusGUI getGUICtrl() {
     	return parent;
     }
-    
+
+    /** Sets the Add Filter button in its BrowseViewPanel to Next */
     public void setBrowseButtonNext() {
     	imageBrowserPanel1.setButtonNext();
     }
-    
+
+    /** Sets the Next button in its BrowseViewPanel to Add Filter */
     public void setBrowseButtonAdd() {
     	imageBrowserPanel1.setButtonAdd();
     }
-    
+
+    /** Shows the next card in the layout */
     public void showNextView() {
         ((CardLayout)jPanel1.getLayout()).next(jPanel1);
     }
-    
+
+    /** Shows the previous card in the layout */
     public void showPreviousView() {
         ((CardLayout)jPanel1.getLayout()).previous(jPanel1);
     }
@@ -199,11 +212,14 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
     private JDialog aboutBox;
     private JDialog addFilterDialog;
     private JDialog loadPresetDialog;
+
+    /** Listens for changes in backend */
     public void propertyChange(PropertyChangeEvent evt) {
        	String change = evt.getPropertyName();
-		if (change.equals(StateChanges.DUPLICATE_FILTER_SELECTED.toString())) {
-			showAddFilterDialog();
-		}
+        if (change.equals(StateChanges.DUPLICATE_FILTER_SELECTED.toString())) {
+            //Duplicate filter added. No go. Opens Add Filter dialog again.
+            showAddFilterDialog();
+        }
     }
 
 }

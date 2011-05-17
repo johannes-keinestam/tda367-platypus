@@ -1,48 +1,41 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ApplyViewPanel.java
- *
- * Created on 2011-apr-01, 20:02:46
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.view.PlatypusGUI;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- *
- * @author skoldator
+ * Panel showing loader animation and information about the files being saved
+ * and the filters being applied. Also allows user to cancel operation.
  */
 public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChangeListener {
 
-    /** Creates new form ApplyViewPanel */
+    /** Constructor */
     public ApplyViewPanel() {
         initComponents();
         ComBus.subscribe(this);
     }
-
+    
+    /** Constructor */
     public ApplyViewPanel(PlatypusView parent) {
         this();
         this.parent = parent;
     }
 
+    /** Sets current file name text in GUI */
     public void setFileName(String name) {
         savingFileLabel.setText(this.savingFileText + " " + name);
     }
 
+    /** Sets the name of the filter being applied in GUI */
     public void setFilterName(String name) {
         applyingFilterLabel.setText(this.applyFilterText + " " + name);
     }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -118,10 +111,10 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Abort operation button clicked. Aborts the operation. */
     private void abortOperationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abortOperationButtonActionPerformed
-        Locator.getCtrl().abortSaveOperation();
+        PlatypusGUI.getInstance().abortSaveOperation();
     }//GEN-LAST:event_abortOperationButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abortOperationButton;
@@ -134,19 +127,23 @@ public class ApplyViewPanel extends javax.swing.JPanel implements PropertyChange
     private String applyFilterText;
     private String savingFileText;
 
-
+    /** Recieves info about backend operations */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
        	String change = evt.getPropertyName();
 	if (change.equals(StateChanges.PROCESSING_IMAGE.toString())) {
+            //New image is being saved, sets text
             BatchImage b = (BatchImage) evt.getNewValue();
             setFileName(b.getFileName());
 	} else if (change.equals(StateChanges.APPLYING_FILTER.toString())) {
+            //New filter is being applied on image, sets text
             IFilter f = (IFilter) evt.getNewValue();
             setFilterName(f.getName());
         } else if (change.equals(StateChanges.SAVE_OPERATION_FINISHED.toString())) {
+            //Save operation is finished, shows next view (FinishedViewPanel)
             parent.showNextView();
         } else if (change.equals(StateChanges.SAVE_OPERATION_ABORTED.toString())) {
+            //Save operation was aborted, shows next view (FinishedViewPanel)
             parent.showNextView();
         }
     }

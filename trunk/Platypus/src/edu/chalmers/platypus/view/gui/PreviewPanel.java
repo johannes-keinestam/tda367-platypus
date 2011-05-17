@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * PreviewPanel.java
- *
- * Created on 2011-apr-01, 18:28:57
- */
-
 package edu.chalmers.platypus.view.gui;
 
 import java.awt.event.ActionEvent;
@@ -17,41 +6,51 @@ import java.beans.PropertyChangeListener;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.Locator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.view.PlatypusGUI;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author skoldator
+ * Panel which shows two preview areas (ImagePreviewPanel). Used for showing
+ * the user the original image, and the image with filters applied.
+ * 
  */
 public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeListener, ActionListener {
+    /** Timer for not allowing requests for new preview images too often when resizing */
+    private Timer resizeTimer;
 
-    private Timer  resizeTimer;
-
-    /** Creates new form PreviewPanel */
+    /** Constructor */
     public PreviewPanel() {
         initComponents();
         resizeTimer = new Timer(500,this);
         ComBus.subscribe(this);
     }
 
+    /**
+     * Creates new thread for getting the original of the picture
+     * set as preview
+     */
     public void setPreviewOriginal() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                ImageIcon i = Locator.getCtrl().getPreviewOriginal(originalPreviewPanel.getWidth()-2,originalPreviewPanel.getHeight()-2);
+                ImageIcon i = PlatypusGUI.getInstance().getPreviewOriginal(originalPreviewPanel.getWidth()-2,originalPreviewPanel.getHeight()-2);
                 originalPreviewPanel.setImage(i);
             }
         });
         t.start();
     }
+
+    /**
+     * Creates new thread for getting preview image with currently added
+     * filter applied.
+     */
     public void setPreviewFiltered() {
        Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                ImageIcon i = Locator.getCtrl().getPreviewFiltered(filteredPreviewPanel.getWidth()-2,filteredPreviewPanel.getHeight()-2);
+                ImageIcon i = PlatypusGUI.getInstance().getPreviewFiltered(filteredPreviewPanel.getWidth()-2,filteredPreviewPanel.getHeight()-2);
                 filteredPreviewPanel.setImage(i);
             }
         });
@@ -197,19 +196,24 @@ public class PreviewPanel extends javax.swing.JPanel implements PropertyChangeLi
     public void propertyChange(PropertyChangeEvent evt) {
         String change = evt.getPropertyName();
 	if (change.equals(StateChanges.NEW_PREVIEW_IMAGE.toString())) {
+            //New preview image set, shows new original and filtered
             setPreviewOriginal();
             setPreviewFiltered();
 	} else if (change.equals(StateChanges.PREVIEW_IMAGE_UPDATED.toString())) {
+            //Preview image updated, i.e. filter settings changed. Update image.
             setPreviewFiltered();
         } else if (change.equals(StateChanges.FILTER_REMOVED_FROM_BATCH.toString())) {
+            //Filter removed from batch. Updates filtered image accordingly.
             setPreviewFiltered();
         } else if (change.equals(StateChanges.NEW_FILTER_ADDED_TO_BATCH.toString())) {
+            //Filter added to batch. Updates filtered image accordingly.
             setPreviewFiltered();
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Stops timer, gets new preview images in the correct size
         resizeTimer.stop();
         originalPreviewPanel.setMinimumSize(new Dimension(0, 0));
         filteredPreviewPanel.setMinimumSize(new Dimension(0, 0));
