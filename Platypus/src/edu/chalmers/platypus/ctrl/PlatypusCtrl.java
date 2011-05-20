@@ -170,7 +170,7 @@ public class PlatypusCtrl implements IImageCtrl, IFilterCtrl, IPreviewCtrl, IPre
 		FileChannel outputChannel = null;
 		FileChannel sourceChannel = null;
 
-		File outputFile = new File(System.getenv("USERPROFILE")
+		File outputFile = new File(System.getProperty("user.home")
 				+ "/PlatyPix/Filters/"
 				+ filterFileName.substring(
 						filterFileName.lastIndexOf(File.separator) + 1,

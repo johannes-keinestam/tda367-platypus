@@ -46,7 +46,7 @@ public class ActiveFilters {
         
         public void savePreset(final String name){
         	//Saves the preset file
-        	File f = new File(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+name+"/");
+        	File f = new File(System.getProperty("user.home")+"/PlatyPix/Presets/"+name+"/");
     		try{
     			f.mkdir();
     		}catch(Exception e){
@@ -59,7 +59,7 @@ public class ActiveFilters {
 			//Saves the info file
 			FileOutputStream fos;
     		try {
-				fos = new FileOutputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+name+".info");
+				fos = new FileOutputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+name+".info");
 				ObjectOutputStream oos;
 				try {
 					 oos = new ObjectOutputStream(fos);

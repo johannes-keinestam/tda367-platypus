@@ -14,7 +14,7 @@ public class SaveViewPanel extends javax.swing.JPanel {
     public SaveViewPanel() {
         initComponents();
 
-        pathTextField.setText(System.getenv("USERPROFILE") + File.separator
+        pathTextField.setText(System.getProperty("user.home") + File.separator
                         + "PlatyPix" + File.separator + "Pictures");
     }
 

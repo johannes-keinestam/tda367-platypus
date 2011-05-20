@@ -71,7 +71,7 @@ public class FilterContainer {
 	}
 
 	public void scanForFilters() {
-		File folder = new File(System.getenv("USERPROFILE")
+		File folder = new File(System.getProperty("user.home")
 				+ "/PlatyPix/Filters");
 
 		File[] listOfFiles = folder.listFiles();
@@ -79,7 +79,7 @@ public class FilterContainer {
 			if (listOfFiles[i].isFile()) {
 				URL url[] = new URL[1];
 				try {
-					url[0] = new URL("file:///" + System.getenv("USERPROFILE")
+					url[0] = new URL("file:///" + System.getProperty("user.home")
 							+ "/PlatyPix/Filters/" + listOfFiles[i].getName());
 					scanJarForLibraries(listOfFiles[i].getName());
 					importFilter(url);
@@ -95,7 +95,7 @@ public class FilterContainer {
 	private void scanJarForLibraries(String file) {
 		  
 		try {
-			JarFile jarFile = new JarFile(System.getenv("USERPROFILE")
+			JarFile jarFile = new JarFile(System.getProperty("user.home")
 					+ "/PlatyPix/Filters/"+file);
 			
 			JarEntry entry = jarFile.getJarEntry("Libraries.txt");
@@ -128,7 +128,7 @@ public class FilterContainer {
 	private void scanClasses(String jar){
 		JarFile jarFile;
 		try {
-			jarFile = new JarFile(System.getenv("USERPROFILE")
+			jarFile = new JarFile(System.getProperty("user.home")
 					+ "/PlatyPix/Filters/"+jar);	   
 			   Enumeration<JarEntry> enu = jarFile.entries();
 		       while (enu.hasMoreElements()) {
@@ -146,7 +146,7 @@ public class FilterContainer {
 	private void loadClass(String file, String jar){
 		URL url[] = new URL[1];
 		try {
-			url[0] = new URL("file:///" + System.getenv("USERPROFILE")
+			url[0] = new URL("file:///" + System.getProperty("user.home")
 					+ "/PlatyPix/Filters/"+jar);
 			libraryLoader = new URLClassLoader(url);
 			try {
