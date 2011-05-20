@@ -18,7 +18,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		String writeDirectory = System.getenv("USERPROFILE")
+		String writeDirectory = System.getProperty("user.home")
 				+ File.separatorChar + "PlatyPix" + File.separatorChar;
 		for (Directories dir : Directories.values()) {
 			writeDirectory = writeDirectory.substring(0,

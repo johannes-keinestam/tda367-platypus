@@ -51,7 +51,7 @@ public class PlatypusModel {
 	}
 
 	public ArrayList<Preset> getPresets() {
-		File folder = new File(System.getenv("USERPROFILE")
+		File folder = new File(System.getProperty("user.home")
 				+ "/PlatyPix/Presets");
 		File[] listOfFiles = folder.listFiles();
 		FileInputStream fis;
