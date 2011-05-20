@@ -52,7 +52,7 @@ public class FilterContainer {
 		
 		try {
 			Class filter = loader
-					.loadClass("edu.chalmers.platypus.model.FilterClass");
+					.loadClass("edu.chalmers.platypus.model.Filter");
 			try {
 				IFilter f = (IFilter) filter.newInstance();
 				loadedFilters.add(f);
