@@ -18,7 +18,7 @@ public interface IFilter extends Serializable {
 
 	public JPanel getPanel();
 	
-	public void saveState(String folder);
+	public Object[] getState();
 	
-	public void loadState(String folder);
+	public void setState (Object[] state);
 }

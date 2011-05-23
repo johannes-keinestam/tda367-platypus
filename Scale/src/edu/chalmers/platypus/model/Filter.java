@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -131,66 +132,29 @@ public class Filter extends Observable implements IFilter {
 		sf.filter(image, bf);
 		return bf;
    }
-
 	@Override
-	public void saveState(String folder) {
-		try {
-			FileOutputStream fos = new FileOutputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+folder+"/"+getName());
-			ObjectOutputStream oos;
-			try {
-				String[] state = new String[6];
-				state[0] = panel.getTextFieldW().getText();
-				state[1] = panel.getTextFieldH().getText();
-				state[2] = panel.getTextFieldWP().getText();
-				state[3] = panel.getTextFieldHP().getText();
-				state[4] = (String) panel.getComboBox().getSelectedItem();
-				state[5] = Integer.toString(operation);
-		        oos = new ObjectOutputStream(fos);
-				oos.writeObject(state);
-		         oos.close();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NullPointerException e){
-				e.printStackTrace();
-			}
-		}
-		catch (FileNotFoundException e) {	
-		}	
+	public Object[] getState() {
+		String[] state = new String[6];
+		state[0] = panel.getTextFieldW().getText();
+		state[1] = panel.getTextFieldH().getText();
+		state[2] = panel.getTextFieldWP().getText();
+		state[3] = panel.getTextFieldHP().getText();
+		state[4] = (String) panel.getComboBox().getSelectedItem();
+		state[5] = Integer.toString(operation);
+		
+		return state;
 	}
 
 	@Override
-	public void loadState(String folder) {
-		FileInputStream fis;
-
-		try {
-			fis = new FileInputStream(System.getenv("USERPROFILE")
-					+ "/PlatyPix/Presets/" + folder + "/"
-					+ getName());
-			try {
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				try {
-					String[] state = (String[]) ois.readObject();
-					panel.getTextFieldW().setText(state[0]);
-					panel.getTextFieldH().setText(state[1]);
-					panel.getTextFieldWP().setText(state[2]);
-					panel.getTextFieldHP().setText(state[3]);
-					panel.getComboBox().setSelectedItem(state[4]);
-					operation = Integer.parseInt(state[5]);
-					panel.loadState(operation);
-
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-
+	public void setState(Object[] state) {
+		String[] values = Arrays.copyOf(state, state.length, String[].class);
+		panel.getTextFieldW().setText(values[0]);
+		panel.getTextFieldH().setText(values[1]);
+		panel.getTextFieldWP().setText(values[2]);
+		panel.getTextFieldHP().setText(values[3]);
+		panel.getComboBox().setSelectedItem(values[4]);
+		operation = Integer.parseInt(values[5]);
+		panel.loadState(operation);
 		
 	}
 

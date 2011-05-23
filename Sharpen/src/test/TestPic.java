@@ -1,17 +1,20 @@
-package edu.chalmers.platypus.model;
+package test;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.image.BufferedImage;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import edu.chalmers.platypus.model.Filter;
+import edu.chalmers.platypus.model.IFilter;
 
 public class TestPic extends JFrame implements Observer {
 
@@ -21,6 +24,7 @@ public class TestPic extends JFrame implements Observer {
 	private IFilter fi;
 	private BufferedImage bufferedImage;
 	private JPanel panel;
+	private ImageIcon im;
 
 	/**
 	 * Launch the application.
@@ -43,7 +47,7 @@ public class TestPic extends JFrame implements Observer {
 	 */
 	public TestPic() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 749, 744);
+		setBounds(0, 0, 749, 744);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -54,7 +58,7 @@ public class TestPic extends JFrame implements Observer {
 		panel.setLayout(null);
 		
 		lblPic = new JLabel("");
-		ImageIcon im = new ImageIcon("D:\\milano\\DCIM\\Camera\\hej.jpg");
+		im = new ImageIcon("D:\\milano\\DCIM\\Camera\\hej.jpg");
 		
 		//lblPic.setIcon(im);
 		lblPic.setBounds(10, 0, 713, 696);
@@ -63,7 +67,7 @@ public class TestPic extends JFrame implements Observer {
 		panel.add(lblPic);
 		Observable o;
 		
-		fi = new FilterClass();
+		fi = new Filter();
 		if(fi instanceof Observable){
 			System.out.println("true");
 			o = (Observable) fi;
@@ -89,7 +93,10 @@ public class TestPic extends JFrame implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		System.out.println("dsdasdasdfghgfhh");
+		bufferedImage = new BufferedImage(im.getIconHeight(), im.getIconWidth(), BufferedImage.TYPE_3BYTE_BGR);
+		bufferedImage.getGraphics().drawImage(im.getImage(), 0 , 0, null);
 		ImageIcon imc = new ImageIcon(fi.applyFilter(bufferedImage));
+		lblPic.repaint();
 		lblPic.setIcon(imc);
 		panel.revalidate();
 		
