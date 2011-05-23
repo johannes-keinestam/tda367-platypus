@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileChannel;
@@ -248,9 +249,29 @@ public class PlatypusCtrl implements IImageCtrl, IFilterCtrl, IPreviewCtrl, IPre
 	public void loadPreset(Preset preset) {
 		for (String name : preset.getFilters()) {
 			IFilter filter = Locator.getModel().getFilterContainer().getFilter(name);
-			filter.loadState(preset.getName());
-			addFilterToBatch(filter);
+			FileInputStream fis;
+
+			try {
+				fis = new FileInputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+filter.getName()+".preset");
+				try {
+					ObjectInputStream ois = new ObjectInputStream(fis);
+					try {
+						filter.setState((Object[]) ois.readObject());
+					
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			addFilterToBatch(filter);	
 		}
+
+		
 	}
 	
 	public void savePreset(String name) {

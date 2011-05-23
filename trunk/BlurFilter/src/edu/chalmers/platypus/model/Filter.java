@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -65,54 +66,20 @@ public class Filter extends Observable implements IFilter {
 		return gf.filter(image, image);
 
    }
-
 	@Override
-	public void saveState(String folder) {
-		try {
-			FileOutputStream fos = new FileOutputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+folder+"/"+getName());
-			ObjectOutputStream oos;
-			try {
-				 oos = new ObjectOutputStream(fos);
-				 oos.writeObject(panel.getSliderAmount().getValue());
-		         oos.close();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NullPointerException e){
-				e.printStackTrace();
-			}
-		}
-		catch (FileNotFoundException e) {	
-		}
-		
+	public Object[] getState() {
+		Integer[] state = new Integer[1];
+		state[0] =  panel.getSliderAmount().getValue();
+		return state;
 	}
 
 	@Override
-	public void loadState(String folder) {
-		FileInputStream fis;
-
-			try {
-				fis = new FileInputStream(System.getenv("USERPROFILE")
-						+ "/PlatyPix/Presets/" + folder + "/"
-						+ getName());
-				try {
-					ObjectInputStream ois = new ObjectInputStream(fis);
-					try {
-						panel.getSliderAmount().setValue((Integer) ois.readObject());
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-	
-		
+	public void setState(Object[] state) {
+		Integer[] value = Arrays.copyOf(state, state.length, Integer[].class);
+		panel.getSliderAmount().setValue(value[0]);
 	}
+
+
 
 
 

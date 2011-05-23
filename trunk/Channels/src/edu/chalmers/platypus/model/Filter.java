@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -64,57 +65,20 @@ public class Filter extends Observable implements IFilter {
 		cf.setIntoR(panel.getSliderAmountR().getValue());
 		return cf.filter(image, image);
    }
-
+	
 	@Override
-	public void saveState(String folder) {
-		try {
-			FileOutputStream fos = new FileOutputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+folder+"/"+getName());
-			ObjectOutputStream oos;
-			try {
-				 int[] state = {panel.getSliderAmountR().getValue(), panel.getSliderAmountG().getValue(),
-						 panel.getSliderAmountB().getValue()};
-				 
-				 oos = new ObjectOutputStream(fos);
-				 oos.writeObject(state);
-		         oos.close();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NullPointerException e){
-				e.printStackTrace();
-			}
-		}
-		catch (FileNotFoundException e) {	
-		}
-		
+	public Object[] getState() {
+		Integer[] state = {panel.getSliderAmountR().getValue(), panel.getSliderAmountG().getValue(),
+				 panel.getSliderAmountB().getValue()};
+		return state;
 	}
 
 	@Override
-	public void loadState(String folder) {
-		FileInputStream fis;
-
-		try {
-			fis = new FileInputStream(System.getenv("USERPROFILE")
-					+ "/PlatyPix/Presets/" + folder + "/"
-					+ getName());
-			try {
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				try {
-					int[] state = (int[]) ois.readObject();
-					panel.getSliderAmountR().setValue(state[0]);
-					panel.getSliderAmountG().setValue(state[1]);
-					panel.getSliderAmountB().setValue(state[2]);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+	public void setState(Object[] state) {
+		Integer[] values = Arrays.copyOf(state, state.length, Integer[].class);
+		panel.getSliderAmountR().setValue(values[0]);
+		panel.getSliderAmountG().setValue(values[1]);
+		panel.getSliderAmountB().setValue(values[2]);
 		
 	}
 

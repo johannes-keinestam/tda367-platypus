@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Observable;
 
 import javax.swing.ImageIcon;
@@ -53,10 +54,7 @@ public class Filter extends Observable implements IFilter {
 
 	@Override
 	public ImageIcon getDescriptiveImage() {
-		URL url = edu.chalmers.platypus.model.Filter.class.getResource("images/rick.jpg");
-		Image image =Toolkit.getDefaultToolkit().getImage(url); 
-		ImageIcon ic = new ImageIcon(image);
-		return ic;
+		return null;
 	}
 
 	@Override
@@ -72,66 +70,6 @@ public class Filter extends Observable implements IFilter {
 				checkW(panel.getTextFieldW().getText(),x , image),checkH(panel.getTextFieldH().getText(),y , image));
 		return cf.filter(image, null);
    }
-	@Override
-	public void saveState(String folder) {
-		try {
-			FileOutputStream fos = new FileOutputStream(System.getenv("USERPROFILE")+"/PlatyPix/Presets/"+folder+"/"+getName());
-			ObjectOutputStream oos;
-			try {
-				 String[] state = new String[4];
-				 state[0] = panel.getTextFieldX().getText();
-				 state[1] = panel.getTextFieldY().getText();
-				 state[2] = panel.getTextFieldW().getText();
-				 state[3] = panel.getTextFieldH().getText();
-				
-				 oos = new ObjectOutputStream(fos);
-				 oos.writeObject(state);
-		         oos.close();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NullPointerException e){
-				e.printStackTrace();
-			}
-		}
-		catch (FileNotFoundException e) {	
-		}
-		
-	}
-
-	@Override
-	public void loadState(String folder) {
-		FileInputStream fis;
-
-			try {
-				fis = new FileInputStream(System.getenv("USERPROFILE")
-						+ "/PlatyPix/Presets/" + folder + "/"
-						+ getName());
-				try {
-					ObjectInputStream ois = new ObjectInputStream(fis);
-					try {
-						
-						String[] state = (String[]) ois.readObject();
-						 panel.getTextFieldX().setText(state[0]);
-						 panel.getTextFieldY().setText(state[1]);
-						 panel.getTextFieldW().setText(state[2]);
-						 panel.getTextFieldH().setText(state[3]);
-						 
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					}
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-	
-		
-	}
-
 	
 	private int checkH(String str, int y, BufferedImage image){
 		try {
@@ -189,5 +127,25 @@ public class Filter extends Observable implements IFilter {
 		}	
 			
 		}
+
+	@Override
+	public Object[] getState() {
+		 String[] state = new String[4];
+		 state[0] = panel.getTextFieldX().getText();
+		 state[1] = panel.getTextFieldY().getText();
+		 state[2] = panel.getTextFieldW().getText();
+		 state[3] = panel.getTextFieldH().getText();
+		return state;
+	}
+
+	@Override
+	public void setState(Object[] state) {
+		 String[] values = Arrays.copyOf(state, state.length, String[].class);
+		 panel.getTextFieldX().setText(values[0]);
+		 panel.getTextFieldY().setText(values[1]);
+		 panel.getTextFieldW().setText(values[2]);
+		 panel.getTextFieldH().setText(values[3]);
+		
+	}
 		
 }

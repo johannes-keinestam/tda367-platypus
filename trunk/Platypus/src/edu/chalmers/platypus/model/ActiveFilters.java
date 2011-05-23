@@ -39,22 +39,34 @@ public class ActiveFilters {
         }
         public void removeAll(){
                 activeFilters.clear();
-        }
-        public void loadPreset(ArrayList<IFilter> preset){
-                //TODO
-        }
-        
+        }      
         public void savePreset(final String name){
         	//Saves the preset file
         	File f = new File(System.getProperty("user.home")+"/PlatyPix/Presets/"+name+"/");
     		try{
     			f.mkdir();
     		}catch(Exception e){
-    		//e.printStacktrace();
     		}
     		
     		for (IFilter filter : activeFilters) {
-    			filter.saveState(name);
+    			try {
+    				FileOutputStream fos = new FileOutputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+filter.getName()+".preset");
+    				ObjectOutputStream oos;
+    				try {
+    					 oos = new ObjectOutputStream(fos);
+    					 oos.writeObject(filter.getState());
+    			         oos.close();
+    				} 
+    				catch (IOException e) {
+    					e.printStackTrace();
+    				}
+    				catch (NullPointerException e){
+    					e.printStackTrace();
+    				}
+    			}
+    			catch (FileNotFoundException e) {	
+    				e.printStackTrace();
+    			}
     		}
 			//Saves the info file
 			FileOutputStream fos;
@@ -70,12 +82,10 @@ public class ActiveFilters {
 					 oos.writeObject(new Preset(name, filters));
 			         oos.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 	           
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }

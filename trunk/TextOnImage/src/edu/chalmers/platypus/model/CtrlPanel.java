@@ -1,19 +1,15 @@
 package edu.chalmers.platypus.model;
 
-import javax.swing.JColorChooser;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
+import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.util.Observer;
 
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class CtrlPanel extends JPanel {
 	private JTextField txtText;
@@ -32,6 +28,27 @@ public class CtrlPanel extends JPanel {
 	 */
 	public CtrlPanel() {
 		setLayout(null);
+		
+		try {
+		    // Set System L&F
+	        UIManager.setLookAndFeel(
+	            UIManager.getSystemLookAndFeelClassName());
+	    } 
+	    catch (UnsupportedLookAndFeelException e) {
+	       // handle exception
+	    }
+	    catch (ClassNotFoundException e) {
+	       // handle exception
+	    }
+	    catch (InstantiationException e) {
+	       // handle exception
+	    }
+	    catch (IllegalAccessException e) {
+	       // handle exception
+	    }
+		
+		setLayout(null);
+		setPreferredSize(new Dimension(575, 350));
 		
 		txtText = new JTextField();
 		txtText.setText("Text...");
@@ -87,6 +104,7 @@ public class CtrlPanel extends JPanel {
 		JLabel lblY = new JLabel("Y:(%)");
 		lblY.setBounds(482, 14, 29, 14);
 		add(lblY);
+		
 
 	}
 
