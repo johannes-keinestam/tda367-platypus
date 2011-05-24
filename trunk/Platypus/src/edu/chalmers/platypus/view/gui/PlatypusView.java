@@ -114,7 +114,6 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         mainPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        startViewPanel1 = new edu.chalmers.platypus.view.gui.StartViewPanel(this);
         imageBrowserPanel1 = new edu.chalmers.platypus.view.gui.BrowseViewPanel(this);
         filterViewPanel1 = new edu.chalmers.platypus.view.FilterViewPanel(this);
         saveViewPanel1 = new edu.chalmers.platypus.view.gui.SaveViewPanel(this);
@@ -132,9 +131,6 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
 
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.setLayout(new java.awt.CardLayout());
-
-        startViewPanel1.setName("startViewPanel1"); // NOI18N
-        jPanel1.add(startViewPanel1, "card7");
 
         imageBrowserPanel1.setName("imageBrowserPanel1"); // NOI18N
         jPanel1.add(imageBrowserPanel1, "browseViewPanel");
@@ -166,11 +162,11 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
 
         menuBar.setName("menuBar"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getResourceMap(PlatypusView.class);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(PlatypusView.class);
         fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
         fileMenu.setName("fileMenu"); // NOI18N
 
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(edu.chalmers.platypus.view.gui.PlatypusApp.class).getContext().getActionMap(PlatypusView.class, this);
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(PlatypusView.class, this);
         exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
         exitMenuItem.setName("exitMenuItem"); // NOI18N
         fileMenu.add(exitMenuItem);
@@ -190,7 +186,6 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
 
         setComponent(mainPanel);
         setMenuBar(menuBar);
-		errorNotifier = new ErrorNotifier(this);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,8 +198,6 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private edu.chalmers.platypus.view.gui.SaveViewPanel saveViewPanel1;
-    private edu.chalmers.platypus.view.gui.StartViewPanel startViewPanel1;
-    private edu.chalmers.platypus.view.ErrorNotifier errorNotifier;
     // End of variables declaration//GEN-END:variables
 
 

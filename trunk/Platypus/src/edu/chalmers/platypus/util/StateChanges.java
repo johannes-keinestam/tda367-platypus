@@ -21,5 +21,6 @@ public enum StateChanges {
         ERROR_OCCURED,
         DUPLICATE_FILTER_SELECTED,
         IMAGE_BATCH_EMPTY,
-        IMAGE_BATCH_CLEARED
+        IMAGE_BATCH_CLEARED,
+        FILTER_LOADED
 }

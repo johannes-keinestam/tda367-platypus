@@ -34,19 +34,6 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
               <SubComponents>
-                <Component class="edu.chalmers.platypus.view.gui.StartViewPanel" name="startViewPanel1">
-                  <Properties>
-                    <Property name="name" type="java.lang.String" value="startViewPanel1" noResource="true"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new edu.chalmers.platypus.view.gui.StartViewPanel(this)"/>
-                  </AuxValues>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                      <CardConstraints cardName="card7"/>
-                    </Constraint>
-                  </Constraints>
-                </Component>
                 <Component class="edu.chalmers.platypus.view.gui.BrowseViewPanel" name="imageBrowserPanel1">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="imageBrowserPanel1" noResource="true"/>
