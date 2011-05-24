@@ -42,6 +42,8 @@ public class PlatypusCtrl implements IImageCtrl, IFilterCtrl, IPreviewCtrl, IPre
 
 		ComBus.notifyListeners(new PropertyChangeEvent(this,
 				StateChanges.MODEL_RESET.toString(), null, null));
+                ComBus.notifyListeners(new PropertyChangeEvent(this,
+				StateChanges.IMAGE_BATCH_EMPTY.toString(), null, null));
 
 	}
 

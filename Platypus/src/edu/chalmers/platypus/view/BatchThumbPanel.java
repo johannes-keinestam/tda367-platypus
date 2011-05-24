@@ -208,16 +208,20 @@ public class BatchThumbPanel extends javax.swing.JPanel implements PropertyChang
             removePanel(removedImage);
         } else if (change.equals(StateChanges.MODEL_RESET.toString())) {
             //Filters and images removed. Removes all images in GUI
+            previewSet = false;
             removeAll();
             addPanel(addImageButton);
             repaint();
             revalidate();
         } else if (change.equals(StateChanges.IMAGE_BATCH_CLEARED.toString())) {
             //All images removed. Removes from GUI.
+            previewSet = false;
             removeAll();
             addPanel(addImageButton);
             repaint();
             revalidate();
+        } else if  (change.equals(StateChanges.IMAGE_BATCH_EMPTY.toString())) {
+            previewSet = false;
         }
     }
 

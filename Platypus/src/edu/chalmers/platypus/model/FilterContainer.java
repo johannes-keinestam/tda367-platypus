@@ -1,5 +1,8 @@
 package edu.chalmers.platypus.model;
 
+import edu.chalmers.platypus.util.ComBus;
+import edu.chalmers.platypus.util.StateChanges;
+import java.beans.PropertyChangeEvent;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,8 +59,10 @@ public class FilterContainer {
 			try {
 				IFilter f = (IFilter) filter.newInstance();
 				loadedFilters.add(f);
-				System.out.println("Filter loaded: " +
-                                        f.getName());
+                                PropertyChangeEvent pce = new PropertyChangeEvent(
+                                        this, StateChanges.FILTER_LOADED.toString(),
+                                        null, f.getName());
+                                ComBus.notifyListeners(pce);
 				return true;
 			} catch (InstantiationException e) {
 				return false;
