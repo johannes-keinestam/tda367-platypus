@@ -4,7 +4,7 @@
 
 == Install ==
 
-PlatyPix is an open source software developed in Java. It is mainly  distributed though a pre-compiled binary file. As such, no compilation or further install is required. Only Java is required on the machine that runs it.
+PlatyPix is an open source software developed in Java. It is mainly  distributed through a pre-compiled binary file. As such, no compilation or further install is required. Only Java is required on the machine that runs it.
 
 == Installing filters ==
 
