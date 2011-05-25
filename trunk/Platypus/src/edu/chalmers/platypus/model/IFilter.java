@@ -8,17 +8,17 @@ import javax.swing.JPanel;
 
 public interface IFilter extends Serializable {
 
-	public String getName();
+    public String getName();
 
-	public String getDescription();
+    public String getDescription();
 
-	public BufferedImage applyFilter(BufferedImage image);
+    public BufferedImage applyFilter(BufferedImage image);
 
-	public ImageIcon getDescriptiveImage();
+    public ImageIcon getDescriptiveImage();
 
-	public JPanel getPanel();
-	
-	public Object[] getState();
-	
-	public void setState (Object[] state);
+    public JPanel getPanel();
+
+    public Object[] getState();
+
+    public void setState(Object[] state);
 }
