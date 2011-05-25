@@ -9,6 +9,10 @@ import edu.chalmers.platypus.model.IFilter;
 
 public class DummyFilterFactory {
 	public static IFilter getRandomDummyFilter() {
+		return getNamedDummyFilter("FilterID "+((Math.random()*100)+(Math.random()*10)));
+	}
+	
+	public static IFilter getNamedDummyFilter(final String filterName) {
 		return new IFilter() {
 			
 			@Override
@@ -18,7 +22,7 @@ public class DummyFilterFactory {
 			
 			@Override
 			public String getName() {
-				return "FilterID "+((Math.random()*100)+(Math.random()*10));
+				return filterName;
 			}
 			
 			@Override
@@ -53,6 +57,8 @@ public class DummyFilterFactory {
 			@Override
 			public void setState(Object[] state) {
 			}
+			
 		};
 	}
+	
 }
