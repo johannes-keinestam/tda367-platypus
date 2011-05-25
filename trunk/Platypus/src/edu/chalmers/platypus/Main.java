@@ -2,7 +2,11 @@ package edu.chalmers.platypus;
 
 import java.io.File;
 
-import edu.chalmers.platypus.ctrl.impl.PlatypusCtrl;
+import edu.chalmers.platypus.ctrl.impl.FilterCtrl;
+import edu.chalmers.platypus.ctrl.impl.ImageCtrl;
+import edu.chalmers.platypus.ctrl.impl.MiscCtrl;
+import edu.chalmers.platypus.ctrl.impl.PresetCtrl;
+import edu.chalmers.platypus.ctrl.impl.PreviewCtrl;
 import edu.chalmers.platypus.model.PlatypusModel;
 import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.util.ModelLocator;
@@ -32,19 +36,30 @@ public class Main {
         sch.splashText("Creating model...");
         PlatypusModel model = PlatypusModel.getInstance();
         
-        sch.splashText("Creating controller...");
-        PlatypusCtrl ctrl = PlatypusCtrl.getInstance();
+		sch.splashText("Setting up");
+		ModelLocator.setModel(model);
+		
+        sch.splashText("Creating miscallenous controller...");
+        MiscCtrl miscCtrl = MiscCtrl.getInstance();
+        sch.splashText("Creating filter controller...");
+        FilterCtrl filterCtrl = FilterCtrl.getInstance();
+        sch.splashText("Creating image controller...");
+        ImageCtrl imageCtrl = ImageCtrl.getInstance();
+        sch.splashText("Creating preset controller...");
+        PresetCtrl presetCtrl = PresetCtrl.getInstance();
+        sch.splashText("Creating preview controller...");
+        PreviewCtrl previewCtrl = PreviewCtrl.getInstance();
         
         sch.splashText("Creating GUI...");
         PlatypusGUI gui = PlatypusGUI.getInstance();
 
 
 		sch.splashText("Setting up");
-		ModelLocator.setModel(model);
-		CtrlLocator.setFilterCtrl(ctrl);
-		CtrlLocator.setImageCtrl(ctrl);
-		CtrlLocator.setPresetCtrl(ctrl);
-		CtrlLocator.setPreviewCtrl(ctrl);
+		CtrlLocator.setFilterCtrl(filterCtrl);
+		CtrlLocator.setImageCtrl(imageCtrl);
+		CtrlLocator.setPresetCtrl(presetCtrl);
+		CtrlLocator.setPreviewCtrl(previewCtrl);
+		CtrlLocator.setMiscCtrl(miscCtrl);
 		
     }
 
