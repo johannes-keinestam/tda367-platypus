@@ -1,14 +1,14 @@
-#summary Information about getting PlatyPix to start.
+#summary Information about getting !PlatyPix to start.
 
-= Installing and running PlatyPix=
+= Installing and running !PlatyPix=
 
 == Install ==
 
-PlatyPix is an open source software developed in Java. It is mainly  distributed through a pre-compiled binary file. As such, no compilation or further install is required. Only Java is required on the machine that runs it.
+!PlatyPix is an open source software developed in Java. It is mainly  distributed through a pre-compiled binary file. As such, no compilation or further install is required. Only Java is required on the machine that runs it.
 
 == Installing filters ==
 
-PlatyPix uses filters which are stored in <user folder>/PlatyPix/Filters. The program is distributed with seven standard filters, which are installed automatically by PlatyPix if the PlatyPix folder in your user directory does not exist. These included filters are:
+!PlatyPix uses filters which are stored in <user folder>/!PlatyPix/Filters. The program is distributed with seven standard filters, which are installed automatically by !PlatyPix if the !PlatyPix folder in your user directory does not exist. These included filters are:
 
   * Blur
   * Channels
@@ -20,13 +20,13 @@ PlatyPix uses filters which are stored in <user folder>/PlatyPix/Filters. The pr
 
 Custom filters can be imported from the Add filter dialog or by placing the in the same directory as the ones above.
 
-== Running PlatyPix ==
+== Running !PlatyPix ==
 
-Because PlatyPix may require large amounts of RAM, it is not recommended to start it directly from the .JAR file. Instead, it should be started from the appropriate script file included with the binary:
+Because !PlatyPix may require large amounts of RAM, it is not recommended to start it directly from the .JAR file. Instead, it should be started from the appropriate script file included with the binary:
 
-  * *PlatyPix_launcher.exe*: Windows operating systems
-  * *PlatyPix_launcher.sh*: All UNIX based systems with sh or bash installed
+  * *!PlatyPix_launcher.exe*: Windows operating systems
+  * *!PlatyPix_launcher.sh*: All UNIX based systems with sh or bash installed
 
 or it can be done manually by launching the .JAR from the command line interface with the command:
 
-java -Xmx1000m -jar PlatyPix.jar
+java -Xmx1000m -jar !PlatyPix.jar
