@@ -1,10 +1,10 @@
 package edu.chalmers.platypus.util;
 
-import edu.chalmers.platypus.ctrl.IFilterCtrl;
-import edu.chalmers.platypus.ctrl.IImageCtrl;
-import edu.chalmers.platypus.ctrl.IMiscCtrl;
-import edu.chalmers.platypus.ctrl.IPresetCtrl;
-import edu.chalmers.platypus.ctrl.IPreviewCtrl;
+import edu.chalmers.platypus.util.interfaces.IFilterCtrl;
+import edu.chalmers.platypus.util.interfaces.IImageCtrl;
+import edu.chalmers.platypus.util.interfaces.IMiscCtrl;
+import edu.chalmers.platypus.util.interfaces.IPresetCtrl;
+import edu.chalmers.platypus.util.interfaces.IPreviewCtrl;
 
 public class CtrlLocator {
 	private static IFilterCtrl filterCtrl;

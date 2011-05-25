@@ -2,11 +2,11 @@ package edu.chalmers.platypus;
 
 import java.io.File;
 
-import edu.chalmers.platypus.ctrl.impl.FilterCtrl;
-import edu.chalmers.platypus.ctrl.impl.ImageCtrl;
-import edu.chalmers.platypus.ctrl.impl.MiscCtrl;
-import edu.chalmers.platypus.ctrl.impl.PresetCtrl;
-import edu.chalmers.platypus.ctrl.impl.PreviewCtrl;
+import edu.chalmers.platypus.ctrl.FilterCtrl;
+import edu.chalmers.platypus.ctrl.ImageCtrl;
+import edu.chalmers.platypus.ctrl.MiscCtrl;
+import edu.chalmers.platypus.ctrl.PresetCtrl;
+import edu.chalmers.platypus.ctrl.PreviewCtrl;
 import edu.chalmers.platypus.model.PlatypusModel;
 import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.util.ModelLocator;

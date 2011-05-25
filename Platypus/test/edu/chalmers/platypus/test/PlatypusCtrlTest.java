@@ -10,11 +10,11 @@ import javax.swing.ImageIcon;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.chalmers.platypus.ctrl.impl.FilterCtrl;
-import edu.chalmers.platypus.ctrl.impl.ImageCtrl;
-import edu.chalmers.platypus.ctrl.impl.MiscCtrl;
-import edu.chalmers.platypus.ctrl.impl.PresetCtrl;
-import edu.chalmers.platypus.ctrl.impl.PreviewCtrl;
+import edu.chalmers.platypus.ctrl.FilterCtrl;
+import edu.chalmers.platypus.ctrl.ImageCtrl;
+import edu.chalmers.platypus.ctrl.MiscCtrl;
+import edu.chalmers.platypus.ctrl.PresetCtrl;
+import edu.chalmers.platypus.ctrl.PreviewCtrl;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.PlatypusModel;

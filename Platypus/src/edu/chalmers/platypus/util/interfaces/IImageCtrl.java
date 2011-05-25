@@ -1,4 +1,4 @@
-package edu.chalmers.platypus.ctrl;
+package edu.chalmers.platypus.util.interfaces;
 
 import java.io.File;
 import edu.chalmers.platypus.model.BatchImage;
