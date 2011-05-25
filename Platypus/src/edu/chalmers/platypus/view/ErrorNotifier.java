@@ -33,7 +33,7 @@ public class ErrorNotifier implements PropertyChangeListener{
      *
      * @param message the descriptive error text to be shown.
      */
-    public void ErrorOccured(String message){
+    public void errorOccured(String message){
         JOptionPane.showMessageDialog(parent.getComponent(),message);
     }
 
@@ -46,7 +46,7 @@ public class ErrorNotifier implements PropertyChangeListener{
         if (change.equals(StateChanges.ERROR_OCCURED.toString())) {
             //An error reported by the backend. Shows message dialog.
             String message = (String) evt.getNewValue();
-            ErrorOccured(message);
+            errorOccured(message);
         }
     }
 }

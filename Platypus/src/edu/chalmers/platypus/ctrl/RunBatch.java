@@ -4,14 +4,14 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.ComBus;
-import edu.chalmers.platypus.util.Locator;
+import edu.chalmers.platypus.util.ModelLocator;
+import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.util.StateChanges;
 
 public class RunBatch implements Runnable {
@@ -39,7 +39,7 @@ public class RunBatch implements Runnable {
 
 	@Override
 	public void run() {
-		for (BatchImage batchImage : Locator.getModel().getImageBatch()) {
+		for (BatchImage batchImage : ModelLocator.getModel().getImageBatch()) {
 			ComBus.notifyListeners(new PropertyChangeEvent(this,
 					StateChanges.PROCESSING_IMAGE.toString(), null, batchImage));
 
@@ -69,8 +69,8 @@ public class RunBatch implements Runnable {
 	}
 
 	private static BufferedImage applyFilters(BufferedImage img) {
-		for (IFilter filter : Locator.getModel().getActiveFilters().getList()) {
-			ComBus.notifyListeners(new PropertyChangeEvent(Locator.getCtrl(),
+		for (IFilter filter : ModelLocator.getModel().getActiveFilters().getList()) {
+			ComBus.notifyListeners(new PropertyChangeEvent(filter,
 					StateChanges.APPLYING_FILTER.toString(), null, filter));
 			img = filter.applyFilter(img);
 			System.gc();

@@ -11,7 +11,9 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.security.AccessController;
 import java.util.ArrayList;
+import java.security.PrivilegedAction;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -50,8 +52,12 @@ public class FilterContainer {
 		return null;
 	}
 
-	public boolean importFilter(URL[] url) {
-		URLClassLoader loader = new URLClassLoader(url, libraryLoader);
+	public boolean importFilter(final URL[] url) {
+		URLClassLoader loader = AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>() {
+			public URLClassLoader run() {
+				return new URLClassLoader(url, libraryLoader);
+			}
+		});
 		
 		try {
 			Class filter = loader
@@ -155,7 +161,7 @@ public class FilterContainer {
 					+ "/PlatyPix/Filters/"+jar);
 			libraryLoader = new URLClassLoader(url);
 			try {
-				Class cl = libraryLoader.loadClass(file);
+				libraryLoader.loadClass(file);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

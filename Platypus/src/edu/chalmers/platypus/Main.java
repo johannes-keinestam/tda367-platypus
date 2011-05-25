@@ -2,15 +2,16 @@ package edu.chalmers.platypus;
 
 import java.io.File;
 
-import edu.chalmers.platypus.ctrl.PlatypusCtrl;
+import edu.chalmers.platypus.ctrl.impl.PlatypusCtrl;
 import edu.chalmers.platypus.model.PlatypusModel;
-import edu.chalmers.platypus.util.Locator;
+import edu.chalmers.platypus.util.CtrlLocator;
+import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.view.PlatypusGUI;
 import edu.chalmers.platypus.view.splash.SplashScreenHandler;
 
 /**
  * 
- * @author skoldator
+ * 
  */
 public class Main {
     private static enum Directories {
@@ -43,10 +44,14 @@ public class Main {
         sch.splashText("Creating GUI...");
         PlatypusGUI gui = PlatypusGUI.getInstance();
 
-        sch.splashText("Setting up");
-        Locator.setModel(model);
-        Locator.setCtrl(ctrl);
 
+		sch.splashText("Setting up");
+		ModelLocator.setModel(model);
+		CtrlLocator.setFilterCtrl(ctrl);
+		CtrlLocator.setImageCtrl(ctrl);
+		CtrlLocator.setPresetCtrl(ctrl);
+		CtrlLocator.setPreviewCtrl(ctrl);
+		
     }
 
 }
