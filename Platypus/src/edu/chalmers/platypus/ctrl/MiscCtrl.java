@@ -33,7 +33,6 @@ public class MiscCtrl implements IMiscCtrl{
 	/**
 	 * Resets the PlatypusModel, clearing both ActiveFilters and ImageBatch 
 	 * of content. 
-	 * 
 	 */
 	public void resetModel() {
 		ModelLocator.getModel().getActiveFilters().getList().clear();

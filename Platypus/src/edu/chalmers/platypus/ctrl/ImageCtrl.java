@@ -74,10 +74,11 @@ public class ImageCtrl implements IImageCtrl{
 			ComBus.notifyListeners(pce);
 		}
 	}
-		/**
-		 * Clears the ImageBatch of all content, notifies listeners on the
-		 * ComBus of the IMAGE_BATCH_CLEARED event.
-		 */
+        
+        /**
+         * Clears the ImageBatch of all content, notifies listeners on the
+         * ComBus of the IMAGE_BATCH_CLEARED event.
+         */
         public void clearImageBatch() {
             ModelLocator.getModel().getImageBatch().clear();
             PropertyChangeEvent pce = new PropertyChangeEvent(this,
@@ -88,7 +89,6 @@ public class ImageCtrl implements IImageCtrl{
         /**
          * Runs the saveImages operation by starting the runnable class
          * RunBatch, 
-         * 
          */
 	public void saveImages(String path, String ext) {
 		RunBatch.start(path, ext);
@@ -96,7 +96,6 @@ public class ImageCtrl implements IImageCtrl{
 
 	/**
 	 * Sends the abort operation to the RunBatch class, 
-	 * 
 	 */
 	public void abortSaveOperation() {
 		RunBatch.stop();

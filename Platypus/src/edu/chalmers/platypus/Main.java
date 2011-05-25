@@ -35,31 +35,24 @@ public class Main {
 
         sch.splashText("Creating model...");
         PlatypusModel model = PlatypusModel.getInstance();
-        
-		sch.splashText("Setting up");
-		ModelLocator.setModel(model);
+        ModelLocator.setModel(model);
 		
-        sch.splashText("Creating miscallenous controller...");
+        sch.splashText("Creating controllers...");
         MiscCtrl miscCtrl = MiscCtrl.getInstance();
-        sch.splashText("Creating filter controller...");
         FilterCtrl filterCtrl = FilterCtrl.getInstance();
-        sch.splashText("Creating image controller...");
         ImageCtrl imageCtrl = ImageCtrl.getInstance();
-        sch.splashText("Creating preset controller...");
         PresetCtrl presetCtrl = PresetCtrl.getInstance();
-        sch.splashText("Creating preview controller...");
         PreviewCtrl previewCtrl = PreviewCtrl.getInstance();
         
         sch.splashText("Creating GUI...");
         PlatypusGUI gui = PlatypusGUI.getInstance();
 
-
-		sch.splashText("Setting up");
-		CtrlLocator.setFilterCtrl(filterCtrl);
-		CtrlLocator.setImageCtrl(imageCtrl);
-		CtrlLocator.setPresetCtrl(presetCtrl);
-		CtrlLocator.setPreviewCtrl(previewCtrl);
-		CtrlLocator.setMiscCtrl(miscCtrl);
+        sch.splashText("Setting up");
+        CtrlLocator.setFilterCtrl(filterCtrl);
+        CtrlLocator.setImageCtrl(imageCtrl);
+        CtrlLocator.setPresetCtrl(presetCtrl);
+        CtrlLocator.setPreviewCtrl(previewCtrl);
+        CtrlLocator.setMiscCtrl(miscCtrl);
 		
     }
 

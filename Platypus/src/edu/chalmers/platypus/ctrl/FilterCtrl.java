@@ -215,9 +215,10 @@ public class FilterCtrl implements IFilterCtrl {
 	}
 	
 	/**
-	 * 
-	 * @param url
-	 * @return
+	 * Imports a filter file (JAR) from the specified URL.
+         *
+	 * @param url filter files to load
+	 * @return true if successfull, otherwise false
 	 */
 	private boolean importFilter(final URL[] url) {
 		URLClassLoader loader = AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>() {
@@ -249,7 +250,7 @@ public class FilterCtrl implements IFilterCtrl {
 	}
 
 	/**
-	 * 
+	 * Scans for filters in default folder, and loads the filters found.
 	 */
 	public void scanForFilters() {
 		File folder = new File(System.getProperty("user.home")
@@ -275,8 +276,9 @@ public class FilterCtrl implements IFilterCtrl {
 	}
 	
 	/**
-	 * 
-	 * @param file
+	 * Determines whether the JAR needs external libraries, and loads them.
+         *
+	 * @param file JAR to scan
 	 */
 	private void scanJarForLibraries(String file) {
 		  
@@ -299,8 +301,9 @@ public class FilterCtrl implements IFilterCtrl {
 	}
 	
 	/**
-	 * 
-	 * @param stream
+	 * Loads libraries specified in the file (usually a text file).
+         *
+	 * @param stream file to scan
 	 */
 	private void loadLibraries(BufferedInputStream stream) {
 	    String thisLine;
@@ -318,7 +321,8 @@ public class FilterCtrl implements IFilterCtrl {
 	  }
 	
 	/**
-	 * 
+	 * Scans a JAR and loads classes from it. Used when the classes are
+         * needed for a filter to work.
 	 * @param jar
 	 */
 	private void scanClasses(String jar){
@@ -333,7 +337,6 @@ public class FilterCtrl implements IFilterCtrl {
 		    		   loadClass(h.toString().replaceAll("/", ".").replaceAll(".class", ""), jar);
 		       }
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -341,9 +344,10 @@ public class FilterCtrl implements IFilterCtrl {
 	}
 	
 	/**
-	 * 
-	 * @param file
-	 * @param jar
+	 * Loads a class from inside a JAR file.
+         *
+	 * @param file class to load
+	 * @param jar JAR that contains it
 	 */
 	private void loadClass(String file, String jar){
 		URL url[] = new URL[1];

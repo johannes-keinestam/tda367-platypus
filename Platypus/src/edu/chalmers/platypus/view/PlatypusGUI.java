@@ -13,6 +13,10 @@ import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.view.gui.PlatypusApp;
 import javax.swing.ImageIcon;
 
+/**
+ * Parent class to all GUI components, with various methods that communicates
+ * with Ctrl. All communication from GUI to Ctrl goes through here.
+ */
 public class PlatypusGUI {
 	private static PlatypusGUI instance;
         private File path;

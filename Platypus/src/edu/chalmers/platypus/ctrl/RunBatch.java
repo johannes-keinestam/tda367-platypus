@@ -14,11 +14,22 @@ import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.util.StateChanges;
 
+/**
+ * Thread that applies filters on the image batch and saves them to the users
+ * harddrive.
+ */
 public class RunBatch implements Runnable {
 	private static String writePath;
 	private static String writeExtension;
 	private static Thread t;
 
+        /**
+         * Saves the image saver thread. Saves images to the specified path,
+         * in the given format (see ImageIO for accepted formats).
+         *
+         * @param writePath save path
+         * @param writeExtension image format (see ImageIO)
+         */
 	public static void start(String writePath, String writeExtension) {
 		RunBatch.writePath = writePath;
 		RunBatch.writeExtension = writeExtension;
@@ -26,6 +37,10 @@ public class RunBatch implements Runnable {
 		t.start();
 	}
 
+        /**
+         * Stops the save thread immediately. May be used by the user if a
+         * filter takes to long to apply.
+         */
 	public static void stop() {
 		t.stop();
 		System.gc();
@@ -65,6 +80,12 @@ public class RunBatch implements Runnable {
 				StateChanges.SAVE_OPERATION_FINISHED.toString(), null, null));
 	}
 
+        /**
+         * Applies currently active filters to an image and returns it.
+         *
+         * @param img image to filter
+         * @return filtered image
+         */
 	public static BufferedImage applyFilters(BufferedImage img) {
 		for (IFilter filter : ModelLocator.getModel().getActiveFilters().getList()) {
 			ComBus.notifyListeners(new PropertyChangeEvent(filter,

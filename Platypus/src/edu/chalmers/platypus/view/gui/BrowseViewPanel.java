@@ -179,6 +179,7 @@ public class BrowseViewPanel extends javax.swing.JPanel implements PropertyChang
         if (change.equals(StateChanges.MODEL_RESET.toString())) {
             //Filters and images cleared. Sets Next button to Add
             setButtonAdd();
+            disableNextButtons();
         } else if (change.equals(StateChanges.NEW_IMAGE_IN_BATCH.toString())) {
             //Image added to batch. Enables Add filter and Load preset buttons
             enableNextButtons();
