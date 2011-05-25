@@ -103,6 +103,8 @@ public class FilterPanel extends javax.swing.JPanel {
         );
 
         filterScrollPane.setViewportView(jPanel1);
+        filterScrollPane.setViewportBorder(null);
+        filterScrollPane.getViewport().setOpaque(false);
 
         nextButton.setText(resourceMap.getString("nextButton.text")); // NOI18N
         nextButton.setName("nextButton"); // NOI18N
@@ -136,11 +138,11 @@ public class FilterPanel extends javax.swing.JPanel {
                     .addComponent(filterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(activateFilterCheckBox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 323, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 353, Short.MAX_VALUE)
                         .addComponent(removeFilterButton))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(previousButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
                         .addComponent(finishButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nextButton)))

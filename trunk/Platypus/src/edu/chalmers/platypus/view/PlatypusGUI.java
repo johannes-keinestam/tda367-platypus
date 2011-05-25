@@ -8,6 +8,7 @@ import javax.swing.ListModel;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.Preset;
+
 import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.view.gui.PlatypusApp;
 import javax.swing.ImageIcon;

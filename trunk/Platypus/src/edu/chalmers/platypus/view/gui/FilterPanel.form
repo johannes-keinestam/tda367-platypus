@@ -4,7 +4,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="Filternamn">
+        <TitledBorder title="Filter name">
           <Property name="titleX" resourceKey="Form.border.title"/>
         </TitledBorder>
       </Border>
@@ -32,12 +32,12 @@
                   <Component id="filterScrollPane" alignment="0" pref="481" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="activateFilterCheckBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="323" max="32767" attributes="0"/>
+                      <EmptySpace pref="353" max="32767" attributes="0"/>
                       <Component id="removeFilterButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="previousButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="226" max="32767" attributes="0"/>
+                      <EmptySpace pref="266" max="32767" attributes="0"/>
                       <Component id="finishButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="nextButton" min="-2" max="-2" attributes="0"/>
@@ -96,6 +96,9 @@
           <Properties>
             <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="filterScrollPane.setViewportBorder(null);&#xa;filterScrollPane.getViewport().setOpaque(false);"/>
+          </AuxValues>
 
           <Layout>
             <DimensionLayout dim="0">

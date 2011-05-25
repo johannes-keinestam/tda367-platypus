@@ -2,29 +2,20 @@
 package edu.chalmers.platypus.model;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.StreamCorruptedException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 
-import org.apache.commons.io.input.ClassLoaderObjectInputStream;
 
-import edu.chalmers.platypus.util.ComBus;
 
 public class ActiveFilters {
         private static ActiveFilters activeFiltersObject;
         private ArrayList<IFilter> activeFilters = new ArrayList<IFilter>();
-        
-        private ActiveFilters(){
 
+        /** Constructor */
+        private ActiveFilters(){
         }
         
         public static ActiveFilters getActiveFilters(){
@@ -50,7 +41,7 @@ public class ActiveFilters {
     		
     		for (IFilter filter : activeFilters) {
     			try {
-    				FileOutputStream fos = new FileOutputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+filter.getName()+".preset");
+    				FileOutputStream fos = new FileOutputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+name+"/"+filter.getName()+".preset");
     				ObjectOutputStream oos;
     				try {
     					 oos = new ObjectOutputStream(fos);

@@ -1,1 +1,1 @@
-java -Xmx1000m -jar Platypus.jar
+java -Xmx1000m -jar PlatyPix.jar
