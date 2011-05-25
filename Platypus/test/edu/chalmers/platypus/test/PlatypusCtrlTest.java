@@ -51,29 +51,61 @@ public class PlatypusCtrlTest {
 		CtrlLocator.setMiscCtrl(miscCtrl);
 	}
 
+	/**
+	 * Tests for FilterCtrl.java
+	 */
 	@Test
 	public void testGetFilterInstance() {
 		assertTrue(FilterCtrl.getInstance() == filterCtrl);
 	}
 	
 	@Test
+	public void testGetLoadedFilterList() {
+		int sizeBefore = filterCtrl.getLoadedFilterList().size();
+		model.getFilterContainer().addFilter(DummyFilterFactory.getRandomDummyFilter());
+		int sizeAfter = filterCtrl.getLoadedFilterList().size();
+		
+		assertTrue(sizeBefore+1 == sizeAfter);
+	}
+
+	@Test
+	public void testAddFilterToBatch() {
+		int sizeBefore = model.getActiveFilters().getList().size();
+		filterCtrl.addFilterToBatch(DummyFilterFactory.getRandomDummyFilter());
+		
+		int sizeAfter = model.getActiveFilters().getList().size();
+
+		assertTrue(sizeBefore+1 == sizeAfter);
+	}
+
+	@Test
+	public void testRemoveFilterFromBatch() {
+		IFilter f = DummyFilterFactory.getRandomDummyFilter();
+		filterCtrl.addFilterToBatch(f);
+		filterCtrl.addFilterToBatch(DummyFilterFactory.getRandomDummyFilter());
+		filterCtrl.removeFilterFromBatch(f);
+
+		assertFalse(model.getActiveFilters().getList().contains(f));
+	}
+
+	@Test
+	public void testImportNewFilter() {
+		File f = new File("test/resources/DummyFilter.jar");
+		filterCtrl.importNewFilter(f);
+		
+		File filterFile = new File(System.getProperty("user.home")+File.separator+"PlatyPix"+File.separator+"Filters"+File.separator+"DummyFilter.jar");
+		
+		assertTrue(filterFile.exists());
+		
+		filterFile.deleteOnExit();
+	}
+	
+	/**
+	 * Tests for MiscCtrl.java
+	 */
+	@Test
 	public void testGetMiscInstance() {
 		assertTrue(MiscCtrl.getInstance() == miscCtrl);
-	}
-	
-	@Test
-	public void testGetImageInstance() {
-		assertTrue(ImageCtrl.getInstance() == imageCtrl);
-	}
-	
-	@Test
-	public void testGetPreviewInstance() {
-		assertTrue(PreviewCtrl.getInstance() == previewCtrl);
-	}
-	
-	@Test
-	public void testGetPresetInstance() {
-		assertTrue(PresetCtrl.getInstance() == presetCtrl);
 	}
 
 	@Test
@@ -86,7 +118,15 @@ public class PlatypusCtrlTest {
 		miscCtrl.resetModel();
 		assertTrue(model.getImageBatch().size() == 0 && model.getActiveFilters().getList().size() == 0);
 	}
-
+	
+	/**
+	 * Tests for ImageCtrl.java
+	 */
+	@Test
+	public void testGetImageInstance() {
+		assertTrue(ImageCtrl.getInstance() == imageCtrl);
+	}
+	
 	@Test
 	public void testAddImageToBatch() {
 		int nrOfImagesBefore = model.getImageBatch().size();
@@ -193,48 +233,15 @@ public class PlatypusCtrlTest {
 		}
 		assertTrue(sizeBefore == sizeAfter);
 	}
-
+	
+	/**
+	 * Tests for PreviewCtrl.java
+	 */
 	@Test
-	public void testGetLoadedFilterList() {
-		int sizeBefore = filterCtrl.getLoadedFilterList().size();
-		model.getFilterContainer().addFilter(DummyFilterFactory.getRandomDummyFilter());
-		int sizeAfter = filterCtrl.getLoadedFilterList().size();
-		
-		assertTrue(sizeBefore+1 == sizeAfter);
+	public void testGetPreviewInstance() {
+		assertTrue(PreviewCtrl.getInstance() == previewCtrl);
 	}
-
-	@Test
-	public void testAddFilterToBatch() {
-		int sizeBefore = model.getActiveFilters().getList().size();
-		filterCtrl.addFilterToBatch(DummyFilterFactory.getRandomDummyFilter());
-		
-		int sizeAfter = model.getActiveFilters().getList().size();
-
-		assertTrue(sizeBefore+1 == sizeAfter);
-	}
-
-	@Test
-	public void testRemoveFilterFromBatch() {
-		IFilter f = DummyFilterFactory.getRandomDummyFilter();
-		filterCtrl.addFilterToBatch(f);
-		filterCtrl.addFilterToBatch(DummyFilterFactory.getRandomDummyFilter());
-		filterCtrl.removeFilterFromBatch(f);
-
-		assertFalse(model.getActiveFilters().getList().contains(f));
-	}
-
-	@Test
-	public void testImportNewFilter() {
-		File f = new File("test/resources/DummyFilter.jar");
-		filterCtrl.importNewFilter(f);
-		
-		File filterFile = new File(System.getProperty("user.home")+File.separator+"PlatyPix"+File.separator+"Filters"+File.separator+"DummyFilter.jar");
-		
-		assertTrue(filterFile.exists());
-		
-		filterFile.deleteOnExit();
-	}
-
+	
 	@Test
 	public void testSetNewPreview() {
 		BatchImage previewBefore = model.getPreview();
@@ -270,6 +277,14 @@ public class PlatypusCtrlTest {
 		
 		ImageIcon preview = previewCtrl.getPreviewOriginal(width, height);
 		assertTrue(preview.getIconWidth() == width || preview.getIconHeight() == height);
+	}
+	
+	/**
+	 * Tests for PresetCtrl.java
+	 */
+	@Test
+	public void testGetPresetInstance() {
+		assertTrue(PresetCtrl.getInstance() == presetCtrl);
 	}
 
 	@Test

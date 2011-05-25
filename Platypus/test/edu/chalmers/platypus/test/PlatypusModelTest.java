@@ -1,6 +1,6 @@
 package edu.chalmers.platypus.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,12 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import edu.chalmers.platypus.model.ActiveFilters;
 import edu.chalmers.platypus.model.BatchImage;
@@ -21,9 +17,6 @@ import edu.chalmers.platypus.model.FilterContainer;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.PlatypusModel;
 import edu.chalmers.platypus.model.Preset;
-import edu.chalmers.platypus.test.DummyFilterFactory;
-import edu.chalmers.platypus.test.DummyImageFactory;
-import edu.chalmers.platypus.util.ModelLocator;
 
 public class PlatypusModelTest {
 	
