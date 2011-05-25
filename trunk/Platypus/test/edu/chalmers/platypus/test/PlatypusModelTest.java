@@ -45,10 +45,10 @@ public class PlatypusModelTest {
 
 	@Test
 	public void testGetBatchSize() {
-		int batchSizeBefore = model.getBatchSize();
+		int batchSizeBefore = model.getImageBatch().size();
 		ArrayList<BatchImage> imageBatch = model.getImageBatch();
 		imageBatch.add(DummyImageFactory.getRandomDummyBatchImage());
-		int batchSizeAfter = model.getBatchSize();
+		int batchSizeAfter = model.getImageBatch().size();
 		
 		assertTrue(batchSizeBefore+1 == batchSizeAfter);
 	}
@@ -86,7 +86,7 @@ public class PlatypusModelTest {
 		activeFiltersList.add(DummyFilterFactory.getRandomDummyFilter());
 		activeFiltersList.add(DummyFilterFactory.getRandomDummyFilter());
 		activeFiltersList.add(DummyFilterFactory.getRandomDummyFilter());
-		activeFilters.removeAll();
+		activeFilters.getList().clear();
 		
 		assertTrue(activeFilters.getList().size() == 0);
 	}

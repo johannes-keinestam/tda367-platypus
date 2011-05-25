@@ -81,7 +81,6 @@ public class PreviewCtrl implements IPreviewCtrl{
 	/**
 	 * Called when the GUI has changed any values on filters to provide an
 	 * updated version of the preview or a new preview has been selected.
-	 * 
 	 */
 	public void previewChanged() {
 		PropertyChangeEvent pce = new PropertyChangeEvent(this,

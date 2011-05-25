@@ -6,6 +6,10 @@ import edu.chalmers.platypus.util.interfaces.IMiscCtrl;
 import edu.chalmers.platypus.util.interfaces.IPresetCtrl;
 import edu.chalmers.platypus.util.interfaces.IPreviewCtrl;
 
+/**
+ * Locator class for controllers, i.e. getters and setters. Used when classes
+ * wants a Ctrl class.
+ */
 public class CtrlLocator {
 	private static IFilterCtrl filterCtrl;
 	private static IImageCtrl imageCtrl;

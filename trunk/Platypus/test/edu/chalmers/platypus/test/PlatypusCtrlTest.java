@@ -84,27 +84,27 @@ public class PlatypusCtrlTest {
 		imageCtrl.addImageToBatch(new File(""));
 
 		miscCtrl.resetModel();
-		assertTrue(model.getBatchSize() == 0 && model.getActiveFilters().getList().size() == 0);
+		assertTrue(model.getImageBatch().size() == 0 && model.getActiveFilters().getList().size() == 0);
 	}
 
 	@Test
 	public void testAddImageToBatch() {
-		int nrOfImagesBefore = model.getBatchSize();
+		int nrOfImagesBefore = model.getImageBatch().size();
 		imageCtrl.addImageToBatch(new File(""));
-		int nrOfImagesAfter = model.getBatchSize();
+		int nrOfImagesAfter = model.getImageBatch().size();
 
 		assertTrue(nrOfImagesBefore+1 == nrOfImagesAfter);
 	}
 
 	@Test
 	public void testRemoveImageFromBatch() {
-		int nrOfImagesBefore = model.getBatchSize();
+		int nrOfImagesBefore = model.getImageBatch().size();
 		
 		BatchImage img = DummyImageFactory.getRandomDummyBatchImage();
 		model.getImageBatch().add(img);
 		imageCtrl.removeImageFromBatch(img);
 		
-		int nrOfImagesAfter = model.getBatchSize();
+		int nrOfImagesAfter = model.getImageBatch().size();
 
 		assertTrue(nrOfImagesBefore == nrOfImagesAfter);
 	}
@@ -115,7 +115,7 @@ public class PlatypusCtrlTest {
 		imageCtrl.addImageToBatch(new File(""));
 
 		imageCtrl.clearImageBatch();
-		assertTrue(model.getBatchSize() == 0);
+		assertTrue(model.getImageBatch().size() == 0);
 	}
 
 	@Test
@@ -130,7 +130,7 @@ public class PlatypusCtrlTest {
 		
 		model.getImageBatch().clear();
 		model.getImageBatch().add(new BatchImage(img));
-		model.getActiveFilters().removeAll();
+		model.getActiveFilters().getList().clear();
 		
 		int sizeBefore = folder.listFiles().length;
 		

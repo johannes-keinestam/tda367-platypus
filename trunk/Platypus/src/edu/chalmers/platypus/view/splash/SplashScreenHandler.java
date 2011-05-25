@@ -21,6 +21,10 @@ public class SplashScreenHandler implements PropertyChangeListener {
     Graphics2D splashGraphics;
     Font font = new Font("SansSerif", Font.BOLD, 14);
 
+    /**
+     * Constructor. Specifies which area of the splash screen should be
+     * affected when writing on it.
+     */
     public SplashScreenHandler() {
         ComBus.subscribe(this);
         sc = SplashScreen.getSplashScreen();
@@ -39,6 +43,11 @@ public class SplashScreenHandler implements PropertyChangeListener {
         }
     }
 
+    /**
+     * Writes the specified text on the splash screen image.
+     *
+     * @param str text to write
+     */
     public void splashText(String str) {
         if (sc != null && sc.isVisible()) {
 
@@ -57,6 +66,7 @@ public class SplashScreenHandler implements PropertyChangeListener {
         String change = evt.getPropertyName();
 
 	if (change.equals(StateChanges.FILTER_LOADED.toString())) {
+            //A filter was loaded, writes to splash scren
             splashText("Loaded filter: "+ (String)evt.getNewValue());
 	}
     }

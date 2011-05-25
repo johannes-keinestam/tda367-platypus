@@ -121,7 +121,7 @@ public class PresetCtrl implements IPresetCtrl{
 	
 	/**
 	 * Saves the current batch of filters as a preset to the
-	 * PlatyPix/Presets directory.
+	 * PlatyPix/Presets directory. Replaces existing presets with same name.
 	 * 
 	 * @param the name of the preset
 	 */
