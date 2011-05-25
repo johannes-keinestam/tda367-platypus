@@ -28,13 +28,10 @@ public class RunBatch implements Runnable {
 
 	public static void stop() {
 		t.stop();
+		System.gc();
 		ComBus.notifyListeners(new PropertyChangeEvent(t,
 				StateChanges.SAVE_OPERATION_ABORTED.toString(), null,
 				null));
-	}
-
-	public static BufferedImage getFilteredImage(BufferedImage img) {
-		return applyFilters(img);
 	}
 
 	@Override
@@ -68,7 +65,7 @@ public class RunBatch implements Runnable {
 				StateChanges.SAVE_OPERATION_FINISHED.toString(), null, null));
 	}
 
-	private static BufferedImage applyFilters(BufferedImage img) {
+	public static BufferedImage applyFilters(BufferedImage img) {
 		for (IFilter filter : ModelLocator.getModel().getActiveFilters().getList()) {
 			ComBus.notifyListeners(new PropertyChangeEvent(filter,
 					StateChanges.APPLYING_FILTER.toString(), null, filter));
