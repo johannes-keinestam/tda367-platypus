@@ -31,14 +31,13 @@ public class PlatypusModelTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		model = ModelLocator.getModel();
+		model = PlatypusModel.getInstance();
 		
 	}
 	
 	/** 
 	 * Tests for PlatypusModel.java 
 	 */
-	/*
 	@Test
 	public void testGetImageBatch() {
 		assertTrue(model.getImageBatch() != null);
@@ -71,12 +70,7 @@ public class PlatypusModelTest {
 		
 		assertTrue(model.getPreview() == preview);
 	}
-	
-	@Test
-	public void testGetPresets() {
-		assertTrue(model.getPresets() != null);
-	}
-*/
+
 	/** 
 	 * Tests for ActiveFilters.java 
 	 */
@@ -102,17 +96,40 @@ public class PlatypusModelTest {
 	 */
 	@Test
 	public void testGetThumbnail() {
-		int thumbnailWidth = new Random().nextInt(100);
-		int thumbnailHeight = new Random().nextInt(100);
-		BatchImage batchImage = new BatchImage(new File("test/resources/testimage.jpg"));
-		BufferedImage thumbnail = batchImage.getThumbnail(thumbnailWidth, thumbnailHeight);
+		BatchImage batchImage;
+		BufferedImage thumbnail;
+		int thumbnailWidth;
+		int thumbnailHeight;
+		
+		//test landscape image
+		batchImage = new BatchImage(new File("test/resources/testimage.jpg"));
+		thumbnailWidth = batchImage.getImage().getWidth() - (new Random().nextInt(100)+1);
+		thumbnailHeight = batchImage.getImage().getHeight() - (new Random().nextInt(100)+1);
+		thumbnail = batchImage.getThumbnail(thumbnailWidth, thumbnailHeight);
 		
 		assertTrue(thumbnail.getWidth() == thumbnailWidth || thumbnail.getHeight() == thumbnailHeight);
+		
+		//Test portrait image
+		batchImage = new BatchImage(new File("test/resources/testimage2.jpg"));
+		thumbnailWidth = batchImage.getImage().getWidth() - (new Random().nextInt(100)+1);
+		thumbnailHeight = batchImage.getImage().getHeight() - (new Random().nextInt(100)+1);
+		thumbnail = batchImage.getThumbnail(thumbnailWidth, thumbnailHeight);
+		
+		assertTrue(thumbnail.getWidth() == thumbnailWidth || thumbnail.getHeight() == thumbnailHeight);
+		
+		//Test no scaling
+		batchImage = new BatchImage(new File("test/resources/testimage.jpg"));
+		thumbnail = batchImage.getThumbnail(-1, -1);
+		BufferedImage bufferedImage = batchImage.getImage();
+		
+		assertTrue(thumbnail.getWidth() == bufferedImage.getWidth() && thumbnail.getHeight() == bufferedImage.getHeight());
 	}
 
 	@Test
 	public void testGetImage() {
-		//assertTrue();
+		BatchImage batchImage = new BatchImage(new File("test/resources/testimage.jpg"));
+
+		assertTrue(batchImage.getImage() != null);
 	}
 
 	@Test
@@ -143,32 +160,7 @@ public class PlatypusModelTest {
 		
 		assertTrue(filterContainer.getFilter(filterName).getName().equals(filterName));
 	}
-/*
-	@Test
-	public void test() {
-		assertTrue();
-	}
 
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-*/
 	/** 
 	 * Tests for Preset.java 
 	 */
