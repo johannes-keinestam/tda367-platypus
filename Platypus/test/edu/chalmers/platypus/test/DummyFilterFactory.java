@@ -12,12 +12,6 @@ public class DummyFilterFactory {
 		return new IFilter() {
 			
 			@Override
-			public void saveState(String folder) {}
-			
-			@Override
-			public void loadState(String folder) {}
-			
-			@Override
 			public JPanel getPanel() {
 				return null;
 			}
@@ -49,6 +43,15 @@ public class DummyFilterFactory {
 					return this.getName().equals(other.getName());
 				}
 				return false;
+			}
+
+			@Override
+			public Object[] getState() {
+				return null;
+			}
+
+			@Override
+			public void setState(Object[] state) {
 			}
 		};
 	}

@@ -10,12 +10,13 @@ import javax.swing.ImageIcon;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.chalmers.platypus.ctrl.PlatypusCtrl;
+import edu.chalmers.platypus.ctrl.impl.PlatypusCtrl;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.PlatypusModel;
 import edu.chalmers.platypus.model.Preset;
-import edu.chalmers.platypus.util.Locator;
+import edu.chalmers.platypus.util.CtrlLocator;
+import edu.chalmers.platypus.util.ModelLocator;
 
 public class PlatypusCtrlTest {
 
@@ -26,8 +27,12 @@ public class PlatypusCtrlTest {
 	public void setUp() throws Exception {
 		ctrl = PlatypusCtrl.getInstance();
 		model = PlatypusModel.getInstance();
-		Locator.setCtrl(ctrl);
-		Locator.setModel(model);
+		
+		ModelLocator.setModel(model);
+		CtrlLocator.setFilterCtrl(ctrl);
+		CtrlLocator.setImageCtrl(ctrl);
+		CtrlLocator.setPresetCtrl(ctrl);
+		CtrlLocator.setPreviewCtrl(ctrl);
 	}
 
 	@Test
@@ -184,7 +189,14 @@ public class PlatypusCtrlTest {
 
 	@Test
 	public void testImportNewFilter() {
-		System.out.println("Not yet implemented");
+		File f = new File("test/resources/DummyFilter.jar");
+		ctrl.importNewFilter(f);
+		
+		File filterFile = new File(System.getProperty("user.home")+File.separator+"PlatyPix"+File.separator+"Filters"+File.separator+"DummyFilter.jar");
+		
+		assertTrue(filterFile.exists());
+		
+		filterFile.deleteOnExit();
 	}
 
 	@Test
@@ -240,17 +252,20 @@ public class PlatypusCtrlTest {
 
 	@Test
 	public void testLoadPreset() {
-		model.getActiveFilters().getList().clear();
-		Preset p = ctrl.getLoadedPresetList().get(0);
-		int numberOfFilters = p.getFilters().length;
-		
-		ctrl.loadPreset(p);
-		assertTrue(model.getActiveFilters().getList().size() == numberOfFilters);
+		if (ctrl.getLoadedPresetList().size() == 0) {
+			fail("Create a preset manually from the application.");
+		} else {
+			model.getActiveFilters().getList().clear();
+			Preset p = ctrl.getLoadedPresetList().get(0);
+			int numberOfFilters = p.getFilters().length;
+			
+			ctrl.loadPreset(p);
+			assertTrue(model.getActiveFilters().getList().size() == numberOfFilters);
+		}
 	}
 
 	@Test
 	public void testSavePreset() {
-		int numberOfFilters = model.getFilterContainer().getList().size();
 		for (IFilter filter : model.getFilterContainer().getList()) {
 			model.getActiveFilters().getList().add(filter);
 		}
