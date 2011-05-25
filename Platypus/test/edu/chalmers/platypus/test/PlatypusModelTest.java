@@ -1,17 +1,26 @@
 package edu.chalmers.platypus.test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Random;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import edu.chalmers.platypus.model.ActiveFilters;
 import edu.chalmers.platypus.model.BatchImage;
+import edu.chalmers.platypus.model.FilterContainer;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.PlatypusModel;
+import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.test.DummyFilterFactory;
 import edu.chalmers.platypus.test.DummyImageFactory;
 import edu.chalmers.platypus.util.ModelLocator;
@@ -86,5 +95,99 @@ public class PlatypusModelTest {
 		
 		assertTrue(activeFilters.getList().size() == 0);
 	}
+	
+	/** 
+	 * Tests for BatchImage.java 
+	 */
+	@Test
+	public void testGetThumbnail() {
+		int thumbnailWidth = new Random().nextInt(100);
+		int thumbnailHeight = new Random().nextInt(100);
+		BatchImage batchImage = new BatchImage(new File("test/resources/testimage.jpg"));
+		BufferedImage thumbnail = batchImage.getThumbnail(thumbnailWidth, thumbnailHeight);
+		
+		assertTrue(thumbnail.getWidth() == thumbnailWidth && thumbnail.getHeight() == thumbnailHeight);
+	}
 
+	@Test
+	public void testGetImage() {
+		//assertTrue();
+	}
+
+	@Test
+	public void testGetFileName() {
+		BatchImage batchImage = new BatchImage(new File("test/resources/testimage.jpg"));
+		
+		assertTrue(batchImage.getFileName().equals("testimage"));
+	}
+
+	/** 
+	 * Tests for FilterContainer.java 
+	 */
+	@Test
+	public void testAddFilter() {
+		FilterContainer filterContainer = FilterContainer.getFilterContainerObject();
+		int filterContainerSizeBefore = filterContainer.getList().size();
+		filterContainer.addFilter(DummyFilterFactory.getRandomDummyFilter());
+		int filterContainerSizeAfter = filterContainer.getList().size();
+		
+		assertTrue(filterContainerSizeBefore+1 == filterContainerSizeAfter);
+	}
+
+	@Test
+	public void test() {
+		assertTrue();
+	}
+
+	@Test
+	public void test() {
+		assertTrue();
+	}
+
+	@Test
+	public void test() {
+		assertTrue();
+	}
+
+	@Test
+	public void test() {
+		assertTrue();
+	}
+
+	@Test
+	public void test() {
+		assertTrue();
+	}
+
+	@Test
+	public void test() {
+		assertTrue();
+	}
+
+	/** 
+	 * Tests for Preset.java 
+	 */
+	@Test
+	public void testGetName() {
+		String presetName = "test_preset";
+		Preset preset = new Preset(presetName, new String[] {"dummyFilter1", "dummyFilter2"});
+		
+		assertTrue(preset.getName().equals(presetName));
+	}
+
+	@Test
+	public void testGetDate() {
+		Preset preset = new Preset("test_preset", new String[] {"dummyFilter1", "dummyFilter2"});
+		
+		assertTrue(preset.getDate().before(new Date()));
+	}
+
+	@Test
+	public void testGetFilters() {
+		String[] filters = {"dummyFilter1", "dummyFilter2"};
+		Preset preset = new Preset("test_preset", filters);
+		
+		assertTrue(preset.getFilters() == filters);
+	}
+	
 }
