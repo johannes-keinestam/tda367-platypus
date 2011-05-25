@@ -1,37 +1,34 @@
 package edu.chalmers.platypus.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
+import edu.chalmers.platypus.model.ActiveFilters;
 import edu.chalmers.platypus.model.BatchImage;
+import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.PlatypusModel;
-import edu.chalmers.platypus.util.Locator;
+import edu.chalmers.platypus.test.DummyFilterFactory;
+import edu.chalmers.platypus.test.DummyImageFactory;
+import edu.chalmers.platypus.util.ModelLocator;
 
 public class PlatypusModelTest {
 	
 	PlatypusModel model;
-	BatchImage preview;
-	BatchImage batchImage;
 	
 	@Before
 	public void setUp() throws Exception {
-		model = Locator.getModel();
-		File testImageFile = new File("test/resources/testimage.jpg");
-		preview = new BatchImage(testImageFile);
+		model = ModelLocator.getModel();
 		
-		batchImage = new BatchImage(testImageFile);
 	}
-
+	
+	/** 
+	 * Tests for PlatypusModel.java 
+	 */
 	@Test
 	public void testGetImageBatch() {
 		assertTrue(model.getImageBatch() != null);
@@ -41,7 +38,7 @@ public class PlatypusModelTest {
 	public void testGetBatchSize() {
 		int batchSizeBefore = model.getBatchSize();
 		ArrayList<BatchImage> imageBatch = model.getImageBatch();
-		imageBatch.add(new BatchImage(null));
+		imageBatch.add(DummyImageFactory.getRandomDummyBatchImage());
 		int batchSizeAfter = model.getBatchSize();
 		
 		assertTrue(batchSizeBefore+1 == batchSizeAfter);
@@ -59,6 +56,7 @@ public class PlatypusModelTest {
 	
 	@Test
 	public void testPreview() {
+		BatchImage preview = new BatchImage(new File("test/resources/testimage.jpg"));
 		model.setPreview(preview);
 		
 		assertTrue(model.getPreview() == preview);
@@ -70,119 +68,23 @@ public class PlatypusModelTest {
 	}
 
 	/** 
-	 * Tests for BatchImage.java 
+	 * Tests for ActiveFilters.java 
 	 */
 	@Test
-	public void testGetThumbnail() {
-		
-		BufferedImage thumbnail = batchImage.getThumbnail();
-		assertTrue();
+	public void testGetList() {		
+		assertTrue(ActiveFilters.getActiveFilters().getList() != null);
 	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
-	@Test
-	public void test() {
-		assertTrue();
-	}
-
 	
+	@Test
+	public void testRemoveAll() {
+		ActiveFilters activeFilters = ActiveFilters.getActiveFilters();
+		ArrayList<IFilter> activeFiltersList = activeFilters.getList();
+		activeFiltersList.add(DummyFilterFactory.getRandomDummyFilter());
+		activeFiltersList.add(DummyFilterFactory.getRandomDummyFilter());
+		activeFiltersList.add(DummyFilterFactory.getRandomDummyFilter());
+		activeFilters.removeAll();
+		
+		assertTrue(activeFilters.getList().size() == 0);
+	}
+
 }
