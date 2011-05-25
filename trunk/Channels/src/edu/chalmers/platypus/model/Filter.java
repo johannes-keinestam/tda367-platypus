@@ -1,12 +1,6 @@
 package edu.chalmers.platypus.model;
 
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Arrays;
 import java.util.Observable;
 
@@ -19,7 +13,7 @@ import com.jhlabs.image.ChannelMixFilter;
 
 
 public class Filter extends Observable implements IFilter {
-	CtrlPanel panel;
+	private CtrlPanel panel;
 	
 	public Filter(){
 		panel = new CtrlPanel();
