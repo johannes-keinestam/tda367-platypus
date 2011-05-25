@@ -4,7 +4,7 @@
   <Properties>
     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-        <TitledBorder title="V&#xe4;lj filter">
+        <TitledBorder title="Choose filter">
           <Property name="titleX" resourceKey="Form.border.title"/>
         </TitledBorder>
       </Border>
@@ -33,7 +33,7 @@
                   <Component id="filterListScrollPane" alignment="0" pref="350" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="importFilterButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="125" max="32767" attributes="0"/>
+                      <EmptySpace pref="141" max="32767" attributes="0"/>
                       <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="okButton" min="-2" max="-2" attributes="0"/>
@@ -164,6 +164,9 @@
                 <Property name="name" type="java.lang.String" value="filterDescriptionTextArea" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="filterDescriptionScrollPane.setViewportBorder(null);&#xa;filterDescriptionScrollPane.getViewport().setOpaque(false);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

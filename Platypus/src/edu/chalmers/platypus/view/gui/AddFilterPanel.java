@@ -138,6 +138,8 @@ public class AddFilterPanel extends javax.swing.JPanel {
         filterDescriptionTextArea.setName("filterDescriptionTextArea"); // NOI18N
         filterDescriptionTextArea.setOpaque(false);
         filterDescriptionScrollPane.setViewportView(filterDescriptionTextArea);
+        filterDescriptionScrollPane.setViewportBorder(null);
+        filterDescriptionScrollPane.getViewport().setOpaque(false);
 
         filterImageLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         filterImageLabel.setText(resourceMap.getString("filterImageLabel.text")); // NOI18N
@@ -198,7 +200,7 @@ public class AddFilterPanel extends javax.swing.JPanel {
                     .addComponent(filterListScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(importFilterButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
                         .addComponent(cancelButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(okButton)))

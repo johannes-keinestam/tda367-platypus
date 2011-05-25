@@ -40,16 +40,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         ComBus.subscribe(this);
         
         parent = PlatypusGUI.getInstance();
-    }
-    
-    @Action
-    public void showAboutBox() {
-        if (aboutBox == null) {
-            JFrame mainFrame = PlatypusApp.getApplication().getMainFrame();
-            aboutBox = new PlatypusAboutBox(mainFrame);
-            aboutBox.setLocationRelativeTo(mainFrame);
-        }
-        PlatypusApp.getApplication().show(aboutBox);
+        new ErrorNotifier(this);
     }
 
     /** Shows the dialog for adding filters to batch. */
@@ -148,6 +139,7 @@ public class PlatypusView extends FrameView implements PropertyChangeListener {
         jPanel1.add(finishedViewPanel1, "card5");
 
         jScrollPane1.setViewportView(jPanel1);
+        jScrollPane1.setViewportBorder(null);
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);

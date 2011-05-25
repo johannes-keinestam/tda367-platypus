@@ -378,7 +378,7 @@ public class PlatypusCtrl implements IImageCtrl, IFilterCtrl, IPreviewCtrl,
 			FileInputStream fis;
 
 			try {
-				fis = new FileInputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+filter.getName()+".preset");
+				fis = new FileInputStream(System.getProperty("user.home")+"/PlatyPix/Presets/"+preset.getName()+"/"+filter.getName()+".preset");
 				try {
 					ObjectInputStream ois = new ObjectInputStream(fis);
 					try {
