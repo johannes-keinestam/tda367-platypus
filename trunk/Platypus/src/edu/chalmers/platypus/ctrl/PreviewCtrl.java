@@ -74,7 +74,7 @@ public class PreviewCtrl implements IPreviewCtrl{
 		BufferedImage original = ModelLocator.getModel().getPreview()
 				.getThumbnail(width, height);
 
-		ImageIcon preview = new ImageIcon(RunBatch.getFilteredImage(original));
+		ImageIcon preview = new ImageIcon(RunBatch.applyFilters(original));
 		return preview;
 	}
 
