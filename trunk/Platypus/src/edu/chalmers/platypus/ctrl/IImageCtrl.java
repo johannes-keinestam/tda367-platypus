@@ -7,6 +7,8 @@ public interface IImageCtrl {
 	public void addImageToBatch(File file);
 
 	public void removeImageFromBatch(BatchImage img);
+	
+    public void clearImageBatch();
 
 	public void saveImages(String path, String ext);
 
