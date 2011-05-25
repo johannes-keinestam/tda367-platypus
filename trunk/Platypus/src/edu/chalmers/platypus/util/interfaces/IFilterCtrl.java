@@ -1,4 +1,4 @@
-package edu.chalmers.platypus.ctrl;
+package edu.chalmers.platypus.util.interfaces;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,4 +17,6 @@ public interface IFilterCtrl {
 	public void importNewFilter(File filter);
 
 	public void copyNewFilter(File filter);
+	
+	public void scanForFilters();
 }

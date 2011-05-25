@@ -1,11 +1,11 @@
-package edu.chalmers.platypus.ctrl.impl;
+package edu.chalmers.platypus.ctrl;
 
 import java.beans.PropertyChangeEvent;
 
-import edu.chalmers.platypus.ctrl.IMiscCtrl;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.util.interfaces.IMiscCtrl;
 
 public class MiscCtrl implements IMiscCtrl{
 	private static MiscCtrl instance;

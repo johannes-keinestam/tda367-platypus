@@ -1,16 +1,15 @@
-package edu.chalmers.platypus.ctrl.impl;
+package edu.chalmers.platypus.ctrl;
 
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.ImageIcon;
 
-import edu.chalmers.platypus.ctrl.IPreviewCtrl;
-import edu.chalmers.platypus.ctrl.RunBatch;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.util.interfaces.IPreviewCtrl;
 
 public class PreviewCtrl implements IPreviewCtrl{
 	

@@ -1,4 +1,4 @@
-package edu.chalmers.platypus.ctrl.impl;
+package edu.chalmers.platypus.ctrl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,11 +9,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import edu.chalmers.platypus.ctrl.IPresetCtrl;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.model.Preset;
 import edu.chalmers.platypus.util.CtrlLocator;
 import edu.chalmers.platypus.util.ModelLocator;
+import edu.chalmers.platypus.util.interfaces.IPresetCtrl;
 
 public class PresetCtrl implements IPresetCtrl{
 	

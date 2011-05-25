@@ -1,15 +1,14 @@
-package edu.chalmers.platypus.ctrl.impl;
+package edu.chalmers.platypus.ctrl;
 
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.util.ArrayList;
 
-import edu.chalmers.platypus.ctrl.IImageCtrl;
-import edu.chalmers.platypus.ctrl.RunBatch;
 import edu.chalmers.platypus.model.BatchImage;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.util.interfaces.IImageCtrl;
 
 public class ImageCtrl implements IImageCtrl{
 	

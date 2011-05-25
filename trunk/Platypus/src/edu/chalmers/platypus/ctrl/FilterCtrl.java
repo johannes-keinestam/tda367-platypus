@@ -1,4 +1,4 @@
-package edu.chalmers.platypus.ctrl.impl;
+package edu.chalmers.platypus.ctrl;
 
 import java.beans.PropertyChangeEvent;
 import java.io.BufferedInputStream;
@@ -22,11 +22,11 @@ import java.util.Observer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import edu.chalmers.platypus.ctrl.IFilterCtrl;
 import edu.chalmers.platypus.model.IFilter;
 import edu.chalmers.platypus.util.ComBus;
 import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.util.StateChanges;
+import edu.chalmers.platypus.util.interfaces.IFilterCtrl;
 
 public class FilterCtrl implements IFilterCtrl {
 	
@@ -219,7 +219,7 @@ public class FilterCtrl implements IFilterCtrl {
 	 * @param url
 	 * @return
 	 */
-	public boolean importFilter(final URL[] url) {
+	private boolean importFilter(final URL[] url) {
 		URLClassLoader loader = AccessController.doPrivileged(new PrivilegedAction<URLClassLoader>() {
 			public URLClassLoader run() {
 				return new URLClassLoader(url, libraryLoader);
