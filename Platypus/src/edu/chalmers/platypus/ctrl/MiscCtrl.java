@@ -7,40 +7,39 @@ import edu.chalmers.platypus.util.ModelLocator;
 import edu.chalmers.platypus.util.StateChanges;
 import edu.chalmers.platypus.util.interfaces.IMiscCtrl;
 
-public class MiscCtrl implements IMiscCtrl{
-	private static MiscCtrl instance;
+public class MiscCtrl implements IMiscCtrl {
+    private static MiscCtrl instance;
 
-	/**
-	 * Constructor
-	 */
-	private MiscCtrl() {
+    /**
+     * Constructor
+     */
+    private MiscCtrl() {
+    }
+
+    /**
+     * Returns the singleton instance of this Class, if none exist the
+     * constructor is run and the instance is set.
+     * 
+     * @return the singleton instance of the MiscCtrl.
+     */
+    public static MiscCtrl getInstance() {
+	if (instance == null) {
+	    instance = new MiscCtrl();
 	}
-	
-	/**
-	 * Returns the singleton instance of this Class, if none exist
-	 * the constructor is run and the instance is set.
-	 * 
-	 * @return the singleton instance of the MiscCtrl.
-	 */
-	public static MiscCtrl getInstance() {
-		if (instance == null) {
-			instance = new MiscCtrl();
-		}
-		return instance;
-	}
+	return instance;
+    }
 
-	
-	/**
-	 * Resets the PlatypusModel, clearing both ActiveFilters and ImageBatch 
-	 * of content. 
-	 */
-	public void resetModel() {
-		ModelLocator.getModel().getActiveFilters().getList().clear();
+    /**
+     * Resets the PlatypusModel, clearing both ActiveFilters and ImageBatch of
+     * content.
+     */
+    public void resetModel() {
+	ModelLocator.getModel().getActiveFilters().getList().clear();
 
-		ModelLocator.getModel().getImageBatch().clear();
+	ModelLocator.getModel().getImageBatch().clear();
 
-		ComBus.notifyListeners(new PropertyChangeEvent(this,
-				StateChanges.MODEL_RESET.toString(), null, null));
+	ComBus.notifyListeners(new PropertyChangeEvent(this,
+		StateChanges.MODEL_RESET.toString(), null, null));
 
-	}
+    }
 }
