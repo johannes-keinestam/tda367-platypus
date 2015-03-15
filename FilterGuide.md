@@ -1,0 +1,157 @@
+# The class #
+
+The first thing to do is to create a new Java class called Filter in the package edu.chalmers.platypus.model. Implement the interface IFilter (and its methods) which you may obtain from the Downloads section. If you'd like the filter to have interactive controls that changes the settings of your filter you may also extend Observable.
+
+Filter.class:
+```
+package edu.chalmers.platypus.model;
+
+import java.awt.image.BufferedImage;
+
+public class Filter extends Observable implements IFilter {
+```
+
+## Naming ##
+
+The name you choose for your filter must be as unique as possible to avoid name conflicts with other filters. We strongly recommend appending the developers name in front of the name of filter. The name should not include the word Filter.
+
+Filter.class:
+```
+    @Override
+    public String getName() {
+        return "PlatyPix Blur";
+    } 
+```
+
+## Descriptive image ##
+
+You can add a descriptive image to your filter. The image will be shown in the Add filter dialog. The maximum recommended size for the image is **80x80** pixels.
+
+## GUI ##
+
+A filter can have a custom GUI with controls, information or anything that is relevant for the filter. It’s not recommended to make the GUI panel wider then **400px** but it is possible. There are no restraints in height but try to keep it as low as possible to avoid unnecessary scrolling. Make sure that the panel has a preferred size, if you want it to be scrollable. To implement this into the PlatyPix GUI, you only have to return a JPanel or a subclass in the getPanel method.
+
+If you want to update the preview image in PlatyPix, for example when a filter setting has been changed, just call setChanged() and notifyObservers(). Remember that updating the preview to often can make the program slow and frustrating to use.
+
+Filter.class:
+```
+    @Override
+    public JPanel getPanel() {
+        return panel;
+    }
+```
+
+
+## applyFilter ##
+
+The applyFilter method is the most important of them all. This is where you do your filter operations. You recieve a BufferedImage and you return a BufferedImage with your filter applied.
+
+## Getting and loading state ##
+
+The getState and loadState methods are only necessary if your filter has settings, and you want these to be savable in a preset. If they are not savable and your filter is used in a preset, it will use it's default settings when loaded. If your filter has no settings you can return null or leave them empty, respectively. If the filter has options it’s important to support loading and saving of the filter state, so it can work correctly in a preset.
+
+### getState() ###
+
+!Platypix calls getState() when it tries to save a preset. Just store the values you need in a array of optional type (it must be serializable) and return it in getState() and it will be saved for later use.
+
+### loadState() ###
+
+The very same array will be obtained from !Platypix when loadState() is called. You have to cast it from Object[.md](.md) to the type used earlier. After that just put the values back into the filter.
+
+## Packaging ##
+
+All filters must be put in a jar-file. Put your compiled .class files with correct packaging in a JAR file, which you name the same as the filter (remove any blank spaces).
+
+If you need external libraries for the filter to work, put them as a JAR file in userfolder/PlatyPix/Filters (not in the same JAR as the filter). You have to notify PlatyPix that you are using external libraries, by adding a file called Libraries.txt in the filter JAR root. Write the file name of each external library you want to load with your filter. Each row in Libraries.txt should point to a library JAR (as below).
+
+Libraries.txt:
+```
+Library1.jar
+Library2.jar
+```
+
+
+# Example filter #
+
+Filter.class:
+```
+package edu.chalmers.platypus.model;
+
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
+import java.util.Observable;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import com.jhlabs.image.GaussianFilter;
+
+public class Filter extends Observable implements IFilter {
+
+	private static final long serialVersionUID = -2223555253792480696L;
+	private CtrlPanel panel;
+	
+	public Filter(){
+		panel = new CtrlPanel();
+		panel.getSliderAmount().addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent arg0) {
+				setChanged();
+				notifyObservers();
+			}
+		});
+		
+	}
+	
+	@Override
+	public String getName() {
+		return "Blur";
+	}
+
+	@Override
+	public String getDescription() {
+		return "Blurs image.";
+	}
+
+	@Override
+	public ImageIcon getDescriptiveImage() {
+		return null;
+	}
+
+	@Override
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	@Override
+	public BufferedImage applyFilter(BufferedImage image) {
+		GaussianFilter gf = new  GaussianFilter(panel.getSliderAmount().getValue());
+		return gf.filter(image, image);
+    }
+	
+	@Override
+	public Object[] getState() {
+		Integer[] state = {panel.getSliderAmount().getValue()};
+		return state;
+	}
+
+	@Override
+	public void setState(Object[] state) {
+		Integer[] value = Arrays.copyOf(state, state.length, Integer[].class);
+		panel.getSliderAmount().setValue(value[0]);
+	}	
+}
+```
+
+File structure of Blur.jar (The JAR of the filter):
+```
+->edu
+	->chalmers
+		->platypus
+			->Filter.class
+			->CtrlPanel.class
+->Libraries.txt
+```
